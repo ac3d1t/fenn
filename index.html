@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en" class="preload">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>fenn</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .theme-ready, .theme-ready *,
+    .theme-ready *::before, .theme-ready *::after {
+      transition: background 0.4s ease, background-color 0.4s ease,
+                  box-shadow 0.4s ease, color 0.4s ease,
+                  border-color 0.4s ease, fill 0.4s ease, stroke 0.4s ease;
+    }
+
+    :root {
+      --bg: #e8e8e8;
+      --shadow-dark: #c5c5c5;
+      --shadow-light: #ffffff;
+      --fg: #555;
+      --fg-dark: #333;
+      --muted: #aaa;
+      --accent: #7a9ccf;
+    }
+
+    :root.dark {
+      --bg: #262626;
+      --shadow-dark: #191919;
+      --shadow-light: #323232;
+      --fg: #999;
+      --fg-dark: #ddd;
+      --muted: #555;
+      --accent: #7a9ccf;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 400;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 4rem;
+      gap: 1.5rem;
+    }
+
+    /* ── card base ── */
+    .card {
+      background: var(--bg);
+      border-radius: 28px;
+      box-shadow: 10px 10px 20px var(--shadow-dark),
+                  -10px -10px 20px var(--shadow-light);
+      padding: 2.5rem 2.2rem;
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.6rem;
+    }
+
+    .card.anim {
+      animation: fadeUp 0.5s ease forwards;
+      opacity: 0;
+    }
+    .card.anim:nth-child(2) { animation-delay: 0.05s; }
+    .card.anim:nth-child(3) { animation-delay: 0.1s; }
+    .card.anim:nth-child(4) { animation-delay: 0.15s; }
+    .card.anim:nth-child(5) { animation-delay: 0.2s; }
+
+    /* ── top bar ── */
+    .topbar {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-wrap {
+      background: var(--bg);
+      border-radius: 50px;
+      box-shadow: 5px 5px 10px var(--shadow-dark),
+                  -5px -5px 10px var(--shadow-light);
+      padding: 0.5rem 1.4rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--fg-dark);
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    /* dark toggle */
+    .toggle-label {
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .toggle {
+      isolation: isolate;
+      position: relative;
+      height: 26px;
+      width: 52px;
+      border-radius: 13px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: -6px -3px 6px 0px var(--shadow-light),
+                   6px 3px 10px 0px var(--shadow-dark),
+                   3px 3px 3px 0px var(--shadow-dark) inset,
+                  -3px -3px 3px 0px var(--shadow-light) inset;
+    }
+
+    .toggle-state { display: none; }
+
+    .indicator {
+      height: 100%;
+      width: 200%;
+      background: var(--bg);
+      border-radius: 13px;
+      transform: translate3d(-75%, 0, 0);
+      transition: transform 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35), background 0.4s;
+      box-shadow: -6px -3px 6px 0px var(--shadow-dark),
+                   6px 3px 10px 0px var(--shadow-dark);
+    }
+
+    .toggle-state:checked ~ .indicator {
+      transform: translate3d(25%, 0, 0);
+    }
+
+    /* hamburger */
+    #hamburgerCheck { display: none; }
+
+    .hamburger-wrap {
+      background: var(--bg);
+      border-radius: 10px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 4px 4px 8px var(--shadow-dark),
+                  -4px -4px 8px var(--shadow-light);
+    }
+
+    .toggle2 {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: transform 0.5s ease;
+    }
+
+    .bars {
+      width: 100%;
+      height: 2.5px;
+      background-color: var(--accent);
+      border-radius: 6px;
+      transition: transform 0.5s ease, width 0.5s ease, background-color 0.4s ease;
+    }
+
+    #bar5 {
+      transition: transform 0.8s ease, width 0.5s ease, background-color 0.4s ease;
+    }
+
+    #bar4, #bar6 { width: 75%; }
+
+    #hamburgerCheck:checked + .toggle2 .bars { position: absolute; }
+    #hamburgerCheck:checked + .toggle2 #bar5 { transform: scaleX(0); }
+    #hamburgerCheck:checked + .toggle2 #bar4 { width: 100%; transform: rotate(45deg); }
+    #hamburgerCheck:checked + .toggle2 #bar6 { width: 100%; transform: rotate(-45deg); }
+    #hamburgerCheck:checked + .toggle2 { transform: rotate(180deg); }
+
+    /* nav menu */
+    .nav-menu {
+      width: 100%;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35);
+    }
+
+    .nav-menu.open { max-height: 600px; }
+
+    .nav-menu-inner {
+      background: var(--bg);
+      border-radius: 14px;
+      box-shadow: inset 4px 4px 8px var(--shadow-dark),
+                  inset -4px -4px 8px var(--shadow-light);
+      padding: 0.4rem 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-menu a {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 0.65rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: color 0.2s;
+    }
+
+    .docs-toggle {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 0.65rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .docs-toggle:hover { color: var(--fg-dark); }
+    .docs-toggle svg:first-child { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.5; }
+
+    .docs-arrow {
+      width: 12px;
+      height: 12px;
+      margin-left: auto;
+      transition: transform 0.3s ease;
+      opacity: 0.4;
+    }
+
+    .docs-toggle.open .docs-arrow { transform: rotate(180deg); }
+
+    .docs-dropdown {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35);
+    }
+
+    .docs-dropdown.open { max-height: 300px; }
+
+    .docs-content {
+      margin: 0 1.2rem 0.8rem;
+      background: var(--bg);
+      border-radius: 12px;
+      box-shadow: inset 3px 3px 6px var(--shadow-dark),
+                  inset -3px -3px 6px var(--shadow-light);
+      padding: 0.9rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .docs-heading {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--fg-dark);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    .docs-heading:first-child { margin-top: 0; }
+
+    .docs-text {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .nav-menu a svg { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.5; }
+
+    .nav-divider {
+      height: 1px;
+      background: var(--shadow-dark);
+      margin: 0.15rem 1.2rem;
+      opacity: 0.4;
+    }
+
+    /* ── hero card ── */
+    .icon-circle {
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      background: var(--bg);
+      box-shadow: 7px 7px 14px var(--shadow-dark),
+                  -7px -7px 14px var(--shadow-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-circle svg { width: 36px; height: 36px; color: var(--accent); }
+
+    .text-center {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--fg-dark);
+      letter-spacing: -0.02em;
+    }
+
+    .desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .info-strip {
+      background: var(--bg);
+      border-radius: 14px;
+      box-shadow: inset 4px 4px 8px var(--shadow-dark),
+                  inset -4px -4px 8px var(--shadow-light);
+      padding: 0.9rem 1.2rem;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .info-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .info-value {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--fg-dark);
+    }
+
+    /* download button + progress */
+    .download-area {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: var(--bg);
+      color: var(--fg-dark);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 6px 6px 12px var(--shadow-dark),
+                  -6px -6px 12px var(--shadow-light);
+      transition: box-shadow 0.25s, transform 0.2s;
+    }
+
+    .btn-download:hover {
+      box-shadow: 8px 8px 16px var(--shadow-dark),
+                  -8px -8px 16px var(--shadow-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-download:active {
+      box-shadow: inset 4px 4px 8px var(--shadow-dark),
+                  inset -4px -4px 8px var(--shadow-light);
+      transform: translateY(0);
+    }
+
+    .btn-download svg { width: 16px; height: 16px; color: var(--accent); }
+
+    .progress-wrap {
+      width: 100%;
+      display: none;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .progress-wrap.show { display: flex; }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      border-radius: 8px;
+      background: var(--bg);
+      box-shadow: inset 3px 3px 6px var(--shadow-dark),
+                  inset -3px -3px 6px var(--shadow-light);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      border-radius: 8px;
+      transition: width 0.1s linear;
+    }
+
+    .progress-text {
+      font-size: 0.68rem;
+      color: var(--muted);
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+
+    .version {
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── section titles ── */
+    .section-title {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      align-self: flex-start;
+    }
+
+    /* ── screenshots ── */
+    .screenshots {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .screenshot-img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 6px 6px 14px var(--shadow-dark),
+                  -6px -6px 14px var(--shadow-light);
+      object-fit: cover;
+      display: block;
+    }
+
+    .screenshot-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 16px;
+      background: var(--bg);
+      box-shadow: inset 4px 4px 10px var(--shadow-dark),
+                  inset -4px -4px 10px var(--shadow-light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--muted);
+    }
+
+    .screenshot-placeholder svg { width: 28px; height: 28px; opacity: 0.4; }
+    .screenshot-placeholder span { font-size: 0.72rem; opacity: 0.5; }
+
+    /* ── system requirements ── */
+    .req-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .req-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.7rem 1rem;
+      border-radius: 12px;
+      background: var(--bg);
+      box-shadow: inset 3px 3px 6px var(--shadow-dark),
+                  inset -3px -3px 6px var(--shadow-light);
+    }
+
+    .req-key {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .req-val {
+      font-size: 0.75rem;
+      color: var(--fg-dark);
+      font-weight: 700;
+    }
+
+    /* ── changelog ── */
+    .changelog-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .changelog-item {
+      background: var(--bg);
+      border-radius: 14px;
+      box-shadow: inset 3px 3px 6px var(--shadow-dark),
+                  inset -3px -3px 6px var(--shadow-light);
+      padding: 1rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .changelog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .changelog-version {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--fg-dark);
+    }
+
+    .changelog-date {
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .changelog-notes {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .changelog-note {
+      font-size: 0.75rem;
+      color: var(--fg);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .changelog-note::before {
+      content: '·';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ── buy me a coffee ── */
+    .coffee-inner {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .coffee-icon {
+      font-size: 2.6rem;
+      background: var(--bg);
+      border-radius: 50%;
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 6px 6px 12px var(--shadow-dark),
+                  -6px -6px 12px var(--shadow-light);
+    }
+
+    .coffee-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--fg-dark);
+      letter-spacing: -0.02em;
+    }
+
+    .btn-coffee {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg);
+      color: var(--fg-dark);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 6px 6px 12px var(--shadow-dark),
+                  -6px -6px 12px var(--shadow-light);
+      transition: box-shadow 0.25s, transform 0.2s;
+    }
+
+    .btn-coffee:hover {
+      box-shadow: 8px 8px 16px var(--shadow-dark),
+                  -8px -8px 16px var(--shadow-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-coffee:active {
+      box-shadow: inset 4px 4px 8px var(--shadow-dark),
+                  inset -4px -4px 8px var(--shadow-light);
+      transform: translateY(0);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 1.2rem 0.8rem 3rem; }
+      .card { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- hero card -->
+  <div class="card anim">
+
+    <div class="topbar">
+      <div class="logo-wrap"><span class="logo">fenn</span></div>
+      <div class="topbar-right">
+        <span class="toggle-label">dark</span>
+        <label class="toggle">
+          <input class="toggle-state" type="checkbox" id="darkToggle"/>
+          <div class="indicator"></div>
+        </label>
+        <div class="hamburger-wrap">
+          <input type="checkbox" id="hamburgerCheck"/>
+          <label class="toggle2" for="hamburgerCheck" aria-label="menu">
+            <div class="bars" id="bar4"></div>
+            <div class="bars" id="bar5"></div>
+            <div class="bars" id="bar6"></div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-menu" id="navMenu">
+      <div class="nav-menu-inner">
+
+        <div class="docs-toggle" id="docsToggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          docs
+          <svg class="docs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+
+        <div class="docs-dropdown" id="docsDropdown">
+          <div class="docs-content">
+            <p class="docs-heading">what is fenn</p>
+            <p class="docs-text">fenn is a fast, minimal search engine for windows. no bloat, just results.</p>
+            <p class="docs-heading">installation</p>
+            <p class="docs-text">1. download the installer<br>2. run it<br>3. open fenn and search</p>
+            <p class="docs-heading">system requirements</p>
+            <p class="docs-text">windows 10/11 · 2gb ram · 50mb storage · x64</p>
+          </div>
+        </div>
+
+        <div class="nav-divider"></div>
+
+        <div class="docs-toggle" id="changelogToggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+          changelog
+          <svg class="docs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+
+        <div class="docs-dropdown" id="changelogDropdown">
+          <div class="docs-content">
+            <p class="docs-heading">v1.0.0 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.65rem">· feb 2026</span></p>
+            <p class="docs-text">· initial release<br>· fast local search indexing<br>· lightweight with minimal resource usage<br>· windows 10 and 11 support</p>
+          </div>
+        </div>
+
+        <div class="nav-divider"></div>
+        <a href="https://github.com/ac3d1t" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          github
+        </a>
+      </div>
+    </div>
+
+    <div class="icon-circle">
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="text-center">
+      <h1>search, your way</h1>
+      <p class="desc">fenn is a fast, lightweight search engine for windows. no fluff, just results.</p>
+    </div>
+
+    <div class="info-strip">
+      <div class="info-item">
+        <span class="info-label">platform</span>
+        <span class="info-value">windows</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">version</span>
+        <span class="info-value">1.0.0</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">license</span>
+        <span class="info-value">free</span>
+      </div>
+    </div>
+
+    <div class="download-area">
+      <a class="btn-download" id="downloadBtn" href="#">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 3v13M6 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        download for windows
+      </a>
+      <div class="progress-wrap" id="progressWrap">
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="progress-text" id="progressText">downloading... 0%</span>
+      </div>
+      <span class="version">v1.0.0 · free</span>
+    </div>
+
+  </div>
+
+  <!-- screenshots card -->
+  <div class="card anim">
+    <span class="section-title">preview</span>
+    <div class="screenshots">
+      <img class="screenshot-img" src="IMG_1284.jpeg" alt="fenn search engine full view"/>
+      <img class="screenshot-img" src="IMG_1283.jpeg" alt="fenn search engine shortcuts"/>
+      <img class="screenshot-img" src="IMG_1282.jpeg" alt="fenn browser tab"/>
+    </div>
+  </div>
+
+  <!-- system requirements card -->
+  <div class="card anim">
+    <span class="section-title">system requirements</span>
+    <div class="req-list">
+      <div class="req-row">
+        <span class="req-key">os</span>
+        <span class="req-val">windows 10 / 11</span>
+      </div>
+      <div class="req-row">
+        <span class="req-key">ram</span>
+        <span class="req-val">2 gb minimum</span>
+      </div>
+      <div class="req-row">
+        <span class="req-key">storage</span>
+        <span class="req-val">50 mb</span>
+      </div>
+      <div class="req-row">
+        <span class="req-key">architecture</span>
+        <span class="req-val">x64</span>
+      </div>
+      <div class="req-row">
+        <span class="req-key">internet</span>
+        <span class="req-val">required</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- changelog card -->
+  <div class="card anim">
+    <span class="section-title">release notes</span>
+    <div class="changelog-list">
+      <div class="changelog-item">
+        <div class="changelog-header">
+          <span class="changelog-version">v1.0.0</span>
+          <span class="changelog-date">feb 2026</span>
+        </div>
+        <div class="changelog-notes">
+          <span class="changelog-note">initial release</span>
+          <span class="changelog-note">fast local search indexing</span>
+          <span class="changelog-note">lightweight with minimal resource usage</span>
+          <span class="changelog-note">windows 10 and 11 support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- buy me a coffee card -->
+  <div class="card anim">
+    <span class="section-title">support fenn</span>
+    <div class="coffee-inner">
+      <div class="coffee-icon">☕</div>
+      <div class="text-center">
+        <h2 class="coffee-title">like fenn? buy me a coffee</h2>
+        <p class="desc">fenn is free and always will be. if it saved u some time, a coffee goes a long way</p>
+      </div>
+      <a class="btn-coffee" href="https://buymeacoffee.com" target="_blank">
+        buy me a coffee
+      </a>
+    </div>
+  </div>
+
+</body>
+<script>
+  const changelogToggle = document.getElementById('changelogToggle')
+  const changelogDropdown = document.getElementById('changelogDropdown')
+  changelogToggle.addEventListener('click', () => {
+    changelogToggle.classList.toggle('open')
+    changelogDropdown.classList.toggle('open')
+  })
+
+  const docsToggle = document.getElementById('docsToggle')
+  const docsDropdown = document.getElementById('docsDropdown')
+  docsToggle.addEventListener('click', () => {
+    docsToggle.classList.toggle('open')
+    docsDropdown.classList.toggle('open')
+  })
+
+  // dark mode
+  const darkToggle = document.getElementById('darkToggle')
+  darkToggle.addEventListener('change', () => {
+    document.documentElement.classList.toggle('dark', darkToggle.checked)
+  })
+
+  // hamburger
+  const menuCheck = document.getElementById('hamburgerCheck')
+  const navMenu = document.getElementById('navMenu')
+  menuCheck.addEventListener('change', () => {
+    navMenu.classList.toggle('open', menuCheck.checked)
+  })
+
+  // download progress bar
+  const downloadBtn = document.getElementById('downloadBtn')
+  const progressWrap = document.getElementById('progressWrap')
+  const progressFill = document.getElementById('progressFill')
+  const progressText = document.getElementById('progressText')
+
+  downloadBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    if (progressWrap.classList.contains('show')) return
+
+    progressWrap.classList.add('show')
+    downloadBtn.style.pointerEvents = 'none'
+    downloadBtn.style.opacity = '0.6'
+
+    let pct = 0
+    const interval = setInterval(() => {
+      pct += Math.random() * 8 + 2
+      if (pct >= 100) {
+        pct = 100
+        clearInterval(interval)
+        progressFill.style.width = '100%'
+        progressText.textContent = 'done'
+        setTimeout(() => {
+          progressWrap.classList.remove('show')
+          progressFill.style.width = '0%'
+          progressText.textContent = 'downloading... 0%'
+          downloadBtn.style.pointerEvents = ''
+          downloadBtn.style.opacity = ''
+          // swap this href for the real download link when ready
+          // window.location.href = 'YOUR_DOWNLOAD_URL'
+        }, 1200)
+        return
+      }
+      progressFill.style.width = pct + '%'
+      progressText.textContent = 'downloading... ' + Math.floor(pct) + '%'
+    }, 120)
+  })
+
+  // enable smooth theme transitions after load
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.documentElement.classList.remove('preload')
+      document.documentElement.classList.add('theme-ready')
+    })
+  })
+</script>
+</html>
