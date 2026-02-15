@@ -930,8 +930,8 @@
         <div class="docs-dropdown" id="changelogDropdown">
           <div class="docs-content">
             <p class="docs-heading">
-              <span class="cl-dot new"></span>
-              v1.0.3 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.65rem">· feb 15, 2026 · <span id="countdown">releasing soon</span></span>
+              <span class="cl-dot major"></span>
+              v1.0.3 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.65rem">· feb 15, 2026 · 7:17am</span>
             </p>
             <p class="docs-text">· persistent bookmarks, engine + dark mode after restart<br>· keyboard shortcuts (cmd+l, cmd+r, cmd+t, cmd+←/→)<br>· new tab button</p>
             <p class="docs-heading">v1.0.2 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.65rem">· feb 15, 2026 · 7:02am</span></p>
@@ -989,7 +989,7 @@
       </div>
       <div class="info-item">
         <span class="info-label">version</span>
-        <span class="info-value" id="selectedVersionLabel">1.0.2</span>
+        <span class="info-value" id="selectedVersionLabel">1.0.3</span>
       </div>
       <div class="info-item">
         <span class="info-label">license</span>
@@ -1015,10 +1015,15 @@
       <div class="os-panel active" id="panelMac">
         <div class="version-list">
           <label class="version-row">
-            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v.1.0.2/fenn-1.0.2.dmg" data-ver="1.0.2" checked/>
+            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v.1.0.3/fenn-1.0.3.dmg" data-ver="1.0.3" checked/>
+            <div class="version-check"></div>
+            <span class="version-name">v1.0.3</span>
+            <span class="version-tag latest">latest</span>
+          </label>
+          <label class="version-row">
+            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v.1.0.2/fenn-1.0.2.dmg" data-ver="1.0.2"/>
             <div class="version-check"></div>
             <span class="version-name">v1.0.2</span>
-            <span class="version-tag latest">latest</span>
           </label>
           <label class="version-row">
             <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v1.0.1/fenn-1.0.1.dmg" data-ver="1.0.1"/>
@@ -1031,7 +1036,7 @@
             <span class="version-name">v1.0.0</span>
           </label>
         </div>
-        <a class="btn-download" id="downloadBtn" href="https://github.com/ac3d1t/fenn/releases/download/v.1.0.2/fenn-1.0.2.dmg">
+        <a class="btn-download" id="downloadBtn" href="https://github.com/ac3d1t/fenn/releases/download/v.1.0.3/fenn-1.0.3.dmg">
           <svg viewBox="0 0 24 24" fill="none">
             <path d="M12 3v13M6 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -1265,22 +1270,6 @@
     }
   })
 
-  // v1.0.3 countdown
-  const releaseTime = new Date('2026-02-15T07:17:00').getTime()
-  const countdownEl = document.getElementById('countdown')
-  function updateCountdown() {
-    const now = Date.now()
-    const diff = releaseTime - now
-    if (diff <= 0) {
-      countdownEl.textContent = '7:17am'
-      return
-    }
-    const mins = Math.floor(diff / 60000)
-    const secs = Math.floor((diff % 60000) / 1000)
-    countdownEl.textContent = `releasing in ${mins}m ${secs}s`
-    setTimeout(updateCountdown, 1000)
-  }
-  updateCountdown()
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       document.documentElement.classList.remove('preload')
