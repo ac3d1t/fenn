@@ -377,7 +377,109 @@
       color: var(--fg-dark);
     }
 
-    /* download button + progress */
+    /* os tabs */
+    .os-tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: var(--bg);
+      border-radius: 50px;
+      box-shadow: inset 4px 4px 8px var(--shadow-dark),
+                  inset -4px -4px 8px var(--shadow-light);
+      padding: 0.3rem;
+    }
+
+    .os-tab {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: none;
+      border: none;
+      border-radius: 50px;
+      padding: 0.45rem 1rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: box-shadow 0.2s, color 0.2s;
+    }
+
+    .os-tab svg { width: 13px; height: 13px; }
+
+    .os-tab.active {
+      box-shadow: 4px 4px 8px var(--shadow-dark),
+                  -4px -4px 8px var(--shadow-light);
+      color: var(--fg-dark);
+    }
+
+    .os-panel { display: none; flex-direction: column; align-items: center; gap: 0.9rem; width: 100%; }
+    .os-panel.active { display: flex; }
+
+    /* version list */
+    .version-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      width: 100%;
+    }
+
+    .version-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 0.8rem;
+      cursor: pointer;
+      border-radius: 12px;
+    }
+
+    .version-row input { display: none; }
+
+    .version-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: var(--bg);
+      box-shadow: 3px 3px 6px rgba(0,0,0,0.18), -1px -1px 4px rgba(255,255,255,0.6);
+      transition: 0.3s;
+    }
+
+    .version-row input:checked + .version-check {
+      background: var(--accent);
+      box-shadow: 3px 3px 6px rgba(0,0,0,0.18), -1px -1px 4px rgba(255,255,255,0.6),
+                  inset 3px 3px 6px rgba(0,0,0,0.18), inset -1px -1px 4px rgba(255,255,255,0.3);
+      transform: scale(1.1);
+    }
+
+    .version-name { font-size: 0.78rem; font-weight: 700; color: var(--fg-dark); flex: 1; }
+
+    .version-tag {
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .version-tag.latest {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* coming soon */
+    .coming-soon-box {
+      background: var(--bg);
+      border-radius: 14px;
+      box-shadow: inset 4px 4px 8px var(--shadow-dark),
+                  inset -4px -4px 8px var(--shadow-light);
+      padding: 1.4rem 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-align: center;
+      width: 100%;
+    }
     .download-area {
       width: 100%;
       display: flex;
@@ -796,11 +898,11 @@
         <div class="docs-dropdown" id="docsDropdown">
           <div class="docs-content">
             <p class="docs-heading">what is fenn</p>
-            <p class="docs-text">fenn is a fast, minimal search engine for windows. no bloat, just results.</p>
+            <p class="docs-text">fenn is a fast, minimal search engine for mac and windows. no bloat, just results.</p>
             <p class="docs-heading">installation</p>
             <p class="docs-text">1. download the installer<br>2. run it<br>3. open fenn and search</p>
             <p class="docs-heading">system requirements</p>
-            <p class="docs-text">windows 10/11 · 2gb ram · 50mb storage · x64</p>
+            <p class="docs-text">macOS 12+ · windows 10/11 · 2gb ram · 50mb storage · x64</p>
           </div>
         </div>
 
@@ -852,17 +954,17 @@
 
     <div class="text-center">
       <h1>search, your way</h1>
-      <p class="desc">fenn is a fast, lightweight search engine for windows. no fluff, just results.</p>
+      <p class="desc">fenn is a fast, lightweight search engine for mac and windows. no fluff, just results.</p>
     </div>
 
     <div class="info-strip">
       <div class="info-item">
         <span class="info-label">platform</span>
-        <span class="info-value">windows</span>
+        <span class="info-value">macOS · windows</span>
       </div>
       <div class="info-item">
         <span class="info-label">version</span>
-        <span class="info-value">1.0.0</span>
+        <span class="info-value" id="selectedVersionLabel">1.0.1</span>
       </div>
       <div class="info-item">
         <span class="info-label">license</span>
@@ -871,20 +973,57 @@
     </div>
 
     <div class="download-area">
-      <a class="btn-download" id="downloadBtn" href="#">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M12 3v13M6 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        download for windows
-      </a>
+
+      <!-- os tabs -->
+      <div class="os-tabs">
+        <button class="os-tab active" id="tabMac">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 8c-1.5 0-3 .5-3 2 0 3 6 3 6 6 0 1.5-1.5 2-3 2s-3-.5-3-2"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="12" y1="18" x2="12" y2="20"/></svg>
+          macOS
+        </button>
+        <button class="os-tab" id="tabWin">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="9" height="9"/><rect x="13" y="3" width="9" height="9"/><rect x="2" y="13" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/></svg>
+          windows
+        </button>
+      </div>
+
+      <!-- mac versions -->
+      <div class="os-panel active" id="panelMac">
+        <div class="version-list">
+          <label class="version-row">
+            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v1.0.1/fenn-1.0.1.dmg" data-ver="1.0.1" checked/>
+            <div class="version-check"></div>
+            <span class="version-name">v1.0.1</span>
+            <span class="version-tag latest">latest</span>
+          </label>
+          <label class="version-row">
+            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v1.0.0/fenn-1.0.0.dmg" data-ver="1.0.0"/>
+            <div class="version-check"></div>
+            <span class="version-name">v1.0.0</span>
+          </label>
+        </div>
+        <a class="btn-download" id="downloadBtn" href="https://github.com/ac3d1t/fenn/releases/download/v1.0.1/fenn-1.0.1.dmg">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 3v13M6 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          download for mac
+        </a>
+      </div>
+
+      <!-- windows panel -->
+      <div class="os-panel" id="panelWin">
+        <div class="coming-soon-box">
+          <span>windows version coming soon</span>
+        </div>
+      </div>
+
       <div class="progress-wrap" id="progressWrap">
         <div class="progress-track">
           <div class="progress-fill" id="progressFill"></div>
         </div>
         <span class="progress-text" id="progressText">downloading... 0%</span>
       </div>
-      <span class="version">v1.0.0 · free</span>
+      <span class="version">free · open source</span>
     </div>
 
   </div>
@@ -905,7 +1044,7 @@
     <div class="req-list">
       <div class="req-row">
         <span class="req-key">os</span>
-        <span class="req-val">windows 10 / 11</span>
+        <span class="req-val">macOS 12+ · windows 10 / 11</span>
       </div>
       <div class="req-row">
         <span class="req-key">ram</span>
@@ -939,7 +1078,7 @@
           <span class="changelog-note">initial release</span>
           <span class="changelog-note">fast local search indexing</span>
           <span class="changelog-note">lightweight with minimal resource usage</span>
-          <span class="changelog-note">windows 10 and 11 support</span>
+          <span class="changelog-note">macOS and windows 10/11 support</span>
         </div>
       </div>
     </div>
@@ -1003,6 +1142,34 @@
   const navMenu = document.getElementById('navMenu')
   menuCheck.addEventListener('change', () => {
     navMenu.classList.toggle('open', menuCheck.checked)
+  })
+
+  // os tabs
+  const tabMac = document.getElementById('tabMac')
+  const tabWin = document.getElementById('tabWin')
+  const panelMac = document.getElementById('panelMac')
+  const panelWin = document.getElementById('panelWin')
+
+  tabMac.addEventListener('click', () => {
+    tabMac.classList.add('active')
+    tabWin.classList.remove('active')
+    panelMac.classList.add('active')
+    panelWin.classList.remove('active')
+  })
+
+  tabWin.addEventListener('click', () => {
+    tabWin.classList.add('active')
+    tabMac.classList.remove('active')
+    panelWin.classList.add('active')
+    panelMac.classList.remove('active')
+  })
+
+  // version selector updates download button href
+  document.querySelectorAll('input[name="macver"]').forEach(inp => {
+    inp.addEventListener('change', () => {
+      document.getElementById('downloadBtn').href = inp.value
+      document.getElementById('selectedVersionLabel').textContent = inp.dataset.ver
+    })
   })
 
   // download progress bar
