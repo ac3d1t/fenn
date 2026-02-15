@@ -1076,6 +1076,30 @@
     <div class="changelog-list">
       <div class="changelog-item">
         <div class="changelog-header">
+          <span class="changelog-version">v1.0.2</span>
+          <span class="changelog-date">feb 2026</span>
+        </div>
+        <div class="changelog-notes">
+          <span class="changelog-note">fixed buy me a coffee link</span>
+          <span class="changelog-note">minor bug fixes</span>
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="changelog-header">
+          <span class="changelog-version">v1.0.1</span>
+          <span class="changelog-date">feb 2026</span>
+        </div>
+        <div class="changelog-notes">
+          <span class="changelog-note">added nav bar with back, forward and refresh</span>
+          <span class="changelog-note">persistent tabs — no more reloading when switching</span>
+          <span class="changelog-note">hover preview on sidebar tabs</span>
+          <span class="changelog-note">bookmarks panel</span>
+          <span class="changelog-note">download manager</span>
+          <span class="changelog-note">settings panel with search engine switcher and dark mode</span>
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="changelog-header">
           <span class="changelog-version">v1.0.0</span>
           <span class="changelog-date">feb 2026</span>
         </div>
@@ -1083,7 +1107,7 @@
           <span class="changelog-note">initial release</span>
           <span class="changelog-note">fast local search indexing</span>
           <span class="changelog-note">lightweight with minimal resource usage</span>
-          <span class="changelog-note">macOS and windows 10/11 support</span>
+          <span class="changelog-note">macOS support</span>
         </div>
       </div>
     </div>
@@ -1098,7 +1122,7 @@
         <h2 class="coffee-title">like fenn? buy me a coffee</h2>
         <p class="desc">fenn is free and always will be. if it saved u some time, a coffee goes a long way</p>
       </div>
-      <a class="btn-coffee" href="https://buymeacoffee.com" target="_blank">
+      <a class="btn-coffee" href="https://buymeacoffee.com/ac3d1t" target="_blank">
         buy me a coffee
       </a>
     </div>
@@ -1177,42 +1201,33 @@
     })
   })
 
-  // download progress bar
+  // download - just let the link work naturally, show progress ui as visual feedback
   const downloadBtn = document.getElementById('downloadBtn')
   const progressWrap = document.getElementById('progressWrap')
   const progressFill = document.getElementById('progressFill')
   const progressText = document.getElementById('progressText')
 
-  downloadBtn.addEventListener('click', (e) => {
-    e.preventDefault()
+  downloadBtn.addEventListener('click', () => {
     if (progressWrap.classList.contains('show')) return
-
     progressWrap.classList.add('show')
-    downloadBtn.style.pointerEvents = 'none'
-    downloadBtn.style.opacity = '0.6'
-
+    progressText.textContent = 'starting download...'
     let pct = 0
     const interval = setInterval(() => {
-      pct += Math.random() * 8 + 2
-      if (pct >= 100) {
-        pct = 100
-        clearInterval(interval)
-        progressFill.style.width = '100%'
-        progressText.textContent = 'done'
-        setTimeout(() => {
-          progressWrap.classList.remove('show')
-          progressFill.style.width = '0%'
-          progressText.textContent = 'downloading... 0%'
-          downloadBtn.style.pointerEvents = ''
-          downloadBtn.style.opacity = ''
-          // swap this href for the real download link when ready
-          // window.location.href = 'YOUR_DOWNLOAD_URL'
-        }, 1200)
-        return
-      }
+      pct += Math.random() * 4 + 1
+      if (pct >= 90) { pct = 90; clearInterval(interval) }
       progressFill.style.width = pct + '%'
       progressText.textContent = 'downloading... ' + Math.floor(pct) + '%'
-    }, 120)
+    }, 200)
+    setTimeout(() => {
+      clearInterval(interval)
+      progressFill.style.width = '100%'
+      progressText.textContent = 'done — check ur downloads'
+      setTimeout(() => {
+        progressWrap.classList.remove('show')
+        progressFill.style.width = '0%'
+        progressText.textContent = 'downloading... 0%'
+      }, 2500)
+    }, 4000)
   })
 
   // search icon bounce
