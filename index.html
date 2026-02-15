@@ -989,7 +989,7 @@
       </div>
       <div class="info-item">
         <span class="info-label">version</span>
-        <span class="info-value" id="selectedVersionLabel">1.0.3</span>
+        <span class="info-value" id="selectedVersionLabel">1.0.2</span>
       </div>
       <div class="info-item">
         <span class="info-label">license</span>
@@ -1015,28 +1015,30 @@
       <div class="os-panel active" id="panelMac">
         <div class="version-list">
           <label class="version-row">
-            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v1.0.3/fenn-1.0.3.dmg" data-ver="1.0.3" checked/>
+            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/tag/v.1.0.3" data-ver="1.0.3" data-unstable="true"/>
             <div class="version-check"></div>
             <span class="version-name">v1.0.3</span>
             <span class="version-tag latest">latest</span>
+            <span class="version-tag" style="background:#e07070;color:#fff;margin-left:0.3rem;">unstable</span>
           </label>
           <label class="version-row">
-            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v.1.0.2/fenn-1.0.2.dmg" data-ver="1.0.2"/>
+            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v.1.0.2/fenn-1.0.2.dmg" data-ver="1.0.2" checked/>
             <div class="version-check"></div>
             <span class="version-name">v1.0.2</span>
+            <span class="version-tag" style="background:#7a9ccf;color:#fff;">recommended</span>
           </label>
           <label class="version-row">
-            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v.1.0.1/fenn-1.0.1.dmg" data-ver="1.0.1"/>
+            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v1.0.1/fenn-1.0.1.dmg" data-ver="1.0.1"/>
             <div class="version-check"></div>
             <span class="version-name">v1.0.1</span>
           </label>
           <label class="version-row">
-            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v.1.0.0/fenn-1.0.0.dmg" data-ver="1.0.0"/>
+            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v1.0.0/fenn-1.0.0.dmg" data-ver="1.0.0"/>
             <div class="version-check"></div>
             <span class="version-name">v1.0.0</span>
           </label>
         </div>
-        <a class="btn-download" id="downloadBtn" href="https://github.com/ac3d1t/fenn/releases/download/v.1.0.3/fenn-1.0.3.dmg">
+        <a class="btn-download" id="downloadBtn" href="https://github.com/ac3d1t/fenn/releases/download/v.1.0.2/fenn-1.0.2.dmg">
           <svg viewBox="0 0 24 24" fill="none">
             <path d="M12 3v13M6 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -1182,10 +1184,23 @@
   })
 
   // version selector updates download button href
+  const unstableWarning = document.createElement('p')
+  unstableWarning.style.cssText = 'font-size:0.68rem;color:#e07070;margin-top:0.4rem;display:none;'
+  unstableWarning.textContent = 'v1.0.3 is unstable — download from the repo at your own risk'
+  document.getElementById('downloadBtn').parentNode.insertBefore(unstableWarning, document.getElementById('downloadBtn').nextSibling)
+
   document.querySelectorAll('input[name="macver"]').forEach(inp => {
     inp.addEventListener('change', () => {
+      const isUnstable = inp.dataset.unstable === 'true'
       document.getElementById('downloadBtn').href = inp.value
       document.getElementById('selectedVersionLabel').textContent = inp.dataset.ver
+      if (isUnstable) {
+        document.getElementById('downloadBtn').textContent = 'view on github'
+        unstableWarning.style.display = 'block'
+      } else {
+        document.getElementById('downloadBtn').textContent = 'download for mac'
+        unstableWarning.style.display = 'none'
+      }
     })
   })
 
