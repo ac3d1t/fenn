@@ -822,7 +822,20 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* bounce animation */
+    /* changelog dots */
+    .cl-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      margin-right: 0.3rem;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+      flex-shrink: 0;
+    }
+    .cl-dot.new { background: #7a9ccf; box-shadow: 0 0 5px #7a9ccf99; }
+    .cl-dot.major { background: #a0c878; box-shadow: 0 0 5px #a0c87899; }
     @keyframes bounce {
       0%   { transform: scale(1); }
       30%  { transform: scale(1.15); }
@@ -916,9 +929,17 @@
 
         <div class="docs-dropdown" id="changelogDropdown">
           <div class="docs-content">
+            <p class="docs-heading">
+              <span class="cl-dot new"></span>
+              v1.0.3 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.65rem">· feb 15, 2026 · <span id="countdown">releasing soon</span></span>
+            </p>
+            <p class="docs-text">· persistent bookmarks, engine + dark mode after restart<br>· keyboard shortcuts (cmd+l, cmd+r, cmd+t, cmd+←/→)<br>· new tab button</p>
             <p class="docs-heading">v1.0.2 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.65rem">· feb 15, 2026 · 7:02am</span></p>
             <p class="docs-text">· fixed buy me a coffee link<br>· minor bug fixes</p>
-            <p class="docs-heading">v1.0.1 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.65rem">· feb 15, 2026 · 4:31am</span></p>
+            <p class="docs-heading">
+              <span class="cl-dot major"></span>
+              v1.0.1 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.65rem">· feb 15, 2026 · 4:31am</span>
+            </p>
             <p class="docs-text">· added nav bar with back, forward and refresh<br>· persistent tabs — no more reloading when switching<br>· hover preview on sidebar tabs<br>· bookmarks panel<br>· download manager<br>· settings panel with engine switcher and dark mode</p>
             <p class="docs-heading">v1.0.0 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.65rem">· feb 15, 2026 · 1:14am</span></p>
             <p class="docs-text">· initial release<br>· fast local search indexing<br>· lightweight with minimal resource usage<br>· macOS support</p>
@@ -1244,7 +1265,22 @@
     }
   })
 
-  // enable smooth theme transitions after load
+  // v1.0.3 countdown
+  const releaseTime = new Date('2026-02-15T07:17:00').getTime()
+  const countdownEl = document.getElementById('countdown')
+  function updateCountdown() {
+    const now = Date.now()
+    const diff = releaseTime - now
+    if (diff <= 0) {
+      countdownEl.textContent = '7:17am'
+      return
+    }
+    const mins = Math.floor(diff / 60000)
+    const secs = Math.floor((diff % 60000) / 1000)
+    countdownEl.textContent = `releasing in ${mins}m ${secs}s`
+    setTimeout(updateCountdown, 1000)
+  }
+  updateCountdown()
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       document.documentElement.classList.remove('preload')
