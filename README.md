@@ -7,8 +7,9 @@
 go to the [releases page](https://github.com/ac3d1t/fenn/releases) and download the `.dmg` file for your version.
 
 **which version should i download?**
+obviously the newest release you silly goof
 - **v1.0.2** is the recommended version. it's stable and has all the core features.
-- **v1.0.3** has extra features (keyboard shortcuts, persistent settings) but is marked unstable. download it from the repo at your own risk.
+- **v1.0.3** has extra features (keyboard shortcuts, persistent settings) but you cant get it off the website for some ridiculous reason. download it from the repo if you want it that bad.
 
 ### step 2 — open the dmg
 
