@@ -380,28 +380,34 @@
     /* os tabs */
     .os-tabs {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.4rem;
       background: var(--bg);
       border-radius: 50px;
       box-shadow: inset 4px 4px 8px var(--shadow-dark),
                   inset -4px -4px 8px var(--shadow-light);
       padding: 0.3rem;
+      overflow-x: auto;
+      width: 100%;
+      scrollbar-width: none;
     }
+    .os-tabs::-webkit-scrollbar { display: none; }
 
     .os-tab {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
       background: none;
       border: none;
       border-radius: 50px;
-      padding: 0.45rem 1rem;
+      padding: 0.45rem 0.7rem;
       font-family: 'Nunito', sans-serif;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 700;
       color: var(--muted);
       cursor: pointer;
       transition: box-shadow 0.2s, color 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .os-tab svg { width: 13px; height: 13px; }
@@ -1021,6 +1027,10 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="9" height="9"/><rect x="13" y="3" width="9" height="9"/><rect x="2" y="13" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/></svg>
           windows
         </button>
+        <button class="os-tab" id="tabLinux">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.5 9.5c0-1.5 1-2.5 2.5-2.5s2.5 1 2.5 2.5c0 2-2.5 3-2.5 5"/><circle cx="12" cy="19" r="0.5" fill="currentColor"/></svg>
+          linux
+        </button>
       </div>
 
       <!-- mac versions -->
@@ -1111,6 +1121,13 @@
             5. tap install<br><br>
             no account needed. no expiry. just install and go.
           </p>
+        </div>
+      </div>
+
+      <!-- linux panel -->
+      <div class="os-panel" id="panelLinux">
+        <div class="coming-soon-box">
+          <span>linux version coming soon</span>
         </div>
       </div>
 
@@ -1235,14 +1252,18 @@
   const tabIOS = document.getElementById('tabIOS')
   const tabAndroid = document.getElementById('tabAndroid')
   const tabWin = document.getElementById('tabWin')
+  const tabLinux = document.getElementById('tabLinux')
   const panelMac = document.getElementById('panelMac')
   const panelIOS = document.getElementById('panelIOS')
   const panelAndroid = document.getElementById('panelAndroid')
   const panelWin = document.getElementById('panelWin')
+  const panelLinux = document.getElementById('panelLinux')
 
   function switchOsTab(activeTab, activePanel) {
-    [tabMac, tabIOS, tabAndroid, tabWin].forEach(t => t.classList.remove('active'))
-    [panelMac, panelIOS, panelAndroid, panelWin].forEach(p => p.classList.remove('active'))
+    const allTabs = [tabMac, tabIOS, tabAndroid, tabWin, tabLinux]
+    const allPanels = [panelMac, panelIOS, panelAndroid, panelWin, panelLinux]
+    allTabs.forEach(t => t.classList.remove('active'))
+    allPanels.forEach(p => p.classList.remove('active'))
     activeTab.classList.add('active')
     activePanel.classList.add('active')
   }
@@ -1251,6 +1272,7 @@
   tabIOS.addEventListener('click', () => switchOsTab(tabIOS, panelIOS))
   tabAndroid.addEventListener('click', () => switchOsTab(tabAndroid, panelAndroid))
   tabWin.addEventListener('click', () => switchOsTab(tabWin, panelWin))
+  tabLinux.addEventListener('click', () => switchOsTab(tabLinux, panelLinux))
 
   // version selector updates download button href
   const unstableWarning = document.createElement('p')
