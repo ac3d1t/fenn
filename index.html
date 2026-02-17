@@ -979,13 +979,13 @@
 
     <div class="text-center">
       <h1>search, your way</h1>
-      <p class="desc">fenn is a fast, lightweight search engine for mac and windows. no fluff, just results.</p>
+      <p class="desc">fenn is a fast, lightweight search engine for mac, iOS, and windows. no fluff, just results.</p>
     </div>
 
     <div class="info-strip">
       <div class="info-item">
         <span class="info-label">platform</span>
-        <span class="info-value">macOS · windows</span>
+        <span class="info-value">macOS · iOS · windows</span>
       </div>
       <div class="info-item">
         <span class="info-label">version</span>
@@ -1004,6 +1004,10 @@
         <button class="os-tab active" id="tabMac">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 8c-1.5 0-3 .5-3 2 0 3 6 3 6 6 0 1.5-1.5 2-3 2s-3-.5-3-2"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="12" y1="18" x2="12" y2="20"/></svg>
           macOS
+        </button>
+        <button class="os-tab" id="tabIOS">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          iOS
         </button>
         <button class="os-tab" id="tabWin">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="9" height="9"/><rect x="13" y="3" width="9" height="9"/><rect x="2" y="13" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/></svg>
@@ -1047,6 +1051,36 @@
         </a>
       </div>
 
+      <!-- iOS panel -->
+      <div class="os-panel" id="panelIOS">
+        <p style="font-size:0.72rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:0.4rem;">
+          fenn for iOS is available as a sideloadable IPA. requires iOS 14.0+
+        </p>
+        <a class="btn-download" href="https://github.com/ac3d1t/fenn-ios/releases/latest" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 3v13M6 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          download IPA
+        </a>
+        <div class="coming-soon-box" style="padding:1rem 1.5rem;font-size:0.68rem;">
+          <p style="font-weight:700;color:var(--fg-dark);margin-bottom:0.6rem;">sideloading instructions</p>
+          <p style="text-align:left;line-height:1.7;">
+            <strong style="color:var(--fg-dark);">option 1: AltStore</strong><br>
+            1. install altstore from altstore.io<br>
+            2. download the ipa above<br>
+            3. open altstore and install<br><br>
+            <strong style="color:var(--fg-dark);">option 2: Sideloadly</strong><br>
+            1. download sideloadly from sideloadly.io<br>
+            2. connect iphone via usb<br>
+            3. drag ipa into sideloadly<br>
+            4. sign with apple id<br><br>
+            <strong style="color:var(--fg-dark);">option 3: TrollStore</strong><br>
+            tap the ipa to install (if jailbroken)
+          </p>
+        </div>
+      </div>
+
       <!-- windows panel -->
       <div class="os-panel" id="panelWin">
         <div class="coming-soon-box">
@@ -1082,7 +1116,7 @@
     <div class="req-list">
       <div class="req-row">
         <span class="req-key">os</span>
-        <span class="req-val">macOS 12+ · windows 10 / 11</span>
+        <span class="req-val">macOS 12+ · iOS 14+ · win 10/11</span>
       </div>
       <div class="req-row">
         <span class="req-key">ram</span>
@@ -1094,7 +1128,7 @@
       </div>
       <div class="req-row">
         <span class="req-key">architecture</span>
-        <span class="req-val">x64</span>
+        <span class="req-val">x64 · arm64</span>
       </div>
       <div class="req-row">
         <span class="req-key">internet</span>
@@ -1165,22 +1199,37 @@
 
   // os tabs
   const tabMac = document.getElementById('tabMac')
+  const tabIOS = document.getElementById('tabIOS')
   const tabWin = document.getElementById('tabWin')
   const panelMac = document.getElementById('panelMac')
+  const panelIOS = document.getElementById('panelIOS')
   const panelWin = document.getElementById('panelWin')
 
   tabMac.addEventListener('click', () => {
     tabMac.classList.add('active')
+    tabIOS.classList.remove('active')
     tabWin.classList.remove('active')
     panelMac.classList.add('active')
+    panelIOS.classList.remove('active')
+    panelWin.classList.remove('active')
+  })
+
+  tabIOS.addEventListener('click', () => {
+    tabIOS.classList.add('active')
+    tabMac.classList.remove('active')
+    tabWin.classList.remove('active')
+    panelIOS.classList.add('active')
+    panelMac.classList.remove('active')
     panelWin.classList.remove('active')
   })
 
   tabWin.addEventListener('click', () => {
     tabWin.classList.add('active')
     tabMac.classList.remove('active')
+    tabIOS.classList.remove('active')
     panelWin.classList.add('active')
     panelMac.classList.remove('active')
+    panelIOS.classList.remove('active')
   })
 
   // version selector updates download button href
