@@ -1240,17 +1240,17 @@
   const panelAndroid = document.getElementById('panelAndroid')
   const panelWin = document.getElementById('panelWin')
 
-  function switchTab(activeTab, activePanel) {
+  function switchOsTab(activeTab, activePanel) {
     [tabMac, tabIOS, tabAndroid, tabWin].forEach(t => t.classList.remove('active'))
     [panelMac, panelIOS, panelAndroid, panelWin].forEach(p => p.classList.remove('active'))
     activeTab.classList.add('active')
     activePanel.classList.add('active')
   }
 
-  tabMac.addEventListener('click', () => switchTab(tabMac, panelMac))
-  tabIOS.addEventListener('click', () => switchTab(tabIOS, panelIOS))
-  tabAndroid.addEventListener('click', () => switchTab(tabAndroid, panelAndroid))
-  tabWin.addEventListener('click', () => switchTab(tabWin, panelWin))
+  tabMac.addEventListener('click', () => switchOsTab(tabMac, panelMac))
+  tabIOS.addEventListener('click', () => switchOsTab(tabIOS, panelIOS))
+  tabAndroid.addEventListener('click', () => switchOsTab(tabAndroid, panelAndroid))
+  tabWin.addEventListener('click', () => switchOsTab(tabWin, panelWin))
 
   // version selector updates download button href
   const unstableWarning = document.createElement('p')
