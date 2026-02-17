@@ -8,7 +8,7 @@ go to the [releases page](https://github.com/ac3d1t/fenn/releases) and download 
 
 **which version should i download?**
 obviously the newest release you silly goof
-- **v1.0.2** is the recommended version. it's stable and has all the core features.
+- **v1.0.2** is the wesion where you can just download it from the website. easy peasy
 - **v1.0.3** has extra features (keyboard shortcuts, persistent settings) but you cant get it off the website for some ridiculous reason. download it from the repo if you want it that bad.
 
 ### step 2 — open the dmg
@@ -115,6 +115,42 @@ if compatible:
 5. tap **install**
 
 done. fenn is installed permanently with no expiry.
+
+---
+
+## android
+
+fenn is available as an APK for android. no account needed, no expiry — just download and install.
+
+requires android 7.0 or later.
+
+### step 1 — enable unknown sources
+
+android blocks installs from outside the play store by default. you need to allow it once:
+
+**android 8.0 and later:**
+1. go to **settings** → **apps**
+2. tap **special app access**
+3. tap **install unknown apps**
+4. find your browser or files app and toggle **allow from this source**
+
+**android 7.0:**
+1. go to **settings** → **security**
+2. toggle on **unknown sources**
+3. tap ok on the warning
+
+### step 2 — download the APK
+
+download fenn.apk from the [releases page](https://github.com/ac3d1t/fenn-ios/releases/latest)
+
+### step 3 — install
+
+1. open your downloads folder
+2. tap `fenn.apk`
+3. tap **install**
+4. tap **open** when it finishes
+
+no re-signing, no expiry, no account needed.
 
 ---
 
