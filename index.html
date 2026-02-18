@@ -52,7 +52,6 @@
       gap: 1.5rem;
     }
 
-    /* ── card base ── */
     .card {
       background: var(--bg);
       border-radius: 28px;
@@ -75,8 +74,8 @@
     .card.anim:nth-child(3) { animation-delay: 0.1s; }
     .card.anim:nth-child(4) { animation-delay: 0.15s; }
     .card.anim:nth-child(5) { animation-delay: 0.2s; }
+    .card.anim:nth-child(6) { animation-delay: 0.25s; }
 
-    /* ── top bar ── */
     .topbar {
       width: 100%;
       display: flex;
@@ -105,7 +104,6 @@
       gap: 0.8rem;
     }
 
-    /* dark toggle */
     .toggle-label {
       font-size: 0.65rem;
       color: var(--muted);
@@ -145,7 +143,6 @@
       transform: translate3d(25%, 0, 0);
     }
 
-    /* hamburger */
     #hamburgerCheck { display: none; }
 
     .hamburger-wrap {
@@ -193,7 +190,6 @@
     #hamburgerCheck:checked + .toggle2 #bar6 { width: 100%; transform: rotate(-45deg); }
     #hamburgerCheck:checked + .toggle2 { transform: rotate(180deg); }
 
-    /* nav menu */
     .nav-menu {
       width: 100%;
       overflow: hidden;
@@ -213,7 +209,8 @@
       flex-direction: column;
     }
 
-    .nav-menu a {
+    .nav-menu a,
+    .docs-toggle {
       font-size: 0.78rem;
       color: var(--muted);
       text-decoration: none;
@@ -224,22 +221,11 @@
       align-items: center;
       gap: 0.6rem;
       transition: color 0.2s;
-    }
-
-    .docs-toggle {
-      font-size: 0.78rem;
-      color: var(--muted);
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      padding: 0.65rem 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
       cursor: pointer;
-      transition: color 0.2s;
     }
 
     .docs-toggle:hover { color: var(--fg-dark); }
+
     .docs-toggle svg:first-child { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.5; }
 
     .docs-arrow {
@@ -298,11 +284,6 @@
 
     .gh-link:hover { color: var(--fg-dark); }
     .gh-link svg { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.5; }
-      font-size: 0.72rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-    .nav-menu a svg { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.5; }
 
     .nav-divider {
       height: 1px;
@@ -311,7 +292,6 @@
       opacity: 0.4;
     }
 
-    /* ── hero card ── */
     .icon-circle {
       width: 86px;
       height: 86px;
@@ -377,7 +357,6 @@
       color: var(--fg-dark);
     }
 
-    /* os tabs */
     .os-tabs {
       display: flex;
       gap: 0.4rem;
@@ -421,7 +400,6 @@
     .os-panel { display: none; flex-direction: column; align-items: center; gap: 0.9rem; width: 100%; }
     .os-panel.active { display: flex; }
 
-    /* version list */
     .version-list {
       display: flex;
       flex-direction: column;
@@ -473,7 +451,6 @@
       color: white;
     }
 
-    /* coming soon */
     .coming-soon-box {
       background: var(--bg);
       border-radius: 14px;
@@ -486,6 +463,7 @@
       text-align: center;
       width: 100%;
     }
+
     .download-area {
       width: 100%;
       display: flex;
@@ -510,19 +488,38 @@
       text-decoration: none;
       box-shadow: 6px 6px 12px var(--shadow-dark),
                   -6px -6px 12px var(--shadow-light);
-      transition: box-shadow 0.25s, transform 0.2s;
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .btn-download::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50px;
+      background: var(--accent);
+      opacity: 0.08;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: -1;
     }
 
     .btn-download:hover {
       box-shadow: 8px 8px 16px var(--shadow-dark),
                   -8px -8px 16px var(--shadow-light);
-      transform: translateY(-1px);
+      transform: translateY(-1px) translateX(4px);
+    }
+
+    .btn-download:hover::after {
+      transform: scaleX(1);
     }
 
     .btn-download:active {
+      transform: translateY(0) translateX(0);
       box-shadow: inset 4px 4px 8px var(--shadow-dark),
                   inset -4px -4px 8px var(--shadow-light);
-      transform: translateY(0);
     }
 
     .btn-download svg { width: 16px; height: 16px; color: var(--accent); }
@@ -567,7 +564,6 @@
       letter-spacing: 0.04em;
     }
 
-    /* ── section titles ── */
     .section-title {
       font-size: 0.65rem;
       letter-spacing: 0.1em;
@@ -577,7 +573,6 @@
       align-self: flex-start;
     }
 
-    /* ── screenshots ── */
     .screenshots {
       width: 100%;
       display: flex;
@@ -612,7 +607,6 @@
     .screenshot-placeholder svg { width: 28px; height: 28px; opacity: 0.4; }
     .screenshot-placeholder span { font-size: 0.72rem; opacity: 0.5; }
 
-    /* ── system requirements ── */
     .req-list {
       width: 100%;
       display: flex;
@@ -644,7 +638,6 @@
       font-weight: 700;
     }
 
-    /* ── changelog ── */
     .changelog-list {
       width: 100%;
       display: flex;
@@ -702,7 +695,6 @@
       flex-shrink: 0;
     }
 
-    /* ── buy me a coffee ── */
     .coffee-inner {
       width: 100%;
       display: flex;
@@ -762,7 +754,6 @@
       transform: translateY(0);
     }
 
-    /* lightbox */
     .lightbox {
       position: fixed;
       inset: 0;
@@ -803,7 +794,6 @@
       transform: scale(1);
     }
 
-    /* toast */
     .toast {
       position: fixed;
       bottom: 2rem;
@@ -828,7 +818,6 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* changelog dots */
     .cl-dot {
       display: inline-block;
       width: 7px;
@@ -842,6 +831,7 @@
     }
     .cl-dot.new { background: #7a9ccf; box-shadow: 0 0 5px #7a9ccf99; }
     .cl-dot.major { background: #a0c878; box-shadow: 0 0 5px #a0c87899; }
+
     @keyframes bounce {
       0%   { transform: scale(1); }
       30%  { transform: scale(1.15); }
@@ -851,10 +841,8 @@
 
     .bounce { animation: bounce 0.45s ease forwards; }
 
-    /* clickable cursor */
     .logo-wrap, .icon-circle, .screenshot-img { cursor: pointer; }
 
-    /* falling coffee */
     .coffee-drop {
       position: fixed;
       top: -60px;
@@ -875,6 +863,39 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* feedback card specific */
+    .feedback-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .feedback-item {
+      background: var(--bg);
+      border-radius: 16px;
+      box-shadow: inset 3px 3px 8px var(--shadow-dark),
+                  inset -3px -3px 8px var(--shadow-light);
+      padding: 1.2rem 1.4rem;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: var(--fg);
+    }
+
+    .feedback-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.8rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .feedback-user {
+      font-weight: 700;
+      color: var(--fg-dark);
+    }
+
     @media (max-width: 480px) {
       body { padding: 1.2rem 0.8rem 3rem; }
       .card { padding: 2rem 1.5rem; }
@@ -885,7 +906,6 @@
 
   <!-- hero card -->
   <div class="card anim">
-
     <div class="topbar">
       <div class="logo-wrap" id="logoPill"><span class="logo">fenn</span></div>
       <div class="topbar-right">
@@ -907,7 +927,6 @@
 
     <div class="nav-menu" id="navMenu">
       <div class="nav-menu-inner">
-
         <div class="docs-toggle" id="docsToggle">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           docs
@@ -976,7 +995,6 @@
             </a>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -1008,32 +1026,14 @@
     </div>
 
     <div class="download-area">
-
-      <!-- os tabs -->
       <div class="os-tabs">
-        <button class="os-tab active" id="tabMac">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 8c-1.5 0-3 .5-3 2 0 3 6 3 6 6 0 1.5-1.5 2-3 2s-3-.5-3-2"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="12" y1="18" x2="12" y2="20"/></svg>
-          macOS
-        </button>
-        <button class="os-tab" id="tabIOS">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-          iOS
-        </button>
-        <button class="os-tab" id="tabAndroid">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 16.5A8 8 0 0 1 4 7.5"/><path d="M20 16.5A8 8 0 0 0 20 7.5"/><line x1="9" y1="7" x2="9" y2="7.01"/><line x1="15" y1="7" x2="15" y2="7.01"/><path d="M6 7l1.5-3M18 7l-1.5-3"/><rect x="4" y="7" width="16" height="10" rx="2"/></svg>
-          android
-        </button>
-        <button class="os-tab" id="tabWin">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="9" height="9"/><rect x="13" y="3" width="9" height="9"/><rect x="2" y="13" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/></svg>
-          windows
-        </button>
-        <button class="os-tab" id="tabLinux">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.5 9.5c0-1.5 1-2.5 2.5-2.5s2.5 1 2.5 2.5c0 2-2.5 3-2.5 5"/><circle cx="12" cy="19" r="0.5" fill="currentColor"/></svg>
-          linux
-        </button>
+        <button class="os-tab active" id="tabMac">macOS</button>
+        <button class="os-tab" id="tabIOS">iOS</button>
+        <button class="os-tab" id="tabAndroid">android</button>
+        <button class="os-tab" id="tabWin">windows</button>
+        <button class="os-tab" id="tabLinux">linux</button>
       </div>
 
-      <!-- mac versions -->
       <div class="os-panel active" id="panelMac">
         <div class="version-list">
           <label class="version-row">
@@ -1069,7 +1069,6 @@
         </a>
       </div>
 
-      <!-- iOS panel -->
       <div class="os-panel" id="panelIOS">
         <p style="font-size:0.72rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:0.4rem;">
           fenn for iOS is available as a sideloadable IPA. requires iOS 14.0+
@@ -1084,22 +1083,13 @@
         <div class="coming-soon-box" style="padding:1rem 1.5rem;font-size:0.68rem;">
           <p style="font-weight:700;color:var(--fg-dark);margin-bottom:0.6rem;">sideloading instructions</p>
           <p style="text-align:left;line-height:1.7;">
-            <strong style="color:var(--fg-dark);">option 1: AltStore</strong><br>
-            1. install altstore from altstore.io<br>
-            2. download the ipa above<br>
-            3. open altstore and install<br><br>
-            <strong style="color:var(--fg-dark);">option 2: Sideloadly</strong><br>
-            1. download sideloadly from sideloadly.io<br>
-            2. connect iphone via usb<br>
-            3. drag ipa into sideloadly<br>
-            4. sign with apple id<br><br>
-            <strong style="color:var(--fg-dark);">option 3: TrollStore</strong><br>
-            tap the ipa to install (if jailbroken)
+            <strong style="color:var(--fg-dark);">option 1: AltStore</strong><br>1. install altstore from altstore.io<br>2. download the ipa above<br>3. open altstore and install<br><br>
+            <strong style="color:var(--fg-dark);">option 2: Sideloadly</strong><br>1. download sideloadly from sideloadly.io<br>2. connect iphone via usb<br>3. drag ipa into sideloadly<br>4. sign with apple id<br><br>
+            <strong style="color:var(--fg-dark);">option 3: TrollStore</strong><br>tap the ipa to install (if jailbroken)
           </p>
         </div>
       </div>
 
-      <!-- android panel -->
       <div class="os-panel" id="panelAndroid">
         <p style="font-size:0.72rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:0.4rem;">
           fenn for android is available as a free APK. requires android 7.0+
@@ -1114,28 +1104,18 @@
         <div class="coming-soon-box" style="padding:1rem 1.5rem;font-size:0.68rem;">
           <p style="font-weight:700;color:var(--fg-dark);margin-bottom:0.6rem;">install instructions</p>
           <p style="text-align:left;line-height:1.7;">
-            1. download the APK above<br>
-            2. open settings → security<br>
-            3. enable "install from unknown sources"<br>
-            4. open the downloaded APK file<br>
-            5. tap install<br><br>
+            1. download the APK above<br>2. open settings → security<br>3. enable "install from unknown sources"<br>4. open the downloaded APK file<br>5. tap install<br><br>
             no account needed. no expiry. just install and go.
           </p>
         </div>
       </div>
 
-      <!-- linux panel -->
       <div class="os-panel" id="panelLinux">
-        <div class="coming-soon-box">
-          <span>linux version coming soon</span>
-        </div>
+        <div class="coming-soon-box"><span>linux version coming soon</span></div>
       </div>
 
-      <!-- windows panel -->
       <div class="os-panel" id="panelWin">
-        <div class="coming-soon-box">
-          <span>windows version coming soon</span>
-        </div>
+        <div class="coming-soon-box"><span>windows version coming soon</span></div>
       </div>
 
       <div class="progress-wrap" id="progressWrap">
@@ -1146,7 +1126,6 @@
       </div>
       <span class="version">free · open source</span>
     </div>
-
   </div>
 
   <!-- screenshots card -->
@@ -1202,185 +1181,216 @@
     </div>
   </div>
 
+  <!-- new feedback card -->
+  <div class="card anim">
+    <span class="section-title">user feedback</span>
+    <p style="font-size:0.72rem; color:var(--muted); margin-top:-0.3rem; margin-bottom:1rem;">recent comments from users</p>
+    <div class="feedback-list">
+      <div class="feedback-item">
+        it'd probably look better if the sliders were less shiny, and looked more like sine waves than spikes.
+        <div class="feedback-meta">
+          <span class="feedback-user">@A221DTWWAG-c9h</span>
+          <span>~2h ago</span>
+        </div>
+      </div>
+      <div class="feedback-item">
+        you're welcome! also i recommend making the buttons kind of slide out at the end, so that they look more like buttons
+        <div class="feedback-meta">
+          <span class="feedback-user">@A221DTWWAG-c9h</span>
+          <span>~11min ago</span>
+        </div>
+      </div>
+      <div class="feedback-item">
+        ill take note of it. thanks for the feedback
+        <div class="feedback-meta">
+          <span class="feedback-user">@optical-ace</span>
+          <span>~46min ago</span>
+        </div>
+      </div>
+      <div class="feedback-item">
+        ill try. i dont really have a computer with me right now, so ill just make a preview card on the website for user feedback and then preview it as a video.
+        <div class="feedback-meta">
+          <span class="feedback-user">@optical-ace</span>
+          <span>~46s ago</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- lightbox -->
   <div class="lightbox" id="lightbox">
     <div class="lightbox-bg" id="lightboxBg"></div>
     <img class="lightbox-img" id="lightboxImg" src="" alt=""/>
   </div>
 
-  <!-- clipboard toast -->
+  <!-- toast -->
   <div class="toast" id="toast">copied to clipboard</div>
 
-</body>
 <script>
-  const githubToggle = document.getElementById('githubToggle')
-  const githubDropdown = document.getElementById('githubDropdown')
-  githubToggle.addEventListener('click', () => {
-    githubToggle.classList.toggle('open')
-    githubDropdown.classList.toggle('open')
-  })
-
-  const changelogToggle = document.getElementById('changelogToggle')
-  const changelogDropdown = document.getElementById('changelogDropdown')
-  changelogToggle.addEventListener('click', () => {
-    changelogToggle.classList.toggle('open')
-    changelogDropdown.classList.toggle('open')
-  })
-
-  const docsToggle = document.getElementById('docsToggle')
-  const docsDropdown = document.getElementById('docsDropdown')
-  docsToggle.addEventListener('click', () => {
-    docsToggle.classList.toggle('open')
-    docsDropdown.classList.toggle('open')
-  })
-
-  // dark mode
-  const darkToggle = document.getElementById('darkToggle')
+// js stays almost the same - just added dark toggle etc
+  const darkToggle = document.getElementById('darkToggle');
   darkToggle.addEventListener('change', () => {
-    document.documentElement.classList.toggle('dark', darkToggle.checked)
-  })
+    document.documentElement.classList.toggle('dark', darkToggle.checked);
+  });
 
-  // hamburger
-  const menuCheck = document.getElementById('hamburgerCheck')
-  const navMenu = document.getElementById('navMenu')
+  const menuCheck = document.getElementById('hamburgerCheck');
+  const navMenu = document.getElementById('navMenu');
   menuCheck.addEventListener('change', () => {
-    navMenu.classList.toggle('open', menuCheck.checked)
-  })
+    navMenu.classList.toggle('open', menuCheck.checked);
+  });
+
+  const docsToggle = document.getElementById('docsToggle');
+  const docsDropdown = document.getElementById('docsDropdown');
+  docsToggle.addEventListener('click', () => {
+    docsToggle.classList.toggle('open');
+    docsDropdown.classList.toggle('open');
+  });
+
+  const changelogToggle = document.getElementById('changelogToggle');
+  const changelogDropdown = document.getElementById('changelogDropdown');
+  changelogToggle.addEventListener('click', () => {
+    changelogToggle.classList.toggle('open');
+    changelogDropdown.classList.toggle('open');
+  });
+
+  const githubToggle = document.getElementById('githubToggle');
+  const githubDropdown = document.getElementById('githubDropdown');
+  githubToggle.addEventListener('click', () => {
+    githubToggle.classList.toggle('open');
+    githubDropdown.classList.toggle('open');
+  });
 
   // os tabs
-  const tabMac = document.getElementById('tabMac')
-  const tabIOS = document.getElementById('tabIOS')
-  const tabAndroid = document.getElementById('tabAndroid')
-  const tabWin = document.getElementById('tabWin')
-  const tabLinux = document.getElementById('tabLinux')
-  const panelMac = document.getElementById('panelMac')
-  const panelIOS = document.getElementById('panelIOS')
-  const panelAndroid = document.getElementById('panelAndroid')
-  const panelWin = document.getElementById('panelWin')
-  const panelLinux = document.getElementById('panelLinux')
+  const tabMac = document.getElementById('tabMac');
+  const tabIOS = document.getElementById('tabIOS');
+  const tabAndroid = document.getElementById('tabAndroid');
+  const tabWin = document.getElementById('tabWin');
+  const tabLinux = document.getElementById('tabLinux');
+  const panelMac = document.getElementById('panelMac');
+  const panelIOS = document.getElementById('panelIOS');
+  const panelAndroid = document.getElementById('panelAndroid');
+  const panelWin = document.getElementById('panelWin');
+  const panelLinux = document.getElementById('panelLinux');
 
   function switchOsTab(activeTab, activePanel) {
-    const allTabs = [tabMac, tabIOS, tabAndroid, tabWin, tabLinux]
-    const allPanels = [panelMac, panelIOS, panelAndroid, panelWin, panelLinux]
-    allTabs.forEach(t => t.classList.remove('active'))
-    allPanels.forEach(p => p.classList.remove('active'))
-    activeTab.classList.add('active')
-    activePanel.classList.add('active')
+    [tabMac, tabIOS, tabAndroid, tabWin, tabLinux].forEach(t => t.classList.remove('active'));
+    [panelMac, panelIOS, panelAndroid, panelWin, panelLinux].forEach(p => p.classList.remove('active'));
+    activeTab.classList.add('active');
+    activePanel.classList.add('active');
   }
 
-  tabMac.addEventListener('click', () => switchOsTab(tabMac, panelMac))
-  tabIOS.addEventListener('click', () => switchOsTab(tabIOS, panelIOS))
-  tabAndroid.addEventListener('click', () => switchOsTab(tabAndroid, panelAndroid))
-  tabWin.addEventListener('click', () => switchOsTab(tabWin, panelWin))
-  tabLinux.addEventListener('click', () => switchOsTab(tabLinux, panelLinux))
+  tabMac.addEventListener('click', () => switchOsTab(tabMac, panelMac));
+  tabIOS.addEventListener('click', () => switchOsTab(tabIOS, panelIOS));
+  tabAndroid.addEventListener('click', () => switchOsTab(tabAndroid, panelAndroid));
+  tabWin.addEventListener('click', () => switchOsTab(tabWin, panelWin));
+  tabLinux.addEventListener('click', () => switchOsTab(tabLinux, panelLinux));
 
-  // version selector updates download button href
-  const unstableWarning = document.createElement('p')
-  unstableWarning.style.cssText = 'font-size:0.68rem;color:#e07070;margin-top:0.4rem;display:none;'
-  unstableWarning.textContent = 'v1.0.3 is unstable — download from the repo at your own risk'
-  document.getElementById('downloadBtn').parentNode.insertBefore(unstableWarning, document.getElementById('downloadBtn').nextSibling)
+  // version radio
+  const unstableWarning = document.createElement('p');
+  unstableWarning.style.cssText = 'font-size:0.68rem;color:#e07070;margin-top:0.4rem;display:none;';
+  unstableWarning.textContent = 'v1.0.3 is unstable — download from the repo at your own risk';
+  const downloadBtnParent = document.getElementById('downloadBtn').parentNode;
+  downloadBtnParent.insertBefore(unstableWarning, document.getElementById('downloadBtn').nextSibling);
 
   document.querySelectorAll('input[name="macver"]').forEach(inp => {
     inp.addEventListener('change', () => {
-      const isUnstable = inp.dataset.unstable === 'true'
-      document.getElementById('downloadBtn').href = inp.value
-      document.getElementById('selectedVersionLabel').textContent = inp.dataset.ver
+      const isUnstable = inp.dataset.unstable === 'true';
+      document.getElementById('downloadBtn').href = inp.value;
+      document.getElementById('selectedVersionLabel').textContent = inp.dataset.ver;
       if (isUnstable) {
-        document.getElementById('downloadBtn').textContent = 'view on github'
-        unstableWarning.style.display = 'block'
+        document.getElementById('downloadBtn').textContent = 'view on github';
+        unstableWarning.style.display = 'block';
       } else {
-        document.getElementById('downloadBtn').textContent = 'download for mac'
-        unstableWarning.style.display = 'none'
+        document.getElementById('downloadBtn').textContent = 'download for mac';
+        unstableWarning.style.display = 'none';
       }
-    })
-  })
+    });
+  });
 
-  // download - just let the link work naturally, show progress ui as visual feedback
-  const downloadBtn = document.getElementById('downloadBtn')
-  const progressWrap = document.getElementById('progressWrap')
-  const progressFill = document.getElementById('progressFill')
-  const progressText = document.getElementById('progressText')
+  // fake progress on click
+  const downloadBtn = document.getElementById('downloadBtn');
+  const progressWrap = document.getElementById('progressWrap');
+  const progressFill = document.getElementById('progressFill');
+  const progressText = document.getElementById('progressText');
 
-  downloadBtn.addEventListener('click', () => {
-    if (progressWrap.classList.contains('show')) return
-    progressWrap.classList.add('show')
-    progressText.textContent = 'starting download...'
-    let pct = 0
+  downloadBtn.addEventListener('click', (e) => {
+    if (progressWrap.classList.contains('show')) return;
+    progressWrap.classList.add('show');
+    progressText.textContent = 'starting download...';
+    let pct = 0;
     const interval = setInterval(() => {
-      pct += Math.random() * 4 + 1
-      if (pct >= 90) { pct = 90; clearInterval(interval) }
-      progressFill.style.width = pct + '%'
-      progressText.textContent = 'downloading... ' + Math.floor(pct) + '%'
-    }, 200)
+      pct += Math.random() * 4 + 1;
+      if (pct >= 90) { pct = 90; clearInterval(interval); }
+      progressFill.style.width = pct + '%';
+      progressText.textContent = 'downloading... ' + Math.floor(pct) + '%';
+    }, 200);
     setTimeout(() => {
-      clearInterval(interval)
-      progressFill.style.width = '100%'
-      progressText.textContent = 'done — check ur downloads'
+      clearInterval(interval);
+      progressFill.style.width = '100%';
+      progressText.textContent = 'done — check ur downloads';
       setTimeout(() => {
-        progressWrap.classList.remove('show')
-        progressFill.style.width = '0%'
-        progressText.textContent = 'downloading... 0%'
-      }, 2500)
-    }, 4000)
-  })
+        progressWrap.classList.remove('show');
+        progressFill.style.width = '0%';
+        progressText.textContent = 'downloading... 0%';
+      }, 2500);
+    }, 4000);
+  });
 
-  // search icon bounce
-  const searchIcon = document.getElementById('searchIcon')
+  // other interactions
+  const searchIcon = document.getElementById('searchIcon');
   searchIcon.addEventListener('click', () => {
-    searchIcon.classList.remove('bounce')
-    void searchIcon.offsetWidth // reflow to restart animation
-    searchIcon.classList.add('bounce')
-    searchIcon.addEventListener('animationend', () => searchIcon.classList.remove('bounce'), { once: true })
-  })
+    searchIcon.classList.remove('bounce');
+    void searchIcon.offsetWidth;
+    searchIcon.classList.add('bounce');
+    searchIcon.addEventListener('animationend', () => searchIcon.classList.remove('bounce'), { once: true });
+  });
 
-  // fenn pill copies to clipboard
-  const logoPill = document.getElementById('logoPill')
-  const toast = document.getElementById('toast')
+  const logoPill = document.getElementById('logoPill');
+  const toast = document.getElementById('toast');
   logoPill.addEventListener('click', () => {
     navigator.clipboard.writeText('fenn').then(() => {
-      toast.classList.add('show')
-      setTimeout(() => toast.classList.remove('show'), 1800)
-    })
-  })
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1800);
+    });
+  });
 
-  // screenshot lightbox
-  const lightbox = document.getElementById('lightbox')
-  const lightboxImg = document.getElementById('lightboxImg')
-  const lightboxBg = document.getElementById('lightboxBg')
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxBg = document.getElementById('lightboxBg');
 
   document.querySelectorAll('.screenshot-img').forEach(img => {
     img.addEventListener('click', () => {
-      lightboxImg.src = img.src
-      lightbox.classList.add('open')
-    })
-  })
+      lightboxImg.src = img.src;
+      lightbox.classList.add('open');
+    });
+  });
 
-  lightboxBg.addEventListener('click', () => lightbox.classList.remove('open'))
-  lightboxImg.addEventListener('click', () => lightbox.classList.remove('open'))
+  lightboxBg.addEventListener('click', () => lightbox.classList.remove('open'));
+  lightboxImg.addEventListener('click', () => lightbox.classList.remove('open'));
 
-  // falling coffee
   document.querySelector('.btn-coffee').addEventListener('click', () => {
-    const count = Math.floor(Math.random() * 4) + 3
+    const count = Math.floor(Math.random() * 4) + 3;
     for (let i = 0; i < count; i++) {
       setTimeout(() => {
-        const drop = document.createElement('div')
-        drop.classList.add('coffee-drop')
-        drop.textContent = '☕'
-        drop.style.left = Math.random() * 90 + 'vw'
-        const duration = Math.random() * 1.2 + 1.2
-        drop.style.animationDuration = duration + 's'
-        drop.style.fontSize = (Math.random() * 1.4 + 1.4) + 'rem'
-        document.body.appendChild(drop)
-        setTimeout(() => drop.remove(), duration * 1000 + 100)
-      }, i * 120)
+        const drop = document.createElement('div');
+        drop.classList.add('coffee-drop');
+        drop.textContent = '☕';
+        drop.style.left = Math.random() * 90 + 'vw';
+        const duration = Math.random() * 1.2 + 1.2;
+        drop.style.animationDuration = duration + 's';
+        drop.style.fontSize = (Math.random() * 1.4 + 1.4) + 'rem';
+        document.body.appendChild(drop);
+        setTimeout(() => drop.remove(), duration * 1000 + 100);
+      }, i * 120);
     }
-  })
+  });
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      document.documentElement.classList.remove('preload')
-      document.documentElement.classList.add('theme-ready')
-    })
-  })
+      document.documentElement.classList.remove('preload');
+      document.documentElement.classList.add('theme-ready');
+    });
+  });
 </script>
+</body>
 </html>
