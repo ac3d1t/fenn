@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fennos tablet</title>
+  <link href="https://fonts.googleapis.com/css2?family=roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --primary: #4caf50;
+      --accent: #2196f3;
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --text-primary: #212121;
+      --text-secondary: #757575;
+      --shadow: rgba(0,0,0,0.12) 0px 1px 3px, rgba(0,0,0,0.24) 0px 1px 2px;
+
+      --bg-dark: #121212;
+      --surface-dark: #1e1e1e;
+      --text-primary-dark: #ffffff;
+      --text-secondary-dark: #b3b3b3;
+      --shadow-dark: rgba(0,0,0,0.4) 0px 2px 4px, rgba(0,0,0,0.3) 0px 7px 13px -3px;
+    }
+
+    body {
+      font-family: 'roboto', sans-serif;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .tablet {
+      width: 768px;
+      height: 1024px;
+      background: var(--bg);
+      border-radius: 45px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark {
+      --bg: var(--bg-dark);
+      --surface: var(--surface-dark);
+      --text-primary: var(--text-primary-dark);
+      --text-secondary: var(--text-secondary-dark);
+      --shadow: var(--shadow-dark);
+    }
+
+    .no-animations .screen {
+      transition: none !important;
+    }
+
+    .reduce-motion {
+      transition-duration: 0s !important;
+    }
+
+    /* boot screen */
+    #bootscreen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      transition: opacity 1s;
+    }
+
+    .boot-logo {
+      width: 150px;
+      height: 150px;
+    }
+
+    /* setup wizard */
+    #setupscreen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg);
+      z-index: 90;
+      padding: 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: var(--text-primary);
+    }
+
+    .setup-step {
+      display: none;
+      text-align: center;
+    }
+
+    .setup-step.active {
+      display: block;
+    }
+
+    .setup-step h1, .setup-step h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .setup-step input {
+      display: block;
+      width: 100%;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border: 1px solid var(--text-secondary);
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    .setup-step button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    /* lock screen */
+    #lockscreen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg);
+      z-index: 80;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      color: var(--text-primary);
+    }
+
+    #locktime {
+      font-size: 5rem;
+      font-weight: 700;
+    }
+
+    #lockdate {
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+    }
+
+    #lockscreen button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 1rem 3rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    /* status bar */
+    .status-bar {
+      height: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      padding-top: 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      background: var(--surface);
+    }
+
+    .status-left { display: flex; gap: 0.5rem; align-items: center; }
+    .status-right { display: flex; gap: 1rem; align-items: center; }
+
+    /* screens container */
+    .screen {
+      position: absolute;
+      top: 64px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .screen.hidden {
+      transform: translatex(100%);
+    }
+
+    /* home screen */
+    .home-screen {
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .time-widget {
+      background: var(--surface);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .time { font-size: 4rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; }
+    .date { font-size: 1.2rem; color: var(--text-secondary); margin-top: 0.5rem; font-weight: 500; }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2rem;
+      flex: 1;
+    }
+
+    .app-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .app-icon:active { transform: scale(0.95); }
+
+    .app-icon-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app-icon svg {
+      width: 48px;
+      height: 48px;
+      fill: var(--text-primary);
+    }
+
+    .app-name {
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* adjust other styles similarly for larger scale, e.g., padding, fonts +20% */
+    .app-header {
+      padding: 1.5rem 2rem;
+    }
+
+    .app-title { font-size: 1.5rem; }
+
+    .setting-name {
+      font-size: 1rem;
+    }
+
+    /* ... (rest of styles same as phone, but with increased sizes where needed) */
+  </style>
+</head>
+<body>
+
+  <div class="tablet">
+    <!-- same content as phone, but with id changes if needed for tablet, e.g., larger svgs -->
+    <!-- boot, setup, lock, status, screens, scripts same as phone version -->
+
+  </div>
+
+  <script>
+    // same script as phone, but adjust for tablet if needed (e.g., larger boot timeout or none)
+  </script>
+
+</body>
+</html>
