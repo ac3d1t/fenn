@@ -298,6 +298,7 @@
 
     .gh-link:hover { color: var(--fg-dark); }
     .gh-link svg { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.5; }
+    .docs-text {
       font-size: 0.72rem;
       color: var(--muted);
       line-height: 1.6;
@@ -879,6 +880,58 @@
       body { padding: 1.2rem 0.8rem 3rem; }
       .card { padding: 2rem 1.5rem; }
     }
+
+    /* new styles for simulator buttons */
+    .simulator-buttons {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .sim-btn {
+      background: var(--bg);
+      color: var(--fg-dark);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 6px 6px 12px var(--shadow-dark),
+                  -6px -6px 12px var(--shadow-light);
+      transition: all 0.25s;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .sim-btn:hover {
+      box-shadow: 8px 8px 16px var(--shadow-dark),
+                  -8px -8px 16px var(--shadow-light);
+      transform: translateY(-2px);
+    }
+
+    .sim-btn:active {
+      box-shadow: inset 4px 4px 8px var(--shadow-dark),
+                  inset -4px -4px 8px var(--shadow-light);
+    }
+
+    .sim-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--accent);
+    }
+
+    .sim-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -1206,6 +1259,47 @@
     </div>
   </div>
 
+  <!-- original try fennOS card -->
+  <div class="card anim">
+    <span class="section-title">try fennOS</span>
+    <p style="font-size:0.72rem; color:var(--muted); margin-top:-0.3rem; margin-bottom:1.2rem;">experience fenn as a complete mobile operating system</p>
+    
+    <div style="background:var(--bg);border-radius:18px;box-shadow:inset 4px 4px 8px var(--shadow-dark),inset -4px -4px 8px var(--shadow-light);padding:2rem;display:flex;flex-direction:column;align-items:center;gap:1rem;">
+      <div style="font-size:3.5rem;">📱</div>
+      <p style="font-size:0.8rem;color:var(--fg);text-align:center;line-height:1.6;max-width:280px;">
+        fennOS is a full neumorphic phone interface with working apps, messages, and the fenn browser built in
+      </p>
+      <a href="fennos.html" target="_blank" style="background:var(--bg);color:var(--fg-dark);text-decoration:none;font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:700;padding:0.9rem 2rem;border-radius:50px;box-shadow:6px 6px 12px var(--shadow-dark),-6px -6px 12px var(--shadow-light);transition:all 0.2s;display:inline-block;margin-top:0.5rem;">
+        open fennOS
+      </a>
+    </div>
+  </div>
+
+  <!-- new card with both simulators -->
+  <div class="card anim">
+    <span class="section-title">fennOS simulators</span>
+    <p style="font-size:0.72rem; color:var(--muted); text-align:center; margin-bottom:1.5rem;">
+      interactive live demos — phone and tablet versions
+    </p>
+    <div class="simulator-buttons">
+      <div style="width:100%; text-align:center;">
+        <p class="sim-label">phone version (iphone style)</p>
+        <button class="sim-btn" onclick="window.open('foneos.html', '_blank')">
+          <svg viewBox="0 0 24 24"><path d="M12 2C5.37 2 2 6.48 2 12s3.37 10 10 10 10-4.48 10-10S18.63 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+          launch phone
+        </button>
+      </div>
+
+      <div style="width:100%; text-align:center; margin-top:1.8rem;">
+        <p class="sim-label">tablet version (ipad style)</p>
+        <button class="sim-btn" onclick="window.open('fenntab.html', '_blank')">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
+          launch tablet
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- system requirements card -->
   <div class="card anim">
     <span class="section-title">system requirements</span>
@@ -1257,7 +1351,6 @@
   <!-- clipboard toast -->
   <div class="toast" id="toast">copied to clipboard</div>
 
-</body>
 <script>
   const githubToggle = document.getElementById('githubToggle')
   const githubDropdown = document.getElementById('githubDropdown')
@@ -1440,82 +1533,4 @@
   // radio 1: sine wave / smooth effect
   previewRadio1.addEventListener('change', () => {
     if (previewRadio1.checked && animationsEnabled) {
-      previewRow1.style.transform = 'translateY(-2px) scale(1.02)'
-      previewRow1.style.boxShadow = '0 6px 16px rgba(0,0,0,0.08)'
-      previewRow2.style.transform = ''
-      previewRow2.style.boxShadow = ''
-    } else if (previewRadio1.checked) {
-      previewRow1.style.transform = ''
-      previewRow1.style.boxShadow = ''
-      previewRow2.style.transform = ''
-      previewRow2.style.boxShadow = ''
-    }
-  })
-
-  // radio 2: slide out / modern effect  
-  previewRadio2.addEventListener('change', () => {
-    if (previewRadio2.checked && animationsEnabled) {
-      previewRow2.style.transform = 'translateX(8px)'
-      previewRow2.style.boxShadow = '0 6px 16px rgba(0,0,0,0.08)'
-      previewRow1.style.transform = ''
-      previewRow1.style.boxShadow = ''
-    } else if (previewRadio2.checked) {
-      previewRow1.style.transform = ''
-      previewRow1.style.boxShadow = ''
-      previewRow2.style.transform = ''
-      previewRow2.style.boxShadow = ''
-    }
-  })
-
-  // feedback submission
-  submitFeedback.addEventListener('click', () => {
-    const feedback = feedbackText.value.trim()
-    if (!feedback) {
-      feedbackStatus.textContent = 'please write something first'
-      feedbackStatus.style.color = '#e07070'
-      feedbackStatus.style.display = 'block'
-      return
-    }
-
-    const selectedStyle = previewRadio1.checked ? 'sine wave (smooth)' : 'slide out (modern)'
-    const animState = animationsEnabled ? 'enabled' : 'disabled'
-    const subject = encodeURIComponent('fenn feedback')
-    const body = encodeURIComponent(`Feedback:\n${feedback}\n\nPreferred style: ${selectedStyle}\nAnimations: ${animState}`)
-    window.location.href = `mailto:chrispy1331@gmail.com?subject=${subject}&body=${body}`
-
-    feedbackText.value = ''
-    feedbackStatus.textContent = 'opening email client...'
-    feedbackStatus.style.color = 'var(--accent)'
-    feedbackStatus.style.display = 'block'
-    
-    setTimeout(() => {
-      feedbackStatus.style.display = 'none'
-    }, 3000)
-  })
-
-  // falling coffee
-  document.querySelector('.btn-coffee').addEventListener('click', () => {
-    const count = Math.floor(Math.random() * 4) + 3
-    for (let i = 0; i < count; i++) {
-      setTimeout(() => {
-        const drop = document.createElement('div')
-        drop.classList.add('coffee-drop')
-        drop.textContent = '☕'
-        drop.style.left = Math.random() * 90 + 'vw'
-        const duration = Math.random() * 1.2 + 1.2
-        drop.style.animationDuration = duration + 's'
-        drop.style.fontSize = (Math.random() * 1.4 + 1.4) + 'rem'
-        document.body.appendChild(drop)
-        setTimeout(() => drop.remove(), duration * 1000 + 100)
-      }, i * 120)
-    }
-  })
-
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      document.documentElement.classList.remove('preload')
-      document.documentElement.classList.add('theme-ready')
-    })
-  })
-</script>
-</html>
+      previewRow1.style.transform = 'translateY(-
