@@ -1,10 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>fennos</title>
-  <link href="https://fonts.googleapis.com/css2?family=roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <title>fennOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -13,30 +13,37 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    :root {
-      --primary: #4caf50;
-      --accent: #2196f3;
-      --bg: #fafafa;
-      --surface: #ffffff;
-      --text-primary: #212121;
-      --text-secondary: #757575;
-      --shadow: rgba(0,0,0,0.12) 0px 1px 3px, rgba(0,0,0,0.24) 0px 1px 2px;
+    :root.light {
+      --bg: #f5f5f5;
+      --bg-card: #ffffff;
+      --shadow: rgba(0,0,0,0.1);
+      --fg: #666;
+      --fg-dark: #222;
+      --muted: #999;
+      --accent: #5e8ed6;
+      --input-bg: #eeeeee;
+    }
 
-      --bg-dark: #121212;
-      --surface-dark: #1e1e1e;
-      --text-primary-dark: #ffffff;
-      --text-secondary-dark: #b3b3b3;
-      --shadow-dark: rgba(0,0,0,0.4) 0px 2px 4px, rgba(0,0,0,0.3) 0px 7px 13px -3px;
+    :root.dark {
+      --bg: #121212;
+      --bg-card: #1e1e1e;
+      --shadow: rgba(0,0,0,0.4);
+      --fg: #aaa;
+      --fg-dark: #eee;
+      --muted: #777;
+      --accent: #7a9ccf;
+      --input-bg: #2a2a2a;
     }
 
     body {
-      font-family: 'roboto', sans-serif;
+      font-family: 'Roboto', sans-serif;
       background: #000;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       padding: 2rem 1rem;
+      transition: background 0.3s;
     }
 
     .phone {
@@ -44,102 +51,173 @@
       height: 812px;
       background: var(--bg);
       border-radius: 45px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
       position: relative;
       overflow: hidden;
+      transition: background 0.3s;
     }
 
-    .dark {
-      --bg: var(--bg-dark);
-      --surface: var(--surface-dark);
-      --text-primary: var(--text-primary-dark);
-      --text-secondary: var(--text-secondary-dark);
-      --shadow: var(--shadow-dark);
+    /* boot screen */
+    .boot-screen {
+      position: absolute;
+      inset: 0;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      animation: fadeOut 2s 1.5s forwards;
     }
 
-    .no-animations .screen {
-      transition: none !important;
+    @keyframes fadeOut {
+      to { opacity: 0; pointer-events: none; }
     }
 
-    .reduce-motion {
-      transition-duration: 0s !important;
+    .boot-logo {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.05); opacity: 1; }
     }
 
     /* setup wizard */
-    #setupscreen {
+    .setup-wizard {
       position: absolute;
       inset: 0;
       background: var(--bg);
-      z-index: 90;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      color: var(--text-primary);
-    }
-
-    .setup-step {
+      z-index: 900;
       display: none;
-      text-align: center;
-    }
-
-    .setup-step.active {
-      display: block;
-    }
-
-    .setup-step h1, .setup-step h2 {
-      margin-bottom: 1rem;
-    }
-
-    .setup-step input {
-      display: block;
-      width: 100%;
-      margin-bottom: 1rem;
-      padding: 0.8rem;
-      border: 1px solid var(--text-secondary);
-      border-radius: 4px;
-    }
-
-    .setup-step button {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 0.8rem;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    /* lock screen */
-    #lockscreen {
-      position: absolute;
-      inset: 0;
-      background: var(--bg);
-      z-index: 80;
-      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
-      color: var(--text-primary);
+      padding: 2rem;
+      transition: opacity 0.3s;
     }
 
-    #locktime {
-      font-size: 3rem;
+    .setup-wizard.active { display: flex; }
+
+    .setup-step {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 300px;
+    }
+
+    .setup-step.active { display: flex; }
+
+    .setup-title {
+      font-size: 1.8rem;
       font-weight: 700;
+      color: var(--fg-dark);
+      margin-bottom: 0.5rem;
     }
 
-    #lockdate {
+    .setup-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .setup-input {
+      width: 100%;
+      background: var(--input-bg);
+      border: none;
+      border-radius: 12px;
+      padding: 1rem;
       font-size: 1rem;
-      color: var(--text-secondary);
+      color: var(--fg-dark);
+      margin-bottom: 1rem;
+      font-family: 'Roboto', sans-serif;
     }
 
-    #lockscreen button {
+    .profile-pics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .profile-pic {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .profile-pic.selected {
+      border-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    .setup-btn {
       background: var(--accent);
       color: white;
       border: none;
-      padding: 0.8rem 2rem;
-      border-radius: 4px;
+      border-radius: 25px;
+      padding: 1rem 3rem;
+      font-size: 1rem;
+      font-weight: 600;
       cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .setup-btn:active { transform: scale(0.95); }
+
+    /* lock screen */
+    .lock-screen {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      z-index: 800;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .lock-screen.active { display: flex; }
+
+    .lock-time {
+      font-size: 5rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+
+    .lock-date {
+      font-size: 1.2rem;
+      font-weight: 300;
+      opacity: 0.9;
+      margin-bottom: 4rem;
+    }
+
+    .lock-indicator {
+      width: 80px;
+      height: 4px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 2px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .lock-indicator::after {
+      content: '▲';
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
     }
 
     /* status bar */
@@ -152,14 +230,18 @@
       padding-top: 0.5rem;
       font-size: 0.75rem;
       font-weight: 500;
-      color: var(--text-primary);
-      background: var(--surface);
+      color: var(--fg-dark);
+      background: var(--bg);
+      transition: background 0.3s, color 0.3s;
     }
 
-    .status-left { display: flex; gap: 0.3rem; align-items: center; }
-    .status-right { display: flex; gap: 0.5rem; align-items: center; }
+    .status-left, .status-right {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
 
-    /* screens container */
+    /* screen */
     .screen {
       position: absolute;
       top: 44px;
@@ -167,14 +249,12 @@
       right: 0;
       bottom: 0;
       background: var(--bg);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s;
     }
 
-    .screen.hidden {
-      transform: translateX(100%);
-    }
+    .screen.hidden { transform: translateX(100%); }
 
-    /* home screen */
+    /* home */
     .home-screen {
       padding: 2rem 1.5rem;
       display: flex;
@@ -182,17 +262,16 @@
       height: 100%;
     }
 
-    .time-widget {
-      background: var(--surface);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      padding: 1.5rem;
+    .search-widget {
+      background: var(--bg-card);
+      border-radius: 25px;
+      padding: 0.9rem 1.2rem;
       margin-bottom: 2rem;
-      text-align: center;
+      box-shadow: 0 2px 8px var(--shadow);
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: background 0.3s, box-shadow 0.3s;
     }
-
-    .time { font-size: 3rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; }
-    .date { font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.3rem; font-weight: 500; }
 
     .apps-grid {
       display: grid;
@@ -210,320 +289,161 @@
       transition: transform 0.2s;
     }
 
-    .app-icon:active { transform: scale(0.95); }
+    .app-icon:active { transform: scale(0.9); }
 
     .app-icon-circle {
       width: 60px;
       height: 60px;
-      border-radius: 12px;
-      background: var(--surface);
-      box-shadow: var(--shadow);
+      border-radius: 50%;
+      background: var(--accent);
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .app-icon svg {
-      width: 32px;
-      height: 32px;
-      fill: var(--text-primary);
+      box-shadow: 0 4px 12px var(--shadow);
+      transition: background 0.3s, box-shadow 0.3s;
     }
 
     .app-name {
       font-size: 0.7rem;
-      color: var(--text-primary);
+      color: var(--fg-dark);
       font-weight: 500;
+      transition: color 0.3s;
     }
 
-    /* messages app */
-    .messages-screen {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
+    /* app header */
     .app-header {
       padding: 1rem 1.5rem;
-      background: var(--surface);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      background: var(--bg-card);
+      box-shadow: 0 2px 4px var(--shadow);
       display: flex;
       align-items: center;
       gap: 1rem;
+      transition: background 0.3s, box-shadow 0.3s;
     }
 
     .back-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 4px;
-      background: var(--surface);
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: none;
-      cursor: pointer;
-      color: var(--text-primary);
-    }
-
-    .app-title { font-size: 1.1rem; font-weight: 500; color: var(--text-primary); flex: 1; }
-
-    .conversation-list {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1rem;
-    }
-
-    .conversation-item {
-      background: var(--surface);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      padding: 1rem;
-      margin-bottom: 0.8rem;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .conversation-item:active { transform: scale(0.98); }
-
-    .conversation-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.5rem;
-    }
-
-    .conversation-name { font-size: 0.85rem; font-weight: 500; color: var(--text-primary); }
-    .conversation-time { font-size: 0.7rem; color: var(--text-secondary); }
-    .conversation-preview { font-size: 0.75rem; color: var(--text-secondary); }
-
-    /* browser */
-    .browser-screen {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    .browser-header {
-      padding: 1rem 1.5rem;
-      background: var(--surface);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .browser-controls {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .browser-btn {
       width: 36px;
       height: 36px;
-      border-radius: 4px;
-      background: var(--surface);
-      box-shadow: var(--shadow);
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      color: var(--text-primary);
-    }
-
-    .browser-btn:active {
-      box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-    }
-
-    .url-bar {
-      background: var(--surface);
-      border-radius: 4px;
-      box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-      padding: 0.7rem 1rem;
-      font-size: 0.8rem;
-      color: var(--text-primary);
-      border: none;
-      width: 100%;
-      font-family: 'roboto', sans-serif;
-      font-weight: 400;
-    }
-
-    .browser-content {
-      flex: 1;
-      background: var(--surface);
-      margin: 0 1rem 1rem 1rem;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .search-page {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      padding: 2rem;
+      border-radius: 50%;
       background: var(--bg);
-    }
-
-    .fenn-logo {
-      font-size: 4rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 2rem;
-      letter-spacing: -0.05em;
-    }
-
-    .search-box {
-      width: 100%;
-      background: var(--surface);
-      border-radius: 4px;
-      box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-      padding: 0.9rem 1.5rem;
-      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border: none;
-      font-family: 'roboto', sans-serif;
-      color: var(--text-primary);
-      font-weight: 400;
+      cursor: pointer;
+      color: var(--fg-dark);
+      font-size: 1.2rem;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .app-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--fg-dark);
+      flex: 1;
+      transition: color 0.3s;
     }
 
     /* settings */
     .settings-screen {
-      padding: 1rem 1.5rem;
+      padding: 0;
       flex: 1;
       overflow-y: auto;
+      background: var(--bg);
+      transition: background 0.3s;
+    }
+
+    .settings-profile {
+      background: var(--bg-card);
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 4px var(--shadow);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    .settings-profile-pic {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+    }
+
+    .settings-profile-info h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--fg-dark);
+      margin-bottom: 0.3rem;
+      transition: color 0.3s;
+    }
+
+    .settings-profile-info p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      transition: color 0.3s;
     }
 
     .settings-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.5rem;
     }
 
     .settings-label {
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--text-secondary);
-      font-weight: 500;
-      margin-bottom: 0.6rem;
-      padding-left: 0.5rem;
+      color: var(--muted);
+      font-weight: 600;
+      padding: 1rem 1.5rem 0.5rem;
+      transition: color 0.3s;
     }
 
     .setting-item {
-      background: var(--surface);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      padding: 1rem;
+      background: var(--bg-card);
+      padding: 1rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.6rem;
+      border-bottom: 1px solid var(--bg);
+      transition: background 0.3s;
     }
 
     .setting-name {
-      font-size: 0.85rem;
-      font-weight: 400;
-      color: var(--text-primary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--fg-dark);
+      transition: color 0.3s;
     }
 
+    /* toggle switch */
     .toggle {
-      width: 46px;
-      height: 26px;
-      border-radius: 13px;
-      background: var(--surface);
-      box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+      width: 50px;
+      height: 30px;
+      border-radius: 15px;
+      background: #ccc;
       position: relative;
       cursor: pointer;
+      transition: background 0.3s;
     }
 
-    .toggle-state {
-      display: none;
-    }
+    .toggle.on { background: var(--accent); }
 
     .toggle-indicator {
-      width: 22px;
-      height: 22px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
-      background: var(--surface);
-      box-shadow: var(--shadow);
+      background: white;
       position: absolute;
       top: 2px;
       left: 2px;
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.3s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
 
-    .toggle-state:checked ~ .toggle-indicator {
-      transform: translateX(20px);
-      background: var(--primary);
-    }
-
-    /* calculator */
-    .calc-btn {
-      background: var(--surface);
-      box-shadow: var(--shadow);
-      border: none;
-      border-radius: 8px;
-      padding: 1.2rem;
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: var(--text-primary);
-      cursor: pointer;
-      font-family: 'roboto', sans-serif;
-      transition: all 0.1s;
-    }
-
-    .calc-btn:active {
-      box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-    }
-
-    .calc-btn.operator {
-      color: var(--accent);
-    }
-
-    /* notes */
-    .note-card {
-      background: var(--surface);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      padding: 1.2rem;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .note-card:active { transform: scale(0.98); }
-
-    .note-title {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .note-preview {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      line-height: 1.4;
-      margin-bottom: 0.6rem;
-    }
-
-    .note-date {
-      font-size: 0.65rem;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 500;
-    }
-
-    /* photos */
-    .photo-thumbnail {
-      aspect-ratio: 1;
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .photo-thumbnail:active { transform: scale(0.95); }
+    .toggle.on .toggle-indicator { transform: translateX(20px); }
 
     @media (max-width: 480px) {
+      body { padding: 0; }
       .phone {
         width: 100%;
         height: 100vh;
@@ -535,256 +455,344 @@
 <body>
 
   <div class="phone">
+    <!-- boot screen -->
+    <div class="boot-screen">
+      <svg class="boot-logo" width="120" height="120" viewBox="0 0 100 100" fill="none">
+        <circle cx="50" cy="50" r="45" stroke="white" stroke-width="3"/>
+        <path d="M50 10 L35 40 L20 30 L25 50 L15 70 L35 65 L40 80 L50 55 L60 80 L65 65 L85 70 L75 50 L80 30 L65 40 Z" fill="white"/>
+      </svg>
+    </div>
 
-    <!-- setup screen -->
-    <div id="setupscreen" style="display: none;">
-      <div class="setup-step active" id="setupwelcome">
-        <h1>welcome to fennos</h1>
-        <p>set up your new phone.</p>
-        <button onclick="nextsetupstep()">start</button>
+    <!-- setup wizard -->
+    <div class="setup-wizard">
+      <div class="setup-step active" id="setupStep1">
+        <div class="setup-title">welcome to fennOS</div>
+        <div class="setup-subtitle">let's set up your device</div>
+        <input type="text" class="setup-input" id="userName" placeholder="enter your name" maxlength="20">
+        <button class="setup-btn" onclick="nextSetupStep()">continue</button>
       </div>
-      <div class="setup-step" id="setupaccount">
-        <h2>create account</h2>
-        <input type="text" placeholder="name" id="username">
-        <input type="email" placeholder="email" id="useremail">
-        <input type="password" placeholder="password" id="userpass">
-        <button onclick="nextsetupstep()">next</button>
-      </div>
-      <div class="setup-step" id="setupprofilepic">
-        <h2>profile picture</h2>
-        <input type="file" id="profilepicinput" accept="image/*">
-        <button onclick="nextsetupstep()">finish</button>
+
+      <div class="setup-step" id="setupStep2">
+        <div class="setup-title">choose your avatar</div>
+        <div class="setup-subtitle">pick a profile picture</div>
+        <div class="profile-pics">
+          <div class="profile-pic" style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%)" onclick="selectAvatar(this, 0)"></div>
+          <div class="profile-pic" style="background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%)" onclick="selectAvatar(this, 1)"></div>
+          <div class="profile-pic" style="background:linear-gradient(135deg,#4facfe 0%,#00f2fe 100%)" onclick="selectAvatar(this, 2)"></div>
+          <div class="profile-pic" style="background:linear-gradient(135deg,#43e97b 0%,#38f9d7 100%)" onclick="selectAvatar(this, 3)"></div>
+          <div class="profile-pic" style="background:linear-gradient(135deg,#fa709a 0%,#fee140 100%)" onclick="selectAvatar(this, 4)"></div>
+          <div class="profile-pic" style="background:linear-gradient(135deg,#30cfd0 0%,#330867 100%)" onclick="selectAvatar(this, 5)"></div>
+        </div>
+        <button class="setup-btn" onclick="completeSetup()">finish setup</button>
       </div>
     </div>
 
     <!-- lock screen -->
-    <div id="lockscreen" style="display: none;">
-      <div id="locktime">9:41</div>
-      <div id="lockdate">tuesday, february 18</div>
-      <button onclick="unlock()">unlock</button>
+    <div class="lock-screen">
+      <div class="lock-time" id="lockTime">9:41</div>
+      <div class="lock-date" id="lockDate">tuesday, february 18</div>
+      <div class="lock-indicator" onclick="unlock()"></div>
     </div>
 
     <!-- status bar -->
     <div class="status-bar">
       <div class="status-left">
-        <span id="statustime">9:41</span>
+        <span id="statusTime">9:41</span>
       </div>
       <div class="status-right">
-        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" style="margin-top:2px;">
-          <rect x="0" y="3" width="3" height="9" fill="var(--text-primary)" opacity="0.4"/>
-          <rect x="4.5" y="1.5" width="3" height="10.5" fill="var(--text-primary)" opacity="0.6"/>
-          <rect x="9" y="0" width="3" height="12" fill="var(--text-primary)"/>
-          <rect x="13.5" y="0" width="2.5" height="12" fill="var(--text-primary)"/>
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor">
+          <rect x="0" y="3" width="3" height="9" opacity="0.4"/>
+          <rect x="4.5" y="1.5" width="3" height="10.5" opacity="0.6"/>
+          <rect x="9" y="0" width="3" height="12"/>
+          <rect x="13.5" y="0" width="2.5" height="12"/>
         </svg>
-        <svg width="24" height="12" viewBox="0 0 24 12" fill="none" style="margin-top:2px;">
-          <rect x="0" y="0" width="18" height="12" rx="2" fill="none" stroke="var(--text-primary)" stroke-width="1.5"/>
-          <rect x="3" y="3" width="12" height="6" rx="1" fill="var(--accent)"/>
-          <rect x="19" y="3.5" width="3" height="5" rx="1" fill="var(--text-primary)"/>
+        <svg width="24" height="12" viewBox="0 0 24 12" fill="none">
+          <rect x="0" y="0" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="3" y="3" width="12" height="6" rx="1" fill="currentColor"/>
+          <rect x="19" y="3.5" width="3" height="5" rx="1" fill="currentColor"/>
         </svg>
-        <span style="font-size:0.7rem;color:var(--text-primary);font-weight:500;">85%</span>
+        <span style="font-size:0.7rem;font-weight:600;">85%</span>
       </div>
     </div>
 
     <!-- home screen -->
-    <div class="screen" id="homescreen">
+    <div class="screen" id="homeScreen">
       <div class="home-screen">
-        <div class="time-widget">
-          <div class="time" id="widgettime">9:41</div>
-          <div class="date" id="widgetdate">tuesday, february 18</div>
-        </div>
+        <div class="search-widget">🔍 search apps, contacts...</div>
 
         <div class="apps-grid">
-          <!-- your app icons here (messages, browser, settings, calculator, notes, photos, weather, phone, mail, music, maps, calendar) -->
-          <!-- ... paste your existing apps-grid content here ... -->
+          <div class="app-icon" onclick="openApp('settings')">
+            <div class="app-icon-circle">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6M5.6 5.6l4.2 4.2m4.2 4.2l4.2 4.2M1 12h6m6 0h6M5.6 18.4l4.2-4.2m4.2-4.2l4.2-4.2"/>
+              </svg>
+            </div>
+            <div class="app-name">settings</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#34d399;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <div class="app-name">messages</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#f59e0b;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+              </svg>
+            </div>
+            <div class="app-name">clock</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#8b5cf6;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+              </svg>
+            </div>
+            <div class="app-name">calendar</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#ec4899;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            </div>
+            <div class="app-name">camera</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#3b82f6;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9M15 9l3 6-3 6"/>
+              </svg>
+            </div>
+            <div class="app-name">photos</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#10b981;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div class="app-name">phone</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#6366f1;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>
+              </svg>
+            </div>
+            <div class="app-name">notes</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- messages screen -->
-    <div class="screen hidden" id="messagesscreen">
-      <!-- your messages content -->
-    </div>
-
-    <!-- browser screen -->
-    <div class="screen hidden" id="browserscreen">
-      <!-- your browser content -->
-    </div>
-
     <!-- settings screen -->
-    <div class="screen hidden" id="settingsscreen">
-      <!-- your settings content with profile section -->
-    </div>
+    <div class="screen hidden" id="settingsScreen">
+      <div style="display:flex;flex-direction:column;height:100%;">
+        <div class="app-header">
+          <button class="back-btn" onclick="closeApp()">←</button>
+          <div class="app-title">settings</div>
+        </div>
 
-    <!-- calculator screen -->
-    <div class="screen hidden" id="calculatorscreen">
-      <!-- your calculator content -->
-    </div>
+        <div class="settings-screen">
+          <div class="settings-profile">
+            <div class="settings-profile-pic" id="profilePic" style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%)"></div>
+            <div class="settings-profile-info">
+              <h3 id="profileName">user</h3>
+              <p id="profileEmail">user@fennos.com</p>
+            </div>
+          </div>
 
-    <!-- notes screen -->
-    <div class="screen hidden" id="notesscreen">
-      <!-- your notes content -->
-    </div>
+          <div class="settings-group">
+            <div class="settings-label">display</div>
+            <div class="setting-item">
+              <div class="setting-name">dark mode</div>
+              <div class="toggle" id="darkModeToggle" onclick="toggleDarkMode()">
+                <div class="toggle-indicator"></div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-name">brightness</div>
+              <div style="width:100px;height:4px;background:#ccc;border-radius:2px;position:relative;">
+                <div style="width:70%;height:100%;background:var(--accent);border-radius:2px;"></div>
+              </div>
+            </div>
+          </div>
 
-    <!-- photos screen -->
-    <div class="screen hidden" id="photosscreen">
-      <!-- your photos content -->
-    </div>
+          <div class="settings-group">
+            <div class="settings-label">sounds</div>
+            <div class="setting-item">
+              <div class="setting-name">ring volume</div>
+              <div style="width:100px;height:4px;background:#ccc;border-radius:2px;position:relative;">
+                <div style="width:50%;height:100%;background:var(--accent);border-radius:2px;"></div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-name">media volume</div>
+              <div style="width:100px;height:4px;background:#ccc;border-radius:2px;position:relative;">
+                <div style="width:80%;height:100%;background:var(--accent);border-radius:2px;"></div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-name">vibrate</div>
+              <div class="toggle on">
+                <div class="toggle-indicator"></div>
+              </div>
+            </div>
+          </div>
 
-    <!-- weather screen -->
-    <div class="screen hidden" id="weatherscreen">
-      <!-- your weather content -->
+          <div class="settings-group">
+            <div class="settings-label">connectivity</div>
+            <div class="setting-item">
+              <div class="setting-name">wifi</div>
+              <div class="toggle on">
+                <div class="toggle-indicator"></div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-name">bluetooth</div>
+              <div class="toggle">
+                <div class="toggle-indicator"></div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-name">mobile data</div>
+              <div class="toggle on">
+                <div class="toggle-indicator"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-group">
+            <div class="settings-label">about</div>
+            <div class="setting-item">
+              <div class="setting-name">fennOS version</div>
+              <div style="font-size:0.85rem;color:var(--muted);">2.0.0</div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-name">device model</div>
+              <div style="font-size:0.85rem;color:var(--muted);">fenn phone</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
 
   <script>
-    // localstorage keys
-    const setup_done = 'setupdone';
-    const user_name = 'username';
-    const profile_pic = 'profilepic';
+    // state
+    let userName = ''
+    let selectedAvatarIndex = 0
+    const avatarGradients = [
+      'linear-gradient(135deg,#667eea 0%,#764ba2 100%)',
+      'linear-gradient(135deg,#f093fb 0%,#f5576c 100%)',
+      'linear-gradient(135deg,#4facfe 0%,#00f2fe 100%)',
+      'linear-gradient(135deg,#43e97b 0%,#38f9d7 100%)',
+      'linear-gradient(135deg,#fa709a 0%,#fee140 100%)',
+      'linear-gradient(135deg,#30cfd0 0%,#330867 100%)'
+    ]
 
-    function initos() {
-      updatetime();
-      setinterval(updatetime, 60000);
-
-      if (!localstorage.getitem(setup_done)) {
-        document.getelementbyid('setupscreen').style.display = 'flex';
-      } else {
-        document.getelementbyid('lockscreen').style.display = 'flex';
-      }
-
-      // load profile in settings
-      const profilesection = document.getelementbyid('profilesection');
-      if (profilesection) {
-        profilesection.innerhtml = `
-          <div class="settings-group">
-            <div class="settings-label">profile</div>
-            <div class="setting-item">
-              <img src="${localstorage.getitem(profile_pic) || ''}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" alt="profile">
-              <div class="setting-name">${localstorage.getitem(user_name) || 'user'}</div>
-            </div>
-          </div>
-        `;
-      }
-
-      // load all toggles
-      document.queryselectorall('.toggle-state').foreach(toggle => {
-        const key = toggle.dataset.key;
-        if (key) {
-          const value = localstorage.getitem(key) === 'true';
-          toggle.checked = value;
-          applysetting(key, value);
-        }
-        toggle.addeventlistener('change', e => {
-          const val = e.target.checked;
-          localstorage.setitem(key, val);
-          applysetting(key, val);
-        });
-      });
+    // time update
+    function updateTime() {
+      const now = new Date()
+      const hours = now.getHours()
+      const minutes = now.getMinutes().toString().padStart(2, '0')
+      const time = `${hours}:${minutes}`
+      
+      document.getElementById('statusTime').textContent = time
+      document.getElementById('lockTime').textContent = time
+      
+      const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+      const months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
+      const date = `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}`
+      document.getElementById('lockDate').textContent = date
     }
 
-    // call init immediately since no boot
-    initos();
+    updateTime()
+    setInterval(updateTime, 60000)
 
-    function applysetting(key, value) {
-      const body = document.body;
-      switch (key) {
-        case 'darkmode':
-          body.classlist.toggle('dark', value);
-          break;
-        case 'animations':
-          body.classlist.toggle('no-animations', !value);
-          break;
-        case 'reducemotion':
-          body.classlist.toggle('reduce-motion', value);
-          break;
-        // other cases...
-      }
+    // setup wizard
+    setTimeout(() => {
+      document.querySelector('.setup-wizard').classList.add('active')
+    }, 3500)
+
+    function nextSetupStep() {
+      userName = document.getElementById('userName').value || 'user'
+      document.getElementById('setupStep1').classList.remove('active')
+      document.getElementById('setupStep2').classList.add('active')
     }
 
-    function nextsetupstep() {
-      const steps = ['setupwelcome', 'setupaccount', 'setupprofilepic'];
-      const current = document.queryselector('.setup-step.active');
-      const currentid = current.id;
-      const index = steps.indexof(currentid);
-      if (index < steps.length - 1) {
-        current.classlist.remove('active');
-        document.getelementbyid(steps[index + 1]).classlist.add('active');
-      } else {
-        localstorage.setitem(user_name, document.getelementbyid('username').value || 'user');
+    function selectAvatar(elem, index) {
+      document.querySelectorAll('.profile-pic').forEach(p => p.classList.remove('selected'))
+      elem.classList.add('selected')
+      selectedAvatarIndex = index
+    }
 
-        const fileinput = document.getelementbyid('profilepicinput');
-        if (fileinput.files.length > 0) {
-          const reader = new filereader();
-          reader.onload = e => {
-            localstorage.setitem(profile_pic, e.target.result);
-          };
-          reader.readasdataurl(fileinput.files[0]);
-        }
-
-        localstorage.setitem(setup_done, 'true');
-        document.getelementbyid('setupscreen').style.display = 'none';
-        document.getelementbyid('lockscreen').style.display = 'flex';
-      }
+    function completeSetup() {
+      document.querySelector('.setup-wizard').classList.remove('active')
+      document.querySelector('.lock-screen').classList.add('active')
+      
+      // set profile
+      document.getElementById('profileName').textContent = userName
+      document.getElementById('profileEmail').textContent = `${userName.toLowerCase().replace(/\s/g, '')}@fennos.com`
+      document.getElementById('profilePic').style.background = avatarGradients[selectedAvatarIndex]
     }
 
     function unlock() {
-      document.getelementbyid('lockscreen').style.display = 'none';
+      document.querySelector('.lock-screen').classList.remove('active')
     }
 
-    function updatetime() {
-      const now = new date();
-      const hours = now.gethours();
-      const minutes = now.getminutes().tostring().padstart(2, '0');
-      const time = `${hours}:${minutes}`;
-      
-      document.getelementbyid('statustime').textcontent = time;
-      document.getelementbyid('widgettime').textcontent = time;
-      document.getelementbyid('locktime').textcontent = time;
-      
-      const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-      const months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
-      const date = `${days[now.getday()]}, ${months[now.getmonth()]} ${now.getdate()}`;
-      document.getelementbyid('widgetdate').textcontent = date;
-      document.getelementbyid('lockdate').textcontent = date;
-    }
+    // navigation
+    let currentScreen = 'homeScreen'
 
-    // app navigation
-    let currentscreen = 'homescreen';
-
-    function openapp(appname) {
+    function openApp(appName) {
       const screens = {
-        'messages': 'messagesscreen',
-        'browser': 'browserscreen',
-        'settings': 'settingsscreen',
-        'calculator': 'calculatorscreen',
-        'notes': 'notesscreen',
-        'photos': 'photosscreen',
-        'weather': 'weatherscreen'
-      };
+        'settings': 'settingsScreen'
+      }
       
-      const targetscreen = screens[appname];
-      if (!targetscreen) return;
+      const targetScreen = screens[appName]
+      if (!targetScreen) return
       
-      document.getelementbyid(currentscreen).classlist.add('hidden');
-      document.getelementbyid(targetscreen).classlist.remove('hidden');
-      currentscreen = targetscreen;
+      document.getElementById(currentScreen).classList.add('hidden')
+      document.getElementById(targetScreen).classList.remove('hidden')
+      currentScreen = targetScreen
     }
 
-    function closeapp() {
-      document.getelementbyid(currentscreen).classlist.add('hidden');
-      document.getelementbyid('homescreen').classlist.remove('hidden');
-      currentscreen = 'homescreen';
+    function closeApp() {
+      document.getElementById(currentScreen).classList.add('hidden')
+      document.getElementById('homeScreen').classList.remove('hidden')
+      currentScreen = 'homeScreen'
     }
 
-    // calculator logic
-    let calccurrentvalue = '0';
-    let calcpreviousvalue = '';
-    let calcoperator = '';
-
-    function calcinput(value) {
-      // your existing calculator logic here...
+    // dark mode
+    function toggleDarkMode() {
+      const toggle = document.getElementById('darkModeToggle')
+      const root = document.documentElement
+      
+      if (toggle.classList.contains('on')) {
+        toggle.classList.remove('on')
+        root.classList.remove('dark')
+        root.classList.add('light')
+      } else {
+        toggle.classList.add('on')
+        root.classList.add('light')
+        root.classList.add('dark')
+      }
     }
+
+    // init light mode
+    document.documentElement.classList.add('light')
   </script>
 
 </body>
