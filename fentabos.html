@@ -1,10 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>fennos tablet</title>
-  <link href="https://fonts.googleapis.com/css2?family=roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <title>fennOS - tablet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -13,221 +13,270 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    :root {
-      --primary: #4caf50;
-      --accent: #2196f3;
-      --bg: #fafafa;
-      --surface: #ffffff;
-      --text-primary: #212121;
-      --text-secondary: #757575;
-      --shadow: rgba(0,0,0,0.12) 0px 1px 3px, rgba(0,0,0,0.24) 0px 1px 2px;
+    :root.light {
+      --bg: #f5f5f5;
+      --bg-card: #ffffff;
+      --shadow: rgba(0,0,0,0.1);
+      --fg: #666;
+      --fg-dark: #222;
+      --muted: #999;
+      --accent: #5e8ed6;
+      --input-bg: #eeeeee;
+    }
 
-      --bg-dark: #121212;
-      --surface-dark: #1e1e1e;
-      --text-primary-dark: #ffffff;
-      --text-secondary-dark: #b3b3b3;
-      --shadow-dark: rgba(0,0,0,0.4) 0px 2px 4px, rgba(0,0,0,0.3) 0px 7px 13px -3px;
+    :root.dark {
+      --bg: #121212;
+      --bg-card: #1e1e1e;
+      --shadow: rgba(0,0,0,0.4);
+      --fg: #aaa;
+      --fg-dark: #eee;
+      --muted: #777;
+      --accent: #7a9ccf;
+      --input-bg: #2a2a2a;
     }
 
     body {
-      font-family: 'roboto', sans-serif;
+      font-family: 'Roboto', sans-serif;
       background: #000;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       padding: 2rem 1rem;
+      transition: background 0.3s;
     }
 
     .tablet {
-      width: 768px;
-      height: 1024px;
+      width: 820px;
+      height: 1180px;
       background: var(--bg);
-      border-radius: 45px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      border-radius: 35px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
       position: relative;
       overflow: hidden;
-    }
-
-    .dark {
-      --bg: var(--bg-dark);
-      --surface: var(--surface-dark);
-      --text-primary: var(--text-primary-dark);
-      --text-secondary: var(--text-secondary-dark);
-      --shadow: var(--shadow-dark);
-    }
-
-    .no-animations .screen {
-      transition: none !important;
-    }
-
-    .reduce-motion {
-      transition-duration: 0s !important;
+      transition: background 0.3s;
     }
 
     /* boot screen */
-    #bootscreen {
+    .boot-screen {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       background: #000;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 100;
-      transition: opacity 1s;
+      z-index: 1000;
+      animation: fadeOut 2s 1.5s forwards;
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; pointer-events: none; }
     }
 
     .boot-logo {
-      width: 150px;
-      height: 150px;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.05); opacity: 1; }
     }
 
     /* setup wizard */
-    #setupscreen {
+    .setup-wizard {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       background: var(--bg);
-      z-index: 90;
-      padding: 4rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      color: var(--text-primary);
-    }
-
-    .setup-step {
+      z-index: 900;
       display: none;
-      text-align: center;
-    }
-
-    .setup-step.active {
-      display: block;
-    }
-
-    .setup-step h1, .setup-step h2 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .setup-step input {
-      display: block;
-      width: 100%;
-      margin-bottom: 1.5rem;
-      padding: 1rem;
-      border: 1px solid var(--text-secondary);
-      border-radius: 4px;
-      font-size: 1rem;
-    }
-
-    .setup-step button {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-
-    /* lock screen */
-    #lockscreen {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--bg);
-      z-index: 80;
-      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 2rem;
-      color: var(--text-primary);
+      padding: 3rem;
+      transition: opacity 0.3s;
     }
 
-    #locktime {
-      font-size: 5rem;
+    .setup-wizard.active { display: flex; }
+
+    .setup-step {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 500px;
+    }
+
+    .setup-step.active { display: flex; }
+
+    .setup-title {
+      font-size: 2.5rem;
       font-weight: 700;
+      color: var(--fg-dark);
+      margin-bottom: 0.8rem;
     }
 
-    #lockdate {
-      font-size: 1.5rem;
-      color: var(--text-secondary);
+    .setup-subtitle {
+      font-size: 1.2rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
     }
 
-    #lockscreen button {
+    .setup-input {
+      width: 100%;
+      background: var(--input-bg);
+      border: none;
+      border-radius: 16px;
+      padding: 1.5rem;
+      font-size: 1.2rem;
+      color: var(--fg-dark);
+      margin-bottom: 1.5rem;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .profile-pics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 4px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .profile-pic.selected {
+      border-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    .setup-btn {
       background: var(--accent);
       color: white;
       border: none;
-      padding: 1rem 3rem;
-      border-radius: 4px;
+      border-radius: 30px;
+      padding: 1.5rem 4rem;
+      font-size: 1.2rem;
+      font-weight: 600;
       cursor: pointer;
-      font-size: 1rem;
+      transition: transform 0.2s;
+    }
+
+    .setup-btn:active { transform: scale(0.95); }
+
+    /* lock screen */
+    .lock-screen {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      z-index: 800;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .lock-screen.active { display: flex; }
+
+    .lock-time {
+      font-size: 8rem;
+      font-weight: 200;
+      margin-bottom: 1rem;
+    }
+
+    .lock-date {
+      font-size: 1.8rem;
+      font-weight: 300;
+      opacity: 0.9;
+      margin-bottom: 6rem;
+    }
+
+    .lock-indicator {
+      width: 120px;
+      height: 6px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .lock-indicator::after {
+      content: '▲';
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-15px); }
     }
 
     /* status bar */
     .status-bar {
-      height: 64px;
+      height: 50px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 2rem;
-      padding-top: 1rem;
-      font-size: 1rem;
+      padding-top: 0.5rem;
+      font-size: 0.9rem;
       font-weight: 500;
-      color: var(--text-primary);
-      background: var(--surface);
+      color: var(--fg-dark);
+      background: var(--bg);
+      transition: background 0.3s, color 0.3s;
     }
 
-    .status-left { display: flex; gap: 0.5rem; align-items: center; }
-    .status-right { display: flex; gap: 1rem; align-items: center; }
+    .status-left, .status-right {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
 
-    /* screens container */
+    /* screen */
     .screen {
       position: absolute;
-      top: 64px;
+      top: 50px;
       left: 0;
       right: 0;
       bottom: 0;
       background: var(--bg);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s;
     }
 
-    .screen.hidden {
-      transform: translatex(100%);
-    }
+    .screen.hidden { transform: translateX(100%); }
 
-    /* home screen */
+    /* home */
     .home-screen {
-      padding: 3rem 2rem;
+      padding: 3rem 2.5rem;
       display: flex;
       flex-direction: column;
       height: 100%;
     }
 
-    .time-widget {
-      background: var(--surface);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      padding: 2rem;
+    .search-widget {
+      background: var(--bg-card);
+      border-radius: 30px;
+      padding: 1.2rem 1.8rem;
       margin-bottom: 3rem;
-      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow);
+      color: var(--muted);
+      font-size: 1.1rem;
+      transition: background 0.3s, box-shadow 0.3s;
     }
-
-    .time { font-size: 4rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; }
-    .date { font-size: 1.2rem; color: var(--text-secondary); margin-top: 0.5rem; font-weight: 500; }
 
     .apps-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 2rem;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 3rem 2rem;
       flex: 1;
     }
 
@@ -240,55 +289,546 @@
       transition: transform 0.2s;
     }
 
-    .app-icon:active { transform: scale(0.95); }
+    .app-icon:active { transform: scale(0.9); }
 
     .app-icon-circle {
-      width: 80px;
-      height: 80px;
-      border-radius: 12px;
-      background: var(--surface);
-      box-shadow: var(--shadow);
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: var(--accent);
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .app-icon svg {
-      width: 48px;
-      height: 48px;
-      fill: var(--text-primary);
+      box-shadow: 0 6px 16px var(--shadow);
+      transition: background 0.3s, box-shadow 0.3s;
     }
 
     .app-name {
       font-size: 0.9rem;
-      color: var(--text-primary);
+      color: var(--fg-dark);
       font-weight: 500;
+      transition: color 0.3s;
     }
 
-    /* adjust other styles similarly for larger scale, e.g., padding, fonts +20% */
+    /* app header */
     .app-header {
-      padding: 1.5rem 2rem;
+      padding: 1.5rem 2.5rem;
+      background: var(--bg-card);
+      box-shadow: 0 2px 6px var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      transition: background 0.3s, box-shadow 0.3s;
     }
 
-    .app-title { font-size: 1.5rem; }
+    .back-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      color: var(--fg-dark);
+      font-size: 1.5rem;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .app-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--fg-dark);
+      flex: 1;
+      transition: color 0.3s;
+    }
+
+    /* settings */
+    .settings-screen {
+      padding: 0;
+      flex: 1;
+      overflow-y: auto;
+      background: var(--bg);
+      transition: background 0.3s;
+    }
+
+    .settings-profile {
+      background: var(--bg-card);
+      padding: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 6px var(--shadow);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    .settings-profile-pic {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+    }
+
+    .settings-profile-info h3 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--fg-dark);
+      margin-bottom: 0.5rem;
+      transition: color 0.3s;
+    }
+
+    .settings-profile-info p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      transition: color 0.3s;
+    }
+
+    .settings-group {
+      margin-bottom: 0.8rem;
+    }
+
+    .settings-label {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      font-weight: 600;
+      padding: 1.5rem 2.5rem 0.8rem;
+      transition: color 0.3s;
+    }
+
+    .setting-item {
+      background: var(--bg-card);
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--bg);
+      transition: background 0.3s;
+    }
 
     .setting-name {
-      font-size: 1rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--fg-dark);
+      transition: color 0.3s;
     }
 
-    /* ... (rest of styles same as phone, but with increased sizes where needed) */
+    /* toggle switch */
+    .toggle {
+      width: 65px;
+      height: 38px;
+      border-radius: 19px;
+      background: #ccc;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .toggle.on { background: var(--accent); }
+
+    .toggle-indicator {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: white;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.3s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .toggle.on .toggle-indicator { transform: translateX(27px); }
+
+    @media (max-width: 900px) {
+      body { padding: 0; }
+      .tablet {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+      }
+    }
   </style>
 </head>
 <body>
 
   <div class="tablet">
-    <!-- same content as phone, but with id changes if needed for tablet, e.g., larger svgs -->
-    <!-- boot, setup, lock, status, screens, scripts same as phone version -->
+    <!-- boot screen -->
+    <div class="boot-screen">
+      <svg class="boot-logo" width="180" height="180" viewBox="0 0 100 100" fill="none">
+        <circle cx="50" cy="50" r="45" stroke="white" stroke-width="3"/>
+        <path d="M50 10 L35 40 L20 30 L25 50 L15 70 L35 65 L40 80 L50 55 L60 80 L65 65 L85 70 L75 50 L80 30 L65 40 Z" fill="white"/>
+      </svg>
+    </div>
+
+    <!-- setup wizard -->
+    <div class="setup-wizard">
+      <div class="setup-step active" id="setupStep1">
+        <div class="setup-title">welcome to fennOS</div>
+        <div class="setup-subtitle">let's set up your tablet</div>
+        <input type="text" class="setup-input" id="userName" placeholder="enter your name" maxlength="20">
+        <button class="setup-btn" onclick="nextSetupStep()">continue</button>
+      </div>
+
+      <div class="setup-step" id="setupStep2">
+        <div class="setup-title">choose your avatar</div>
+        <div class="setup-subtitle">pick a profile picture</div>
+        <div class="profile-pics">
+          <div class="profile-pic" style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%)" onclick="selectAvatar(this, 0)"></div>
+          <div class="profile-pic" style="background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%)" onclick="selectAvatar(this, 1)"></div>
+          <div class="profile-pic" style="background:linear-gradient(135deg,#4facfe 0%,#00f2fe 100%)" onclick="selectAvatar(this, 2)"></div>
+          <div class="profile-pic" style="background:linear-gradient(135deg,#43e97b 0%,#38f9d7 100%)" onclick="selectAvatar(this, 3)"></div>
+          <div class="profile-pic" style="background:linear-gradient(135deg,#fa709a 0%,#fee140 100%)" onclick="selectAvatar(this, 4)"></div>
+          <div class="profile-pic" style="background:linear-gradient(135deg,#30cfd0 0%,#330867 100%)" onclick="selectAvatar(this, 5)"></div>
+        </div>
+        <button class="setup-btn" onclick="completeSetup()">finish setup</button>
+      </div>
+    </div>
+
+    <!-- lock screen -->
+    <div class="lock-screen">
+      <div class="lock-time" id="lockTime">9:41</div>
+      <div class="lock-date" id="lockDate">tuesday, february 18</div>
+      <div class="lock-indicator" onclick="unlock()"></div>
+    </div>
+
+    <!-- status bar -->
+    <div class="status-bar">
+      <div class="status-left">
+        <span id="statusTime">9:41</span>
+      </div>
+      <div class="status-right">
+        <svg width="20" height="15" viewBox="0 0 16 12" fill="currentColor">
+          <rect x="0" y="3" width="3" height="9" opacity="0.4"/>
+          <rect x="4.5" y="1.5" width="3" height="10.5" opacity="0.6"/>
+          <rect x="9" y="0" width="3" height="12"/>
+          <rect x="13.5" y="0" width="2.5" height="12"/>
+        </svg>
+        <svg width="28" height="15" viewBox="0 0 24 12" fill="none">
+          <rect x="0" y="0" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="3" y="3" width="12" height="6" rx="1" fill="currentColor"/>
+          <rect x="19" y="3.5" width="3" height="5" rx="1" fill="currentColor"/>
+        </svg>
+        <span style="font-size:0.85rem;font-weight:600;">85%</span>
+      </div>
+    </div>
+
+    <!-- home screen -->
+    <div class="screen" id="homeScreen">
+      <div class="home-screen">
+        <div class="search-widget">🔍 search apps, contacts, settings...</div>
+
+        <div class="apps-grid">
+          <div class="app-icon" onclick="openApp('settings')">
+            <div class="app-icon-circle">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6M5.6 5.6l4.2 4.2m4.2 4.2l4.2 4.2M1 12h6m6 0h6M5.6 18.4l4.2-4.2m4.2-4.2l4.2-4.2"/>
+              </svg>
+            </div>
+            <div class="app-name">settings</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#34d399;">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <div class="app-name">messages</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#f59e0b;">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+              </svg>
+            </div>
+            <div class="app-name">clock</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#8b5cf6;">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+              </svg>
+            </div>
+            <div class="app-name">calendar</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#ec4899;">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            </div>
+            <div class="app-name">camera</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#3b82f6;">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9M15 9l3 6-3 6"/>
+              </svg>
+            </div>
+            <div class="app-name">photos</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#10b981;">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div class="app-name">phone</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#6366f1;">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>
+              </svg>
+            </div>
+            <div class="app-name">notes</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#ef4444;">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <rect x="4" y="2" width="16" height="20" rx="2"/><path d="M12 6h.01M12 10v6"/>
+              </svg>
+            </div>
+            <div class="app-name">files</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#14b8a6;">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <div class="app-name">home</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#f97316;">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+              </svg>
+            </div>
+            <div class="app-name">weather</div>
+          </div>
+
+          <div class="app-icon">
+            <div class="app-icon-circle" style="background:#a855f7;">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+              </svg>
+            </div>
+            <div class="app-name">tools</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- settings screen -->
+    <div class="screen hidden" id="settingsScreen">
+      <div style="display:flex;flex-direction:column;height:100%;">
+        <div class="app-header">
+          <button class="back-btn" onclick="closeApp()">←</button>
+          <div class="app-title">settings</div>
+        </div>
+
+        <div class="settings-screen">
+          <div class="settings-profile">
+            <div class="settings-profile-pic" id="profilePic" style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%)"></div>
+            <div class="settings-profile-info">
+              <h3 id="profileName">user</h3>
+              <p id="profileEmail">user@fennos.com</p>
+            </div>
+          </div>
+
+          <div class="settings-group">
+            <div class="settings-label">display</div>
+            <div class="setting-item">
+              <div class="setting-name">dark mode</div>
+              <div class="toggle" id="darkModeToggle" onclick="toggleDarkMode()">
+                <div class="toggle-indicator"></div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-name">brightness</div>
+              <div style="width:150px;height:6px;background:#ccc;border-radius:3px;position:relative;">
+                <div style="width:70%;height:100%;background:var(--accent);border-radius:3px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-group">
+            <div class="settings-label">sounds</div>
+            <div class="setting-item">
+              <div class="setting-name">ring volume</div>
+              <div style="width:150px;height:6px;background:#ccc;border-radius:3px;position:relative;">
+                <div style="width:50%;height:100%;background:var(--accent);border-radius:3px;"></div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-name">media volume</div>
+              <div style="width:150px;height:6px;background:#ccc;border-radius:3px;position:relative;">
+                <div style="width:80%;height:100%;background:var(--accent);border-radius:3px;"></div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-name">vibrate</div>
+              <div class="toggle on">
+                <div class="toggle-indicator"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-group">
+            <div class="settings-label">connectivity</div>
+            <div class="setting-item">
+              <div class="setting-name">wifi</div>
+              <div class="toggle on">
+                <div class="toggle-indicator"></div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-name">bluetooth</div>
+              <div class="toggle">
+                <div class="toggle-indicator"></div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-name">mobile data</div>
+              <div class="toggle on">
+                <div class="toggle-indicator"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-group">
+            <div class="settings-label">about</div>
+            <div class="setting-item">
+              <div class="setting-name">fennOS version</div>
+              <div style="font-size:1rem;color:var(--muted);">2.0.0</div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-name">device model</div>
+              <div style="font-size:1rem;color:var(--muted);">fenn tablet</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
 
   <script>
-    // same script as phone, but adjust for tablet if needed (e.g., larger boot timeout or none)
+    // state
+    let userName = ''
+    let selectedAvatarIndex = 0
+    const avatarGradients = [
+      'linear-gradient(135deg,#667eea 0%,#764ba2 100%)',
+      'linear-gradient(135deg,#f093fb 0%,#f5576c 100%)',
+      'linear-gradient(135deg,#4facfe 0%,#00f2fe 100%)',
+      'linear-gradient(135deg,#43e97b 0%,#38f9d7 100%)',
+      'linear-gradient(135deg,#fa709a 0%,#fee140 100%)',
+      'linear-gradient(135deg,#30cfd0 0%,#330867 100%)'
+    ]
+
+    // time update
+    function updateTime() {
+      const now = new Date()
+      const hours = now.getHours()
+      const minutes = now.getMinutes().toString().padStart(2, '0')
+      const time = `${hours}:${minutes}`
+      
+      document.getElementById('statusTime').textContent = time
+      document.getElementById('lockTime').textContent = time
+      
+      const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+      const months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
+      const date = `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}`
+      document.getElementById('lockDate').textContent = date
+    }
+
+    updateTime()
+    setInterval(updateTime, 60000)
+
+    // setup wizard
+    setTimeout(() => {
+      document.querySelector('.setup-wizard').classList.add('active')
+    }, 3500)
+
+    function nextSetupStep() {
+      userName = document.getElementById('userName').value || 'user'
+      document.getElementById('setupStep1').classList.remove('active')
+      document.getElementById('setupStep2').classList.add('active')
+    }
+
+    function selectAvatar(elem, index) {
+      document.querySelectorAll('.profile-pic').forEach(p => p.classList.remove('selected'))
+      elem.classList.add('selected')
+      selectedAvatarIndex = index
+    }
+
+    function completeSetup() {
+      document.querySelector('.setup-wizard').classList.remove('active')
+      document.querySelector('.lock-screen').classList.add('active')
+      
+      // set profile
+      document.getElementById('profileName').textContent = userName
+      document.getElementById('profileEmail').textContent = `${userName.toLowerCase().replace(/\s/g, '')}@fennos.com`
+      document.getElementById('profilePic').style.background = avatarGradients[selectedAvatarIndex]
+    }
+
+    function unlock() {
+      document.querySelector('.lock-screen').classList.remove('active')
+    }
+
+    // navigation
+    let currentScreen = 'homeScreen'
+
+    function openApp(appName) {
+      const screens = {
+        'settings': 'settingsScreen'
+      }
+      
+      const targetScreen = screens[appName]
+      if (!targetScreen) return
+      
+      document.getElementById(currentScreen).classList.add('hidden')
+      document.getElementById(targetScreen).classList.remove('hidden')
+      currentScreen = targetScreen
+    }
+
+    function closeApp() {
+      document.getElementById(currentScreen).classList.add('hidden')
+      document.getElementById('homeScreen').classList.remove('hidden')
+      currentScreen = 'homeScreen'
+    }
+
+    // dark mode
+    function toggleDarkMode() {
+      const toggle = document.getElementById('darkModeToggle')
+      const root = document.documentElement
+      
+      if (toggle.classList.contains('on')) {
+        toggle.classList.remove('on')
+        root.classList.remove('dark')
+        root.classList.add('light')
+      } else {
+        toggle.classList.add('on')
+        root.classList.remove('light')
+        root.classList.add('dark')
+      }
+    }
+
+    // init light mode
+    document.documentElement.classList.add('light')
   </script>
 
 </body>
