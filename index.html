@@ -65,6 +65,7 @@
       flex-direction: column;
       align-items: center;
       gap: 1.6rem;
+      position: relative;
     }
 
     .card.anim {
@@ -82,6 +83,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      z-index: 10;
     }
 
     .logo-wrap {
@@ -90,6 +92,7 @@
       box-shadow: 5px 5px 10px var(--shadow-dark),
                   -5px -5px 10px var(--shadow-light);
       padding: 0.5rem 1.4rem;
+      cursor: pointer;
     }
 
     .logo {
@@ -158,6 +161,7 @@
       justify-content: center;
       box-shadow: 4px 4px 8px var(--shadow-dark),
                   -4px -4px 8px var(--shadow-light);
+      cursor: pointer;
     }
 
     .toggle2 {
@@ -179,6 +183,7 @@
       background-color: var(--accent);
       border-radius: 6px;
       transition: transform 0.5s ease, width 0.5s ease, background-color 0.4s ease;
+      pointer-events: none;
     }
 
     #bar5 {
@@ -201,7 +206,7 @@
       transition: max-height 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35);
     }
 
-    .nav-menu.open { max-height: 600px; }
+    .nav-menu.open { max-height: 1000px; }
 
     .nav-menu-inner {
       background: var(--bg);
@@ -211,6 +216,7 @@
       padding: 0.4rem 0;
       display: flex;
       flex-direction: column;
+      margin-top: 1rem;
     }
 
     .nav-menu a {
@@ -258,7 +264,7 @@
       transition: max-height 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35);
     }
 
-    .docs-dropdown.open { max-height: 300px; }
+    .docs-dropdown.open { max-height: 600px; }
 
     .docs-content {
       margin: 0 1.2rem 0.8rem;
@@ -298,6 +304,7 @@
 
     .gh-link:hover { color: var(--fg-dark); }
     .gh-link svg { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.5; }
+
     .docs-text {
       font-size: 0.72rem;
       color: var(--muted);
@@ -323,6 +330,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
     }
 
     .icon-circle svg { width: 36px; height: 36px; color: var(--accent); }
@@ -411,7 +419,7 @@
       flex-shrink: 0;
     }
 
-    .os-tab svg { width: 13px; height: 13px; }
+    .os-tab svg { width: 13px; height: 13px; pointer-events: none; }
 
     .os-tab.active {
       box-shadow: 4px 4px 8px var(--shadow-dark),
@@ -593,6 +601,7 @@
                   -6px -6px 14px var(--shadow-light);
       object-fit: cover;
       display: block;
+      cursor: pointer;
     }
 
     .screenshot-placeholder {
@@ -852,9 +861,6 @@
 
     .bounce { animation: bounce 0.45s ease forwards; }
 
-    /* clickable cursor */
-    .logo-wrap, .icon-circle, .screenshot-img { cursor: pointer; }
-
     /* falling coffee */
     .coffee-drop {
       position: fixed;
@@ -880,63 +886,10 @@
       body { padding: 1.2rem 0.8rem 3rem; }
       .card { padding: 2rem 1.5rem; }
     }
-
-    /* new styles for simulator buttons */
-    .simulator-buttons {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      margin-top: 1rem;
-    }
-
-    .sim-btn {
-      background: var(--bg);
-      color: var(--fg-dark);
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      padding: 1rem 2rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 6px 6px 12px var(--shadow-dark),
-                  -6px -6px 12px var(--shadow-light);
-      transition: all 0.25s;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.8rem;
-    }
-
-    .sim-btn:hover {
-      box-shadow: 8px 8px 16px var(--shadow-dark),
-                  -8px -8px 16px var(--shadow-light);
-      transform: translateY(-2px);
-    }
-
-    .sim-btn:active {
-      box-shadow: inset 4px 4px 8px var(--shadow-dark),
-                  inset -4px -4px 8px var(--shadow-light);
-    }
-
-    .sim-btn svg {
-      width: 20px;
-      height: 20px;
-      fill: var(--accent);
-    }
-
-    .sim-label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-align: center;
-    }
   </style>
 </head>
 <body>
 
-  <!-- hero card -->
   <div class="card anim">
 
     <div class="topbar">
@@ -1062,7 +1015,6 @@
 
     <div class="download-area">
 
-      <!-- os tabs -->
       <div class="os-tabs">
         <button class="os-tab active" id="tabMac">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 8c-1.5 0-3 .5-3 2 0 3 6 3 6 6 0 1.5-1.5 2-3 2s-3-.5-3-2"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="12" y1="18" x2="12" y2="20"/></svg>
@@ -1086,7 +1038,6 @@
         </button>
       </div>
 
-      <!-- mac versions -->
       <div class="os-panel active" id="panelMac">
         <div class="version-list">
           <label class="version-row">
@@ -1122,7 +1073,6 @@
         </a>
       </div>
 
-      <!-- iOS panel -->
       <div class="os-panel" id="panelIOS">
         <p style="font-size:0.72rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:0.4rem;">
           fenn for iOS is available as a sideloadable IPA. requires iOS 14.0+
@@ -1152,12 +1102,11 @@
         </div>
       </div>
 
-      <!-- android panel -->
       <div class="os-panel" id="panelAndroid">
         <p style="font-size:0.72rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:0.4rem;">
           fenn for android is available as a free APK. requires android 7.0+
         </p>
-        <a class="btn-download" href="https://github.com/ac3d1t/fenn-ios/releases/latest" target="_blank">
+        <a class="btn-download" href="https://github.com/ac3d1t/fenn-ios/actions/runs/22259917527/artifacts/5602085438" target="_blank">
           <svg viewBox="0 0 24 24" fill="none">
             <path d="M12 3v13M6 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -1171,20 +1120,17 @@
             2. open settings → security<br>
             3. enable "install from unknown sources"<br>
             4. open the downloaded APK file<br>
-            5. tap install<br><br>
-            no account needed. no expiry. just install and go.
+            5. tap install
           </p>
         </div>
       </div>
 
-      <!-- linux panel -->
       <div class="os-panel" id="panelLinux">
         <div class="coming-soon-box">
           <span>linux version coming soon</span>
         </div>
       </div>
 
-      <!-- windows panel -->
       <div class="os-panel" id="panelWin">
         <div class="coming-soon-box">
           <span>windows version coming soon</span>
@@ -1202,7 +1148,6 @@
 
   </div>
 
-  <!-- screenshots card -->
   <div class="card anim">
     <span class="section-title">preview</span>
     <p style="font-size:0.72rem; color:var(--muted); margin-top:-0.3rem; margin-bottom:0.2rem;">app preview (as of v1.0.2)</p>
@@ -1213,18 +1158,22 @@
     </div>
   </div>
 
-  <!-- feedback card -->
   <div class="card anim">
-    <span class="section-title">feedback</span>
-    <p style="font-size:0.72rem; color:var(--muted); margin-top:-0.3rem; margin-bottom:0.3rem;">help make fenn better — test UI changes live and send feedback</p>
-    <p style="font-size:0.65rem; color:var(--muted); margin-bottom:0.8rem;">thanks to <a href="https://youtube.com/@a221dtwwag-c9h" target="_blank" style="color:var(--accent);text-decoration:none;">@a221dtwwag-c9h</a> for the feedback</p>
+    <span class="section-title">experience & feedback</span>
     
+    <div style="width:100%;background:var(--bg);border-radius:18px;box-shadow:inset 4px 4px 8px var(--shadow-dark),inset -4px -4px 8px var(--shadow-light);padding:1.5rem;display:flex;flex-direction:column;align-items:center;gap:0.8rem;margin-bottom:1rem;">
+      <div style="font-size:2.5rem;">📱</div>
+      <p style="font-size:0.75rem;color:var(--fg);text-align:center;line-height:1.5;">
+        <strong>try fennOS:</strong> experience fenn as a complete mobile operating system with working apps.
+      </p>
+      <a href="fennos.html" target="_blank" style="background:var(--bg);color:var(--fg-dark);text-decoration:none;font-family:'Nunito',sans-serif;font-size:0.8rem;font-weight:700;padding:0.6rem 1.5rem;border-radius:50px;box-shadow:4px 4px 8px var(--shadow-dark),-4px -4px 8px var(--shadow-light);transition:all 0.2s;">
+        open fennOS
+      </a>
+    </div>
+
     <div style="width:100%;display:flex;flex-direction:column;gap:1rem;">
-      <!-- preview area -->
-      <div style="background:var(--bg);border-radius:14px;box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);padding:1.5rem;display:flex;flex-direction:column;gap:1rem;align-items:center;">
-        <span style="font-size:0.68rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;">live preview</span>
-        
-        <!-- toggle switch -->
+      <div style="background:var(--bg);border-radius:14px;box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);padding:1.2rem;display:flex;flex-direction:column;gap:1rem;align-items:center;">
+        <span style="font-size:0.68rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;">ui testing</span>
         <div style="display:flex;align-items:center;gap:0.8rem;">
           <span style="font-size:0.75rem;color:var(--muted);">enable animations</span>
           <label class="toggle">
@@ -1232,8 +1181,6 @@
             <div class="indicator"></div>
           </label>
         </div>
-        
-        <!-- version-style selector with live preview -->
         <div style="width:100%;display:flex;flex-direction:column;gap:0.35rem;">
           <label class="version-row" id="previewRow1" style="transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);">
             <input type="radio" name="previewver" id="previewRadio1" checked/>
@@ -1250,57 +1197,14 @@
         </div>
       </div>
       
-      <!-- feedback form -->
       <div style="background:var(--bg);border-radius:14px;box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);padding:1.2rem;display:flex;flex-direction:column;gap:0.8rem;">
-        <textarea id="feedbackText" placeholder="share your thoughts on the design, features, or anything else..." style="width:100%;min-height:100px;background:var(--bg);border:none;border-radius:10px;box-shadow:inset 2px 2px 4px var(--shadow-dark),inset -2px -2px 4px var(--shadow-light);padding:0.8rem;font-family:'Nunito',sans-serif;font-size:0.75rem;color:var(--fg-dark);resize:vertical;"></textarea>
-        <button id="submitFeedback" style="background:var(--bg);color:var(--fg-dark);font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:700;padding:0.8rem 1.8rem;border:none;border-radius:50px;cursor:pointer;box-shadow:4px 4px 8px var(--shadow-dark),-4px -4px 8px var(--shadow-light);transition:all 0.25s;align-self:flex-end;">send feedback</button>
+        <textarea id="feedbackText" placeholder="share your thoughts..." style="width:100%;min-height:80px;background:var(--bg);border:none;border-radius:10px;box-shadow:inset 2px 2px 4px var(--shadow-dark),inset -2px -2px 4px var(--shadow-light);padding:0.8rem;font-family:'Nunito',sans-serif;font-size:0.75rem;color:var(--fg-dark);resize:vertical;"></textarea>
+        <button id="submitFeedback" style="background:var(--bg);color:var(--fg-dark);font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:700;padding:0.7rem 1.5rem;border:none;border-radius:50px;cursor:pointer;box-shadow:4px 4px 8px var(--shadow-dark),-4px -4px 8px var(--shadow-light);transition:all 0.25s;align-self:flex-end;">send feedback</button>
         <span id="feedbackStatus" style="font-size:0.68rem;color:var(--muted);text-align:right;display:none;"></span>
       </div>
     </div>
   </div>
 
-  <!-- original try fennOS card -->
-  <div class="card anim">
-    <span class="section-title">try fennOS</span>
-    <p style="font-size:0.72rem; color:var(--muted); margin-top:-0.3rem; margin-bottom:1.2rem;">experience fenn as a complete mobile operating system</p>
-    
-    <div style="background:var(--bg);border-radius:18px;box-shadow:inset 4px 4px 8px var(--shadow-dark),inset -4px -4px 8px var(--shadow-light);padding:2rem;display:flex;flex-direction:column;align-items:center;gap:1rem;">
-      <div style="font-size:3.5rem;">📱</div>
-      <p style="font-size:0.8rem;color:var(--fg);text-align:center;line-height:1.6;max-width:280px;">
-        fennOS is a full neumorphic phone interface with working apps, messages, and the fenn browser built in
-      </p>
-      <a href="fennos.html" target="_blank" style="background:var(--bg);color:var(--fg-dark);text-decoration:none;font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:700;padding:0.9rem 2rem;border-radius:50px;box-shadow:6px 6px 12px var(--shadow-dark),-6px -6px 12px var(--shadow-light);transition:all 0.2s;display:inline-block;margin-top:0.5rem;">
-        open fennOS
-      </a>
-    </div>
-  </div>
-
-  <!-- new card with both simulators -->
-  <div class="card anim">
-    <span class="section-title">fennOS simulators</span>
-    <p style="font-size:0.72rem; color:var(--muted); text-align:center; margin-bottom:1.5rem;">
-      interactive live demos — phone and tablet versions
-    </p>
-    <div class="simulator-buttons">
-      <div style="width:100%; text-align:center;">
-        <p class="sim-label">phone version (iphone style)</p>
-        <button class="sim-btn" onclick="window.open('foneos.html', '_blank')">
-          <svg viewBox="0 0 24 24"><path d="M12 2C5.37 2 2 6.48 2 12s3.37 10 10 10 10-4.48 10-10S18.63 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
-          launch phone
-        </button>
-      </div>
-
-      <div style="width:100%; text-align:center; margin-top:1.8rem;">
-        <p class="sim-label">tablet version (ipad style)</p>
-        <button class="sim-btn" onclick="window.open('fenntab.html', '_blank')">
-          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
-          launch tablet
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- system requirements card -->
   <div class="card anim">
     <span class="section-title">system requirements</span>
     <div class="req-list">
@@ -1327,14 +1231,13 @@
     </div>
   </div>
 
-  <!-- buy me a coffee card -->
   <div class="card anim">
     <span class="section-title">support fenn</span>
     <div class="coffee-inner">
       <div class="coffee-icon">☕</div>
       <div class="text-center">
         <h2 class="coffee-title">like fenn? buy me a coffee</h2>
-        <p class="desc">fenn is free and always will be. if it saved u some time, a coffee goes a long way</p>
+        <p class="desc">fenn is free and always will be.</p>
       </div>
       <a class="btn-coffee" href="https://buymeacoffee.com/ac3d1t" target="_blank">
         buy me a coffee
@@ -1342,195 +1245,199 @@
     </div>
   </div>
 
-  <!-- lightbox -->
   <div class="lightbox" id="lightbox">
     <div class="lightbox-bg" id="lightboxBg"></div>
     <img class="lightbox-img" id="lightboxImg" src="" alt=""/>
   </div>
 
-  <!-- clipboard toast -->
   <div class="toast" id="toast">copied to clipboard</div>
 
+</body>
 <script>
-  const githubToggle = document.getElementById('githubToggle')
-  const githubDropdown = document.getElementById('githubDropdown')
-  githubToggle.addEventListener('click', () => {
-    githubToggle.classList.toggle('open')
-    githubDropdown.classList.toggle('open')
-  })
-
-  const changelogToggle = document.getElementById('changelogToggle')
-  const changelogDropdown = document.getElementById('changelogDropdown')
-  changelogToggle.addEventListener('click', () => {
-    changelogToggle.classList.toggle('open')
-    changelogDropdown.classList.toggle('open')
-  })
-
-  const docsToggle = document.getElementById('docsToggle')
-  const docsDropdown = document.getElementById('docsDropdown')
-  docsToggle.addEventListener('click', () => {
-    docsToggle.classList.toggle('open')
-    docsDropdown.classList.toggle('open')
-  })
-
-  // dark mode
-  const darkToggle = document.getElementById('darkToggle')
-  darkToggle.addEventListener('change', () => {
-    document.documentElement.classList.toggle('dark', darkToggle.checked)
-  })
-
-  // hamburger
-  const menuCheck = document.getElementById('hamburgerCheck')
-  const navMenu = document.getElementById('navMenu')
-  menuCheck.addEventListener('change', () => {
-    navMenu.classList.toggle('open', menuCheck.checked)
-  })
-
-  // os tabs
-  const tabMac = document.getElementById('tabMac')
-  const tabIOS = document.getElementById('tabIOS')
-  const tabAndroid = document.getElementById('tabAndroid')
-  const tabWin = document.getElementById('tabWin')
-  const tabLinux = document.getElementById('tabLinux')
-  const panelMac = document.getElementById('panelMac')
-  const panelIOS = document.getElementById('panelIOS')
-  const panelAndroid = document.getElementById('panelAndroid')
-  const panelWin = document.getElementById('panelWin')
-  const panelLinux = document.getElementById('panelLinux')
-
-  function switchOsTab(activeTab, activePanel) {
-    const allTabs = [tabMac, tabIOS, tabAndroid, tabWin, tabLinux]
-    const allPanels = [panelMac, panelIOS, panelAndroid, panelWin, panelLinux]
-    allTabs.forEach(t => t.classList.remove('active'))
-    allPanels.forEach(p => p.classList.remove('active'))
-    activeTab.classList.add('active')
-    activePanel.classList.add('active')
+  // Helper for toggle dropdowns
+  function setupDropdown(toggleId, dropdownId) {
+    const toggle = document.getElementById(toggleId);
+    const dropdown = document.getElementById(dropdownId);
+    if(toggle && dropdown) {
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggle.classList.toggle('open');
+        dropdown.classList.toggle('open');
+      });
+    }
   }
 
-  tabMac.addEventListener('click', () => switchOsTab(tabMac, panelMac))
-  tabIOS.addEventListener('click', () => switchOsTab(tabIOS, panelIOS))
-  tabAndroid.addEventListener('click', () => switchOsTab(tabAndroid, panelAndroid))
-  tabWin.addEventListener('click', () => switchOsTab(tabWin, panelWin))
-  tabLinux.addEventListener('click', () => switchOsTab(tabLinux, panelLinux))
+  setupDropdown('githubToggle', 'githubDropdown');
+  setupDropdown('changelogToggle', 'changelogDropdown');
+  setupDropdown('docsToggle', 'docsDropdown');
 
-  // version selector updates download button href
-  const unstableWarning = document.createElement('p')
-  unstableWarning.style.cssText = 'font-size:0.68rem;color:#e07070;margin-top:0.4rem;display:none;'
-  unstableWarning.textContent = 'v1.0.3 is unstable — download from the repo at your own risk'
-  document.getElementById('downloadBtn').parentNode.insertBefore(unstableWarning, document.getElementById('downloadBtn').nextSibling)
+  // Dark mode logic
+  const darkToggle = document.getElementById('darkToggle');
+  if(darkToggle) {
+    darkToggle.addEventListener('change', () => {
+      document.documentElement.classList.toggle('dark', darkToggle.checked);
+    });
+  }
+
+  // Hamburger menu logic
+  const menuCheck = document.getElementById('hamburgerCheck');
+  const navMenu = document.getElementById('navMenu');
+  if(menuCheck && navMenu) {
+    menuCheck.addEventListener('change', () => {
+      navMenu.classList.toggle('open', menuCheck.checked);
+    });
+  }
+
+  // OS Tab switching
+  const tabs = {
+    'tabMac': 'panelMac',
+    'tabIOS': 'panelIOS',
+    'tabAndroid': 'panelAndroid',
+    'tabWin': 'panelWin',
+    'tabLinux': 'panelLinux'
+  };
+
+  Object.keys(tabs).forEach(tabId => {
+    const tabEl = document.getElementById(tabId);
+    if(tabEl) {
+      tabEl.addEventListener('click', () => {
+        // Remove active from all
+        Object.keys(tabs).forEach(id => {
+          document.getElementById(id).classList.remove('active');
+          document.getElementById(tabs[id]).classList.remove('active');
+        });
+        // Add to clicked
+        tabEl.classList.add('active');
+        document.getElementById(tabs[tabId]).classList.add('active');
+      });
+    }
+  });
+
+  // Mac Version Selector Logic
+  const downloadBtn = document.getElementById('downloadBtn');
+  const selectedVersionLabel = document.getElementById('selectedVersionLabel');
+  
+  const unstableWarning = document.createElement('p');
+  unstableWarning.style.cssText = 'font-size:0.68rem;color:#e07070;margin-top:0.4rem;display:none;';
+  unstableWarning.textContent = 'v1.0.3 is unstable — download from the repo at your own risk';
+  if(downloadBtn) downloadBtn.parentNode.insertBefore(unstableWarning, downloadBtn.nextSibling);
 
   document.querySelectorAll('input[name="macver"]').forEach(inp => {
     inp.addEventListener('change', () => {
-      const isUnstable = inp.dataset.unstable === 'true'
-      document.getElementById('downloadBtn').href = inp.value
-      document.getElementById('selectedVersionLabel').textContent = inp.dataset.ver
-      if (isUnstable) {
-        document.getElementById('downloadBtn').textContent = 'view on github'
-        unstableWarning.style.display = 'block'
-      } else {
-        document.getElementById('downloadBtn').textContent = 'download for mac'
-        unstableWarning.style.display = 'none'
+      if(downloadBtn && selectedVersionLabel) {
+        downloadBtn.href = inp.value;
+        selectedVersionLabel.textContent = inp.dataset.ver;
+        const isUnstable = inp.dataset.unstable === 'true';
+        if (isUnstable) {
+          downloadBtn.textContent = 'view on github';
+          unstableWarning.style.display = 'block';
+        } else {
+          downloadBtn.textContent = 'download for mac';
+          unstableWarning.style.display = 'none';
+        }
       }
-    })
-  })
+    });
+  });
 
-  // download - just let the link work naturally, show progress ui as visual feedback
-  const downloadBtn = document.getElementById('downloadBtn')
-  const progressWrap = document.getElementById('progressWrap')
-  const progressFill = document.getElementById('progressFill')
-  const progressText = document.getElementById('progressText')
+  // Download simulation UI
+  if(downloadBtn) {
+    downloadBtn.addEventListener('click', (e) => {
+      const progressWrap = document.getElementById('progressWrap');
+      const progressFill = document.getElementById('progressFill');
+      const progressText = document.getElementById('progressText');
+      
+      if (!progressWrap || progressWrap.classList.contains('show')) return;
+      
+      progressWrap.classList.add('show');
+      let pct = 0;
+      const interval = setInterval(() => {
+        pct += Math.random() * 5 + 2;
+        if (pct >= 95) { pct = 95; clearInterval(interval); }
+        progressFill.style.width = pct + '%';
+        progressText.textContent = 'downloading... ' + Math.floor(pct) + '%';
+      }, 150);
 
-  downloadBtn.addEventListener('click', () => {
-    if (progressWrap.classList.contains('show')) return
-    progressWrap.classList.add('show')
-    progressText.textContent = 'starting download...'
-    let pct = 0
-    const interval = setInterval(() => {
-      pct += Math.random() * 4 + 1
-      if (pct >= 90) { pct = 90; clearInterval(interval) }
-      progressFill.style.width = pct + '%'
-      progressText.textContent = 'downloading... ' + Math.floor(pct) + '%'
-    }, 200)
-    setTimeout(() => {
-      clearInterval(interval)
-      progressFill.style.width = '100%'
-      progressText.textContent = 'done — check ur downloads'
       setTimeout(() => {
-        progressWrap.classList.remove('show')
-        progressFill.style.width = '0%'
-        progressText.textContent = 'downloading... 0%'
-      }, 2500)
-    }, 4000)
-  })
+        clearInterval(interval);
+        progressFill.style.width = '100%';
+        progressText.textContent = 'done — check your downloads';
+        setTimeout(() => {
+          progressWrap.classList.remove('show');
+          progressFill.style.width = '0%';
+        }, 3000);
+      }, 3500);
+    });
+  }
 
-  // search icon bounce
-  const searchIcon = document.getElementById('searchIcon')
-  searchIcon.addEventListener('click', () => {
-    searchIcon.classList.remove('bounce')
-    void searchIcon.offsetWidth // reflow to restart animation
-    searchIcon.classList.add('bounce')
-    searchIcon.addEventListener('animationend', () => searchIcon.classList.remove('bounce'), { once: true })
-  })
+  // Search Icon Animation
+  const searchIcon = document.getElementById('searchIcon');
+  if(searchIcon) {
+    searchIcon.addEventListener('click', () => {
+      searchIcon.classList.add('bounce');
+      setTimeout(() => searchIcon.classList.remove('bounce'), 500);
+    });
+  }
 
-  // fenn pill copies to clipboard
-  const logoPill = document.getElementById('logoPill')
-  const toast = document.getElementById('toast')
-  logoPill.addEventListener('click', () => {
-    navigator.clipboard.writeText('fenn').then(() => {
-      toast.classList.add('show')
-      setTimeout(() => toast.classList.remove('show'), 1800)
-    })
-  })
+  // Copy Logo logic
+  const logoPill = document.getElementById('logoPill');
+  const toast = document.getElementById('toast');
+  if(logoPill && toast) {
+    logoPill.addEventListener('click', () => {
+      navigator.clipboard.writeText('fenn').then(() => {
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+      });
+    });
+  }
 
-  // screenshot lightbox
-  const lightbox = document.getElementById('lightbox')
-  const lightboxImg = document.getElementById('lightboxImg')
-  const lightboxBg = document.getElementById('lightboxBg')
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxBg = document.getElementById('lightboxBg');
 
   document.querySelectorAll('.screenshot-img').forEach(img => {
     img.addEventListener('click', () => {
-      lightboxImg.src = img.src
-      lightbox.classList.add('open')
-    })
-  })
+      lightboxImg.src = img.src;
+      lightbox.classList.add('open');
+    });
+  });
+  if(lightboxBg) lightboxBg.addEventListener('click', () => lightbox.classList.remove('open'));
 
-  lightboxBg.addEventListener('click', () => lightbox.classList.remove('open'))
-  lightboxImg.addEventListener('click', () => lightbox.classList.remove('open'))
+  // Feedback Interactivity
+  const previewSwitch = document.getElementById('previewSwitch');
+  const previewRadio1 = document.getElementById('previewRadio1');
+  const previewRadio2 = document.getElementById('previewRadio2');
+  const feedbackText = document.getElementById('feedbackText');
+  const submitFeedback = document.getElementById('submitFeedback');
 
-  // feedback card interactivity
-  const previewSwitch = document.getElementById('previewSwitch')
-  const previewRadio1 = document.getElementById('previewRadio1')
-  const previewRadio2 = document.getElementById('previewRadio2')
-  const previewRow1 = document.getElementById('previewRow1')
-  const previewRow2 = document.getElementById('previewRow2')
-  const feedbackText = document.getElementById('feedbackText')
-  const submitFeedback = document.getElementById('submitFeedback')
-  const feedbackStatus = document.getElementById('feedbackStatus')
+  if(submitFeedback) {
+    submitFeedback.addEventListener('click', () => {
+      const text = feedbackText.value.trim();
+      if(!text) return;
+      const mailUrl = `mailto:support@fenn.com?subject=Feedback&body=${encodeURIComponent(text)}`;
+      window.location.href = mailUrl;
+    });
+  }
 
-  let animationsEnabled = false
-
-  // toggle switch
-  previewSwitch.addEventListener('change', () => {
-    animationsEnabled = previewSwitch.checked
-    if (!animationsEnabled) {
-      // reset all animations
-      previewRow1.style.transform = ''
-      previewRow1.style.boxShadow = ''
-      previewRow2.style.transform = ''
-      previewRow2.style.boxShadow = ''
-    } else {
-      // apply current selection's animation
-      if (previewRadio1.checked) {
-        previewRow1.style.transform = 'translateY(-2px) scale(1.02)'
-        previewRow1.style.boxShadow = '0 6px 16px rgba(0,0,0,0.08)'
-      } else {
-        previewRow2.style.transform = 'translateX(8px)'
-        previewRow2.style.boxShadow = '0 6px 16px rgba(0,0,0,0.08)'
-      }
+  // Coffee Effect
+  document.querySelector('.btn-coffee')?.addEventListener('click', () => {
+    for (let i = 0; i < 5; i++) {
+      setTimeout(() => {
+        const drop = document.createElement('div');
+        drop.className = 'coffee-drop';
+        drop.textContent = '☕';
+        drop.style.left = Math.random() * 90 + 'vw';
+        document.body.appendChild(drop);
+        setTimeout(() => drop.remove(), 2000);
+      }, i * 200);
     }
-  })
+  });
 
-  // radio 1: sine wave / smooth effect
-  previewRadio1.addEventListener('change', () => {
-    if (previewRadio1.checked && animationsEnabled) {
-      previewRow1.style.transform = 'translateY(-
+  // Finish preloading
+  window.addEventListener('load', () => {
+    document.documentElement.classList.remove('preload');
+    document.documentElement.classList.add('theme-ready');
+  });
+</script>
+</html>
