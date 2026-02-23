@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>fenn</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%23e8e8e8'/><stop offset='100%25' style='stop-color:%23d0d0d0'/></linearGradient><filter id='shadow'><feGaussianBlur in='SourceAlpha' stdDeviation='3'/><feOffset dx='4' dy='4' result='offsetblur'/><feComponentTransfer><feFuncA type='linear' slope='0.3'/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in='SourceGraphic'/></feMerge></filter></defs><rect width='100' height='100' fill='url(%23bg)'/><text x='50' y='72' font-family='Arial Black,sans-serif' font-size='60' font-weight='900' fill='%23c5c5c5' text-anchor='middle' filter='url(%23shadow)'>f</text><text x='50' y='72' font-family='Arial Black,sans-serif' font-size='60' font-weight='900' fill='%23f5f5f5' text-anchor='middle' opacity='0.8'>f</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><linearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%23e8e8e8'/><stop offset='100%25' style='stop-color:%23d0d0d0'/></linearGradient></defs><rect width='180' height='180' rx='40' fill='url(%23bg)'/><text x='90' y='130' font-family='Arial Black,sans-serif' font-size='100' font-weight='900' fill='%23c5c5c5' text-anchor='middle'>f</text><text x='90' y='130' font-family='Arial Black,sans-serif' font-size='100' font-weight='900' fill='%23f5f5f5' text-anchor='middle' opacity='0.8'>f</text></svg>">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="fenn">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after {
@@ -1104,22 +1109,21 @@
         <p style="font-size:0.72rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:0.4rem;">
           fenn for android is available as a free APK. requires android 7.0+
         </p>
-        <a class="btn-download" href="https://drive.google.com/file/d/1WPLaXomBs9zP95BV6pOA5WDVkKz39gbI/view?usp=drivesdk" target="_blank">
+        <a class="btn-download" href="https://github.com/ac3d1t/fenn-ios/releases/download/v1.0.3-mobile/fenn.apk" target="_blank">
           <svg viewBox="0 0 24 24" fill="none">
             <path d="M12 3v13M6 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
-          download APK from Google Drive
+          download APK
         </a>
         <div class="coming-soon-box" style="padding:1rem 1.5rem;font-size:0.68rem;">
           <p style="font-weight:700;color:var(--fg-dark);margin-bottom:0.6rem;">install instructions</p>
           <p style="text-align:left;line-height:1.7;">
             1. download the APK above<br>
-            2. unzip in file manager<br>
-            3. open settings → security<br>
-            4. enable "install from unknown sources"<br>
-            5. open the downloaded APK file<br>
-            6. tap install<br><br>
+            2. open settings → security<br>
+            3. enable "install from unknown sources"<br>
+            4. open the downloaded APK file<br>
+            5. tap install<br><br>
             no account needed. no expiry. just install and go.
           </p>
         </div>
@@ -1127,15 +1131,42 @@
 
       <!-- linux panel -->
       <div class="os-panel" id="panelLinux">
-        <div class="coming-soon-box">
-          <span>linux version coming soon</span>
+        <p style="font-size:0.72rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:0.4rem;">
+          fenn for linux is available as an AppImage. works on most distributions
+        </p>
+        <a class="btn-download" href="https://github.com/ac3d1t/fenn/releases/latest" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 3v13M6 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          download AppImage
+        </a>
+        <div class="install-box">
+          <p style="font-size:0.68rem; color:var(--muted); line-height:1.5;">
+            • make it executable: <code style="background:var(--bg);padding:0.2rem 0.4rem;border-radius:4px;font-size:0.65rem;">chmod +x fenn.AppImage</code><br>
+            • run: <code style="background:var(--bg);padding:0.2rem 0.4rem;border-radius:4px;font-size:0.65rem;">./fenn.AppImage</code>
+          </p>
         </div>
       </div>
 
       <!-- windows panel -->
       <div class="os-panel" id="panelWin">
-        <div class="coming-soon-box">
-          <span>windows version coming soon</span>
+        <p style="font-size:0.72rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:0.4rem;">
+          fenn for windows is available as an installer. requires windows 10 or 11
+        </p>
+        <a class="btn-download" href="https://github.com/ac3d1t/fenn/releases/latest" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 3v13M6 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          download installer
+        </a>
+        <div class="install-box">
+          <p style="font-size:0.68rem; color:var(--muted); line-height:1.5;">
+            • run the installer<br>
+            • follow the setup wizard<br>
+            • launch fenn from start menu or desktop
+          </p>
         </div>
       </div>
 
