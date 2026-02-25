@@ -8,7 +8,7 @@ go to the [releases page](https://github.com/ac3d1t/fenn/releases) and download 
 
 **which version should i download?**
 obviously the newest release you silly goof
-- **v1.0.2** is the wesion where you can just download it from the website. easy peasy
+- **v1.0.2** is the version where you can just download it from the website. easy peasy
 - **v1.0.3** has extra features (keyboard shortcuts, persistent settings) but you cant get it off the website for some ridiculous reason. download it from the repo if you want it that bad.
 
 ### step 2 — open the dmg
