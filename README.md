@@ -87,8 +87,8 @@ Sideloadly is simpler to set up but requires you to manually re-sign every 7 day
 2. install and open it
 3. connect your iPhone to your computer via USB
 4. trust the computer on your iPhone if prompted
-5. download the fenn IPA from [fenn-ios releases](https://github.com/ac3d1t/fenn-ios/releases/download/v1.0.3-ios/fenn.ipa)
-6. drag the IPA file into the Sideloadly window
+5. download the fenn IPA from [fenn-ios releases](https://github.com/ac3d1t/fenn-ios/releases/download/v1.0.3-ios/fenn.ipa) or [fenn releases (in this repository)] 
+6. drag the IPA file into the Sideloadly window or manually select it by pressing the IPA file icon and locating it in your file explorer (usually in downloads)
 7. enter your apple ID in the account field
 8. click **start**
 9. enter your apple ID password when prompted
@@ -109,7 +109,7 @@ check if your device is compatible at [github.com/opa334/TrollStore](https://git
 
 if compatible:
 1. install TrollStore using the instructions for your specific iOS version
-2. download the fenn IPA from [fenn-ios releases](https://github.com/ac3d1t/fenn-ios/releases/download/v1.0.3-ios/fenn.ipa)
+2. download the fenn IPA from [fenn-ios releases](https://github.com/ac3d1t/fenn-ios/releases/download/v1.0.3-ios/fenn.ipa) or [fenn releases (in this repository)]
 3. open the IPA file on your device
 4. tap **open in TrollStore**
 5. tap **install**
@@ -141,14 +141,15 @@ android blocks installs from outside the play store by default. you need to allo
 
 ### step 2 — download the APK
 
-download fenn.apk from the [releases page](https://github.com/ac3d1t/fenn-ios/releases/latest)
+download fenn.apk from the [fenn-ios releases page](https://github.com/ac3d1t/fenn-ios/releases/latest) or [fenn releases (in this repository)]
 
 ### step 3 — install
 
 1. open your downloads folder
-2. tap `fenn.apk`
-3. tap **install**
-4. tap **open** when it finishes
+2. tap `fenn.apk.zip`
+3. unzip the file by long pressing it and finding the unzip option in the dropdown
+4. tap **install**
+5. tap **open** when it finishes
 
 no re-signing, no expiry, no account needed.
 
@@ -170,7 +171,7 @@ delete the old version from your applications folder first, then install the new
 
 **iOS: app crashes immediately after opening**
 
-make sure you've trusted the developer certificate in settings → general → VPN & device management. if you already did, try re-signing with AltStore or Sideloadly.
+make sure you've trusted the developer certificate in settings → general → VPN & device management. if you already did, try re-signing with AltStore or Sideloadly. if this doesnt work, try updating your device. the app only works on iOS 14+.
 
 **iOS: "app is no longer available"**
 
@@ -184,6 +185,6 @@ the IPA file should be in your downloads folder. if safari downloaded it, go to 
 
 ## support
 
-if you run into issues not covered here, open an issue on the [github repo](https://github.com/ac3d1t/fenn/issues) or reach out directly.
+if you run into issues not covered here, open an issue on the [github repo](https://github.com/ac3d1t/fenn/issues) or reach out directly. [chrispy1331@gmail.com]
 
 if fenn has been useful, a coffee is always appreciated — [buymeacoffee.com/ac3d1t](https://buymeacoffee.com/ac3d1t)
