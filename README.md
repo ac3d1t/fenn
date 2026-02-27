@@ -181,6 +181,10 @@ your 7-day signing period expired. re-sign the app using AltStore or Sideloadly.
 
 the IPA file should be in your downloads folder. if safari downloaded it, go to the Files app → downloads → look for fenn.ipa. then tap and hold → share → open in AltStore or Sideloadly.
 
+**android 16: request file owner permission to open the app**
+
+android 16 implemented a new "auto blocker" feature that prevents internet-downloaded apps (like fenn) from opening because its created by an untrusted developer or its not downloaded directly from the google play store. to bypass this, go to settings > security and privacy > toggle auto blocker OFF. if the issue still persists, check if you have turned off untrusted developer downloads (already mentioned in the android download instructions) if that doesnt work, just be patient, as im tying to launch fenn to the google play store.
+
 ---
 
 ## support
