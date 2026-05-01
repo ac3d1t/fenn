@@ -21,12 +21,225 @@
 
     :root {
       --bg: #e8e8e8; --shadow-dark: #c5c5c5; --shadow-light: #ffffff;
-      --fg: #555; --fg-dark: #333; --muted: #aaa; --accent: #7a9ccf;
+      --fg: #555; --fg-dark: #333; --muted: #aaa; --accent: #007aff;
     }
 
     :root.dark {
       --bg: #262626; --shadow-dark: #191919; --shadow-light: #323232;
-      --fg: #999; --fg-dark: #ddd; --muted: #555; --accent: #7a9ccf;
+      --fg: #999; --fg-dark: #ddd; --muted: #555; --accent: #007aff;
+    }
+
+    :root.fennex {
+      --bg: #1a1a1a; --shadow-dark: #0d0d0d; --shadow-light: #2a2a2a;
+      --fg: #888; --fg-dark: #e5e5e5; --muted: #555; --accent: #007aff;
+    }
+
+    /* fennex removes all rounded corners and animations */
+    :root.fennex .card,
+    :root.fennex .logo-wrap,
+    :root.fennex .toggle,
+    :root.fennex .hamburger-wrap,
+    :root.fennex .nav-menu-inner,
+    :root.fennex .docs-content,
+    :root.fennex .icon-circle,
+    :root.fennex .info-strip,
+    :root.fennex .os-tabs,
+    :root.fennex .os-tab,
+    :root.fennex .version-check,
+    :root.fennex .btn-download,
+    :root.fennex .btn-coffee,
+    :root.fennex .install-box,
+    :root.fennex .coming-soon-box,
+    :root.fennex .screenshot-img,
+    :root.fennex .req-row,
+    :root.fennex .version-row,
+    :root.fennex .docs-dropdown,
+    :root.fennex .progress-track {
+      border-radius: 0 !important;
+    }
+
+    :root.fennex .theme-ready, :root.fennex .theme-ready *, :root.fennex .theme-ready *::before, :root.fennex .theme-ready *::after {
+      transition: none !important;
+    }
+
+    :root.fennex body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      padding: 1.5rem 1rem 3rem;
+      gap: 1rem;
+    }
+
+    :root.fennex .card {
+      box-shadow: none;
+      border: 1px solid var(--shadow-dark);
+      padding: 2rem 1.8rem;
+      gap: 1.2rem;
+    }
+
+    :root.fennex .card.anim {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    :root.fennex .logo-wrap,
+    :root.fennex .hamburger-wrap,
+    :root.fennex .toggle {
+      box-shadow: none;
+      border: 1px solid var(--shadow-dark);
+    }
+
+    :root.fennex .toggle {
+      background: var(--shadow-dark);
+      border: none;
+    }
+
+    :root.fennex .indicator {
+      box-shadow: none;
+      background: var(--accent);
+    }
+
+    :root.fennex .nav-menu-inner {
+      box-shadow: none;
+      border: 1px solid var(--shadow-dark);
+      padding: 0;
+    }
+
+    :root.fennex .nav-menu a,
+    :root.fennex .docs-toggle {
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid var(--shadow-dark);
+      font-size: 0.75rem;
+    }
+
+    :root.fennex .nav-menu a:last-child,
+    :root.fennex .docs-toggle:last-child {
+      border-bottom: none;
+    }
+
+    :root.fennex .icon-circle {
+      box-shadow: none;
+      border: 1px solid var(--shadow-dark);
+      width: 72px;
+      height: 72px;
+    }
+
+    :root.fennex h1 {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    :root.fennex .desc {
+      font-size: 0.8rem;
+    }
+
+    :root.fennex .info-strip {
+      box-shadow: none;
+      border: 1px solid var(--shadow-dark);
+      padding: 0.8rem 1rem;
+    }
+
+    :root.fennex .os-tabs {
+      box-shadow: none;
+      border: 1px solid var(--shadow-dark);
+      padding: 0;
+      gap: 0;
+    }
+
+    :root.fennex .os-tab {
+      padding: 0.4rem 0.8rem;
+      box-shadow: none;
+      border-right: 1px solid var(--shadow-dark);
+      flex: 1;
+      text-align: center;
+      font-size: 0.7rem;
+      background: var(--bg);
+    }
+
+    :root.fennex .os-tab:last-child {
+      border-right: none;
+    }
+
+    :root.fennex .os-tab.active {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: none;
+    }
+
+    :root.fennex .btn-download,
+    :root.fennex .btn-coffee {
+      box-shadow: none;
+      border: 1px solid var(--accent);
+      background: var(--bg);
+      color: var(--accent);
+      padding: 0.8rem 1.8rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    :root.fennex .btn-download:hover,
+    :root.fennex .btn-coffee:hover {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: none;
+      transform: none;
+    }
+
+    :root.fennex .btn-download:active,
+    :root.fennex .btn-coffee:active {
+      box-shadow: none;
+      transform: none;
+    }
+
+    :root.fennex .version-row,
+    :root.fennex .req-row {
+      box-shadow: none;
+      border: 1px solid var(--shadow-dark);
+      padding: 0.6rem 0.8rem;
+    }
+
+    :root.fennex .version-check {
+      box-shadow: none;
+      border: 1px solid var(--muted);
+    }
+
+    :root.fennex .version-row input:checked + .version-check {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: none;
+      transform: none;
+    }
+
+    :root.fennex .coming-soon-box,
+    :root.fennex .install-box {
+      box-shadow: none;
+      border: 1px solid var(--shadow-dark);
+      padding: 1rem 1.2rem;
+      font-size: 0.75rem;
+    }
+
+    :root.fennex .screenshot-img {
+      box-shadow: none;
+      border: 1px solid var(--shadow-dark);
+    }
+
+    :root.fennex .progress-track {
+      box-shadow: none;
+      border: 1px solid var(--shadow-dark);
+    }
+
+    :root.fennex .docs-content {
+      box-shadow: none;
+      border: 1px solid var(--shadow-dark);
+      margin: 0;
+      padding: 0.8rem 1rem;
+    }
+
+    :root.fennex .toggle-label {
+      font-size: 0.65rem;
+    }
+
+    :root.fennex .section-title {
+      font-size: 0.65rem;
     }
 
     body {
@@ -340,7 +553,7 @@
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
     .cl-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 0.3rem; vertical-align: middle; position: relative; top: -1px; flex-shrink: 0; }
-    .cl-dot.new { background: #7a9ccf; box-shadow: 0 0 5px #7a9ccf99; }
+    .cl-dot.new { background: #007aff; box-shadow: 0 0 5px #007aff99; }
     .cl-dot.major { background: #a0c878; box-shadow: 0 0 5px #a0c87899; }
 
     .coffee-drop { position: fixed; top: -60px; font-size: 2rem; pointer-events: none; z-index: 999; animation: coffeeFall linear forwards; }
@@ -355,7 +568,6 @@
       .card { padding: 2rem 1.5rem; }
     }
 
-    /* landscape phones */
     @media (max-height: 500px) and (orientation: landscape) {
       body { padding: 1rem 1.5rem 2rem; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 1rem; }
       .card { max-width: 420px; padding: 1.4rem 1.6rem; gap: 1rem; }
@@ -368,7 +580,6 @@
       .card.anim:nth-child(2), .card.anim:nth-child(3) { flex: 1; min-width: 260px; }
     }
 
-    /* tablets */
     @media (min-width: 700px) and (min-height: 501px) {
       body { padding: 2.5rem 2rem 5rem; }
       .card { max-width: 560px; }
@@ -399,6 +610,24 @@
 
     <div class="nav-menu" id="navMenu">
       <div class="nav-menu-inner">
+        <div class="docs-toggle" id="themeToggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v1m0 16v1m9-9h-1m-16 0H1m15.66 5.66l-.707-.707M6.34 6.34l-.707-.707m12.73 0l-.707.707M6.34 17.66l-.707.707M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          theme
+          <svg class="docs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="docs-dropdown" id="themeDropdown">
+          <div class="docs-content" style="gap:0.3rem;padding:0.5rem 0.4rem;">
+            <label style="display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0.6rem;cursor:pointer;font-size:0.75rem;font-weight:600;color:var(--fg-dark);" id="themeSmooth">
+              <input type="radio" name="theme" value="smooth" style="margin:0;cursor:pointer;"/>
+              fenn (smooth)
+            </label>
+            <label style="display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0.6rem;cursor:pointer;font-size:0.75rem;font-weight:600;color:var(--fg-dark);" id="themeFennex">
+              <input type="radio" name="theme" value="fennex" style="margin:0;cursor:pointer;"/>
+              fennex (fast)
+            </label>
+          </div>
+        </div>
+        <div class="nav-divider"></div>
         <div class="docs-toggle" id="docsToggle">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           docs
@@ -512,7 +741,7 @@
             <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v.1.0.2/fenn-1.0.2.dmg" data-ver="1.0.2" checked/>
             <div class="version-check"></div>
             <span class="version-name">v1.0.2</span>
-            <span class="version-tag" style="background:#7a9ccf;color:#fff;">recommended</span>
+            <span class="version-tag" style="background:#007aff;color:#fff;">recommended</span>
           </label>
           <label class="version-row">
             <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v1.0.1/fenn-1.0.1.dmg" data-ver="1.0.1"/>
@@ -634,7 +863,7 @@
   <div class="toast" id="toast">copied to clipboard</div>
 
 <script>
-  ['githubToggle','changelogToggle','docsToggle'].forEach(id => {
+  ['githubToggle','changelogToggle','docsToggle','themeToggle'].forEach(id => {
     const toggle = document.getElementById(id)
     const dropdown = document.getElementById(id.replace('Toggle','Dropdown'))
     toggle.addEventListener('click', () => {
@@ -645,7 +874,36 @@
 
   document.getElementById('darkToggle').addEventListener('change', e => {
     document.documentElement.classList.toggle('dark', e.target.checked)
+    localStorage.setItem('fennDarkMode', e.target.checked)
   })
+
+  // theme switcher
+  document.querySelectorAll('input[name="theme"]').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      if (e.target.value === 'fennex') {
+        document.documentElement.classList.add('fennex')
+        document.documentElement.classList.remove('dark')
+        document.getElementById('darkToggle').checked = false
+      } else {
+        document.documentElement.classList.remove('fennex')
+        const isDark = localStorage.getItem('fennDarkMode') === 'true'
+        document.documentElement.classList.toggle('dark', isDark)
+        document.getElementById('darkToggle').checked = isDark
+      }
+      localStorage.setItem('fennTheme', e.target.value)
+    })
+  })
+
+  // load saved theme
+  const savedTheme = localStorage.getItem('fennTheme') || 'smooth'
+  document.querySelector(`input[name="theme"][value="${savedTheme}"]`).checked = true
+  if (savedTheme === 'fennex') {
+    document.documentElement.classList.add('fennex')
+  } else {
+    const isDark = localStorage.getItem('fennDarkMode') === 'true'
+    document.documentElement.classList.toggle('dark', isDark)
+    document.getElementById('darkToggle').checked = isDark
+  }
 
   const menuCheck = document.getElementById('hamburgerCheck')
   menuCheck.addEventListener('change', () => {
