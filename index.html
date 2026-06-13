@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>fenn</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%23e8e8e8'/><stop offset='100%25' style='stop-color:%23d0d0d0'/></linearGradient><filter id='shadow'><feGaussianBlur in='SourceAlpha' stdDeviation='3'/><feOffset dx='4' dy='4' result='offsetblur'/><feComponentTransfer><feFuncA type='linear' slope='0.3'/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in='SourceGraphic'/></feMerge></filter></defs><rect width='100' height='100' fill='url(%23bg)'/><text x='50' y='72' font-family='Arial Black,sans-serif' font-size='60' font-weight='900' fill='%23c5c5c5' text-anchor='middle' filter='url(%23shadow)'>f</text><text x='50' y='72' font-family='Arial Black,sans-serif' font-size='60' font-weight='900' fill='%23f5f5f5' text-anchor='middle' opacity='0.8'>f</text></svg>">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><defs><linearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%23e8e8e8'/><stop offset='100%25' style='stop-color:%23d0d0d0'/></linearGradient></defs><rect width='180' height='180' rx='40' fill='url(%23bg)'/><text x='90' y='130' font-family='Arial Black,sans-serif' font-size='100' font-weight='900' fill='%23c5c5c5' text-anchor='middle'>f</text><text x='90' y='130' font-family='Arial Black,sans-serif' font-size='100' font-weight='900' fill='%23f5f5f5' text-anchor='middle' opacity='0.8'>f</text></svg>">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="fenn">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,224 +19,52 @@
       --bg: #e8e8e8; --shadow-dark: #c5c5c5; --shadow-light: #ffffff;
       --fg: #555; --fg-dark: #333; --muted: #aaa; --accent: #007aff;
     }
-
     :root.dark {
       --bg: #262626; --shadow-dark: #191919; --shadow-light: #323232;
       --fg: #999; --fg-dark: #ddd; --muted: #555; --accent: #007aff;
     }
-
     :root.fennex {
       --bg: #1a1a1a; --shadow-dark: #0d0d0d; --shadow-light: #2a2a2a;
       --fg: #888; --fg-dark: #e5e5e5; --muted: #555; --accent: #007aff;
     }
 
-    /* fennex removes all rounded corners and animations */
-    :root.fennex .card,
-    :root.fennex .logo-wrap,
-    :root.fennex .toggle,
-    :root.fennex .hamburger-wrap,
-    :root.fennex .nav-menu-inner,
-    :root.fennex .docs-content,
-    :root.fennex .icon-circle,
-    :root.fennex .info-strip,
-    :root.fennex .os-tabs,
-    :root.fennex .os-tab,
-    :root.fennex .version-check,
-    :root.fennex .btn-download,
-    :root.fennex .btn-coffee,
-    :root.fennex .install-box,
-    :root.fennex .coming-soon-box,
-    :root.fennex .screenshot-img,
-    :root.fennex .req-row,
-    :root.fennex .version-row,
-    :root.fennex .docs-dropdown,
-    :root.fennex .progress-track {
-      border-radius: 0 !important;
-    }
-
-    :root.fennex .theme-ready, :root.fennex .theme-ready *, :root.fennex .theme-ready *::before, :root.fennex .theme-ready *::after {
-      transition: none !important;
-    }
-
-    :root.fennex body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-      padding: 1.5rem 1rem 3rem;
-      gap: 1rem;
-    }
-
-    :root.fennex .card {
-      box-shadow: none;
-      border: 1px solid var(--shadow-dark);
-      padding: 2rem 1.8rem;
-      gap: 1.2rem;
-    }
-
-    :root.fennex .card.anim {
-      animation: none;
-      opacity: 1;
-      transform: none;
-    }
-
-    :root.fennex .logo-wrap,
-    :root.fennex .hamburger-wrap,
-    :root.fennex .toggle {
-      box-shadow: none;
-      border: 1px solid var(--shadow-dark);
-    }
-
-    :root.fennex .toggle {
-      background: var(--shadow-dark);
-      border: none;
-    }
-
-    :root.fennex .indicator {
-      box-shadow: none;
-      background: var(--accent);
-    }
-
-    :root.fennex .nav-menu-inner {
-      box-shadow: none;
-      border: 1px solid var(--shadow-dark);
-      padding: 0;
-    }
-
-    :root.fennex .nav-menu a,
-    :root.fennex .docs-toggle {
-      padding: 0.5rem 1rem;
-      border-bottom: 1px solid var(--shadow-dark);
-      font-size: 0.75rem;
-    }
-
-    :root.fennex .nav-menu a:last-child,
-    :root.fennex .docs-toggle:last-child {
-      border-bottom: none;
-    }
-
-    :root.fennex .icon-circle {
-      box-shadow: none;
-      border: 1px solid var(--shadow-dark);
-      width: 72px;
-      height: 72px;
-    }
-
-    :root.fennex h1 {
-      font-size: 1.3rem;
-      font-weight: 600;
-    }
-
-    :root.fennex .desc {
-      font-size: 0.8rem;
-    }
-
-    :root.fennex .info-strip {
-      box-shadow: none;
-      border: 1px solid var(--shadow-dark);
-      padding: 0.8rem 1rem;
-    }
-
-    :root.fennex .os-tabs {
-      box-shadow: none;
-      border: 1px solid var(--shadow-dark);
-      padding: 0;
-      gap: 0;
-    }
-
-    :root.fennex .os-tab {
-      padding: 0.4rem 0.8rem;
-      box-shadow: none;
-      border-right: 1px solid var(--shadow-dark);
-      flex: 1;
-      text-align: center;
-      font-size: 0.7rem;
-      background: var(--bg);
-    }
-
-    :root.fennex .os-tab:last-child {
-      border-right: none;
-    }
-
-    :root.fennex .os-tab.active {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: none;
-    }
-
-    :root.fennex .btn-download,
-    :root.fennex .btn-coffee {
-      box-shadow: none;
-      border: 1px solid var(--accent);
-      background: var(--bg);
-      color: var(--accent);
-      padding: 0.8rem 1.8rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-
-    :root.fennex .btn-download:hover,
-    :root.fennex .btn-coffee:hover {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: none;
-      transform: none;
-    }
-
-    :root.fennex .btn-download:active,
-    :root.fennex .btn-coffee:active {
-      box-shadow: none;
-      transform: none;
-    }
-
-    :root.fennex .version-row,
-    :root.fennex .req-row {
-      box-shadow: none;
-      border: 1px solid var(--shadow-dark);
-      padding: 0.6rem 0.8rem;
-    }
-
-    :root.fennex .version-check {
-      box-shadow: none;
-      border: 1px solid var(--muted);
-    }
-
-    :root.fennex .version-row input:checked + .version-check {
-      background: var(--accent);
-      border-color: var(--accent);
-      box-shadow: none;
-      transform: none;
-    }
-
-    :root.fennex .coming-soon-box,
-    :root.fennex .install-box {
-      box-shadow: none;
-      border: 1px solid var(--shadow-dark);
-      padding: 1rem 1.2rem;
-      font-size: 0.75rem;
-    }
-
-    :root.fennex .screenshot-img {
-      box-shadow: none;
-      border: 1px solid var(--shadow-dark);
-    }
-
-    :root.fennex .progress-track {
-      box-shadow: none;
-      border: 1px solid var(--shadow-dark);
-    }
-
-    :root.fennex .docs-content {
-      box-shadow: none;
-      border: 1px solid var(--shadow-dark);
-      margin: 0;
-      padding: 0.8rem 1rem;
-    }
-
-    :root.fennex .toggle-label {
-      font-size: 0.65rem;
-    }
-
-    :root.fennex .section-title {
-      font-size: 0.65rem;
-    }
+    :root.fennex .card, :root.fennex .logo-wrap, :root.fennex .toggle,
+    :root.fennex .hamburger-wrap, :root.fennex .nav-menu-inner, :root.fennex .docs-content,
+    :root.fennex .icon-circle, :root.fennex .info-strip, :root.fennex .os-tabs,
+    :root.fennex .os-tab, :root.fennex .version-check, :root.fennex .btn-download,
+    :root.fennex .btn-coffee, :root.fennex .install-box, :root.fennex .coming-soon-box,
+    :root.fennex .screenshot-img, :root.fennex .req-row, :root.fennex .version-row,
+    :root.fennex .docs-dropdown, :root.fennex .progress-track { border-radius: 0 !important; }
+    :root.fennex .theme-ready, :root.fennex .theme-ready *, :root.fennex .theme-ready *::before, :root.fennex .theme-ready *::after { transition: none !important; }
+    :root.fennex body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; padding: 1.5rem 1rem 3rem; gap: 1rem; }
+    :root.fennex .card { box-shadow: none; border: 1px solid var(--shadow-dark); padding: 2rem 1.8rem; gap: 1.2rem; }
+    :root.fennex .card.anim { animation: none; opacity: 1; transform: none; }
+    :root.fennex .logo-wrap, :root.fennex .hamburger-wrap, :root.fennex .toggle { box-shadow: none; border: 1px solid var(--shadow-dark); }
+    :root.fennex .toggle { background: var(--shadow-dark); border: none; }
+    :root.fennex .indicator { box-shadow: none; background: var(--accent); }
+    :root.fennex .nav-menu-inner { box-shadow: none; border: 1px solid var(--shadow-dark); padding: 0; }
+    :root.fennex .nav-menu a, :root.fennex .docs-toggle { padding: 0.5rem 1rem; border-bottom: 1px solid var(--shadow-dark); font-size: 0.75rem; }
+    :root.fennex .nav-menu a:last-child, :root.fennex .docs-toggle:last-child { border-bottom: none; }
+    :root.fennex .icon-circle { box-shadow: none; border: 1px solid var(--shadow-dark); width: 72px; height: 72px; }
+    :root.fennex h1 { font-size: 1.3rem; font-weight: 600; }
+    :root.fennex .desc { font-size: 0.8rem; }
+    :root.fennex .info-strip { box-shadow: none; border: 1px solid var(--shadow-dark); padding: 0.8rem 1rem; }
+    :root.fennex .os-tabs { box-shadow: none; border: 1px solid var(--shadow-dark); padding: 0; gap: 0; }
+    :root.fennex .os-tab { padding: 0.4rem 0.8rem; box-shadow: none; border-right: 1px solid var(--shadow-dark); flex: 1; text-align: center; font-size: 0.7rem; background: var(--bg); }
+    :root.fennex .os-tab:last-child { border-right: none; }
+    :root.fennex .os-tab.active { background: var(--accent); color: #fff; box-shadow: none; }
+    :root.fennex .btn-download, :root.fennex .btn-coffee { box-shadow: none; border: 1px solid var(--accent); background: var(--bg); color: var(--accent); padding: 0.8rem 1.8rem; font-size: 0.8rem; font-weight: 600; }
+    :root.fennex .btn-download:hover, :root.fennex .btn-coffee:hover { background: var(--accent); color: #fff; box-shadow: none; transform: none; }
+    :root.fennex .btn-download:active, :root.fennex .btn-coffee:active { box-shadow: none; transform: none; }
+    :root.fennex .version-row, :root.fennex .req-row { box-shadow: none; border: 1px solid var(--shadow-dark); padding: 0.6rem 0.8rem; }
+    :root.fennex .version-check { box-shadow: none; border: 1px solid var(--muted); }
+    :root.fennex .version-row input:checked + .version-check { background: var(--accent); border-color: var(--accent); box-shadow: none; transform: none; }
+    :root.fennex .coming-soon-box, :root.fennex .install-box { box-shadow: none; border: 1px solid var(--shadow-dark); padding: 1rem 1.2rem; font-size: 0.75rem; }
+    :root.fennex .screenshot-img { box-shadow: none; border: 1px solid var(--shadow-dark); }
+    :root.fennex .progress-track { box-shadow: none; border: 1px solid var(--shadow-dark); }
+    :root.fennex .docs-content { box-shadow: none; border: 1px solid var(--shadow-dark); margin: 0; padding: 0.8rem 1rem; }
+    :root.fennex .toggle-label { font-size: 0.65rem; }
+    :root.fennex .section-title { font-size: 0.65rem; }
 
     body {
       background: var(--bg); color: var(--fg);
@@ -255,67 +79,29 @@
       padding: 2.5rem 2.2rem; width: 100%; max-width: 500px;
       display: flex; flex-direction: column; align-items: center; gap: 1.6rem;
     }
-
     .card.anim { animation: fadeUp 0.5s ease forwards; opacity: 0; }
     .card.anim:nth-child(1) { animation-delay: 0s; }
     .card.anim:nth-child(2) { animation-delay: 0.05s; }
     .card.anim:nth-child(3) { animation-delay: 0.1s; }
     .card.anim:nth-child(4) { animation-delay: 0.15s; }
+    .card.anim:nth-child(5) { animation-delay: 0.2s; }
 
     .topbar { width: 100%; display: flex; align-items: center; justify-content: space-between; }
-
-    .logo-wrap {
-      background: var(--bg); border-radius: 50px; cursor: pointer;
-      box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
-      padding: 0.5rem 1.4rem;
-    }
-
+    .logo-wrap { background: var(--bg); border-radius: 50px; cursor: pointer; box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light); padding: 0.5rem 1.4rem; }
     .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.04em; color: var(--fg-dark); }
-
     .topbar-right { display: flex; align-items: center; gap: 0.8rem; }
-
     .toggle-label { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
-
-    .toggle {
-      isolation: isolate; position: relative; height: 26px; width: 52px;
-      border-radius: 13px; overflow: hidden; cursor: pointer;
-      box-shadow: -6px -3px 6px 0px var(--shadow-light), 6px 3px 10px 0px var(--shadow-dark),
-                   3px 3px 3px 0px var(--shadow-dark) inset, -3px -3px 3px 0px var(--shadow-light) inset;
-    }
-
+    .toggle { isolation: isolate; position: relative; height: 26px; width: 52px; border-radius: 13px; overflow: hidden; cursor: pointer; box-shadow: -6px -3px 6px 0px var(--shadow-light), 6px 3px 10px 0px var(--shadow-dark), 3px 3px 3px 0px var(--shadow-dark) inset, -3px -3px 3px 0px var(--shadow-light) inset; }
     .toggle-state { display: none; }
-
-    .indicator {
-      height: 100%; width: 200%; background: var(--bg); border-radius: 13px;
-      transform: translate3d(-75%, 0, 0);
-      transition: transform 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35), background 0.4s;
-      box-shadow: -6px -3px 6px 0px var(--shadow-dark), 6px 3px 10px 0px var(--shadow-dark);
-    }
-
+    .indicator { height: 100%; width: 200%; background: var(--bg); border-radius: 13px; transform: translate3d(-75%, 0, 0); transition: transform 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35), background 0.4s; box-shadow: -6px -3px 6px 0px var(--shadow-dark), 6px 3px 10px 0px var(--shadow-dark); }
     .toggle-state:checked ~ .indicator { transform: translate3d(25%, 0, 0); }
 
     #hamburgerCheck { display: none; }
-
-    .hamburger-wrap {
-      background: var(--bg); border-radius: 10px; width: 44px; height: 44px;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
-    }
-
-    .toggle2 {
-      position: relative; width: 28px; height: 28px; cursor: pointer;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 5px; transition: transform 0.5s ease;
-    }
-
-    .bars {
-      width: 100%; height: 2.5px; background-color: var(--accent); border-radius: 6px;
-      transition: transform 0.5s ease, width 0.5s ease, background-color 0.4s ease;
-    }
-
+    .hamburger-wrap { background: var(--bg); border-radius: 10px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light); }
+    .toggle2 { position: relative; width: 28px; height: 28px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; transition: transform 0.5s ease; }
+    .bars { width: 100%; height: 2.5px; background-color: var(--accent); border-radius: 6px; transition: transform 0.5s ease, width 0.5s ease, background-color 0.4s ease; }
     #bar5 { transition: transform 0.8s ease, width 0.5s ease, background-color 0.4s ease; }
     #bar4, #bar6 { width: 75%; }
-
     #hamburgerCheck:checked + .toggle2 .bars { position: absolute; }
     #hamburgerCheck:checked + .toggle2 #bar5 { transform: scaleX(0); }
     #hamburgerCheck:checked + .toggle2 #bar4 { width: 100%; transform: rotate(45deg); }
@@ -323,219 +109,98 @@
     #hamburgerCheck:checked + .toggle2 { transform: rotate(180deg); }
 
     .nav-menu { width: 100%; overflow: hidden; max-height: 0; transition: max-height 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35); }
-    .nav-menu.open { max-height: 600px; }
-
-    .nav-menu-inner {
-      background: var(--bg); border-radius: 14px;
-      box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
-      padding: 0.4rem 0; display: flex; flex-direction: column;
-    }
-
-    .nav-menu a {
-      font-size: 0.78rem; color: var(--muted); text-decoration: none;
-      font-weight: 600; letter-spacing: 0.04em; padding: 0.65rem 1.2rem;
-      display: flex; align-items: center; gap: 0.6rem; transition: color 0.2s;
-    }
-
+    .nav-menu.open { max-height: 700px; }
+    .nav-menu-inner { background: var(--bg); border-radius: 14px; box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); padding: 0.4rem 0; display: flex; flex-direction: column; }
+    .nav-menu a { font-size: 0.78rem; color: var(--muted); text-decoration: none; font-weight: 600; letter-spacing: 0.04em; padding: 0.65rem 1.2rem; display: flex; align-items: center; gap: 0.6rem; transition: color 0.2s; }
     .nav-menu a:hover { color: var(--fg-dark); }
     .nav-menu a svg { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.5; }
-
-    .docs-toggle {
-      font-size: 0.78rem; color: var(--muted); font-weight: 600; letter-spacing: 0.04em;
-      padding: 0.65rem 1.2rem; display: flex; align-items: center; gap: 0.6rem;
-      cursor: pointer; transition: color 0.2s;
-    }
-
+    .docs-toggle { font-size: 0.78rem; color: var(--muted); font-weight: 600; letter-spacing: 0.04em; padding: 0.65rem 1.2rem; display: flex; align-items: center; gap: 0.6rem; cursor: pointer; transition: color 0.2s; }
     .docs-toggle:hover { color: var(--fg-dark); }
     .docs-toggle svg:first-child { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.5; }
-
     .docs-arrow { width: 12px; height: 12px; margin-left: auto; transition: transform 0.3s ease; opacity: 0.4; }
     .docs-toggle.open .docs-arrow { transform: rotate(180deg); }
-
     .docs-dropdown { overflow: hidden; max-height: 0; transition: max-height 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35); }
-    .docs-dropdown.open { max-height: 400px; }
-
-    .docs-content {
-      margin: 0 1.2rem 0.8rem; background: var(--bg); border-radius: 12px;
-      box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
-      padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.5rem;
-    }
-
-    .docs-heading {
-      font-size: 0.68rem; font-weight: 700; color: var(--fg-dark);
-      letter-spacing: 0.04em; text-transform: uppercase; margin-top: 0.3rem;
-    }
-
+    .docs-dropdown.open { max-height: 600px; }
+    .docs-content { margin: 0 1.2rem 0.8rem; background: var(--bg); border-radius: 12px; box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light); padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .docs-heading { font-size: 0.68rem; font-weight: 700; color: var(--fg-dark); letter-spacing: 0.04em; text-transform: uppercase; margin-top: 0.3rem; }
     .docs-heading:first-child { margin-top: 0; }
-
     .docs-text { font-size: 0.72rem; color: var(--muted); line-height: 1.6; }
-
-    .gh-link {
-      display: flex; align-items: center; gap: 0.6rem; font-size: 0.75rem;
-      font-weight: 600; color: var(--muted); text-decoration: none;
-      padding: 0.5rem 0.6rem; border-radius: 8px; transition: color 0.2s;
-    }
-
+    .gh-link { display: flex; align-items: center; gap: 0.6rem; font-size: 0.75rem; font-weight: 600; color: var(--muted); text-decoration: none; padding: 0.5rem 0.6rem; border-radius: 8px; transition: color 0.2s; }
     .gh-link:hover { color: var(--fg-dark); }
     .gh-link svg { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.5; }
-
     .nav-divider { height: 1px; background: var(--shadow-dark); margin: 0.15rem 1.2rem; opacity: 0.4; }
 
-    .icon-circle {
-      width: 86px; height: 86px; border-radius: 50%; background: var(--bg); cursor: pointer;
-      box-shadow: 7px 7px 14px var(--shadow-dark), -7px -7px 14px var(--shadow-light);
-      display: flex; align-items: center; justify-content: center;
-    }
-
+    .icon-circle { width: 86px; height: 86px; border-radius: 50%; background: var(--bg); cursor: pointer; box-shadow: 7px 7px 14px var(--shadow-dark), -7px -7px 14px var(--shadow-light); display: flex; align-items: center; justify-content: center; }
     .icon-circle svg { width: 36px; height: 36px; color: var(--accent); }
-
     .text-center { text-align: center; display: flex; flex-direction: column; gap: 0.5rem; }
-
     h1 { font-size: 1.5rem; font-weight: 700; color: var(--fg-dark); letter-spacing: -0.02em; }
-
     .desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
 
-    .info-strip {
-      background: var(--bg); border-radius: 14px;
-      box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
-      padding: 0.9rem 1.2rem; width: 100%; display: flex; justify-content: space-around;
-    }
-
+    .info-strip { background: var(--bg); border-radius: 14px; box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); padding: 0.9rem 1.2rem; width: 100%; display: flex; justify-content: space-around; }
     .info-item { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
     .info-label { font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
     .info-value { font-size: 0.78rem; font-weight: 700; color: var(--fg-dark); }
 
-    .os-tabs {
-      display: flex; gap: 0.4rem; background: var(--bg); border-radius: 50px;
-      box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
-      padding: 0.3rem; overflow-x: auto; width: 100%; scrollbar-width: none;
-    }
+    .os-tabs { display: flex; gap: 0.4rem; background: var(--bg); border-radius: 50px; box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); padding: 0.3rem; overflow-x: auto; width: 100%; scrollbar-width: none; }
     .os-tabs::-webkit-scrollbar { display: none; }
-
-    .os-tab {
-      display: flex; align-items: center; gap: 0.4rem; background: none; border: none;
-      border-radius: 50px; padding: 0.45rem 0.7rem; font-family: 'Nunito', sans-serif;
-      font-size: 0.75rem; font-weight: 700; color: var(--muted); cursor: pointer;
-      transition: box-shadow 0.2s, color 0.2s; white-space: nowrap; flex-shrink: 0;
-    }
-
+    .os-tab { display: flex; align-items: center; gap: 0.4rem; background: none; border: none; border-radius: 50px; padding: 0.45rem 0.7rem; font-family: 'Nunito', sans-serif; font-size: 0.75rem; font-weight: 700; color: var(--muted); cursor: pointer; transition: box-shadow 0.2s, color 0.2s; white-space: nowrap; flex-shrink: 0; }
     .os-tab svg { width: 13px; height: 13px; }
-
-    .os-tab.active {
-      box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
-      color: var(--fg-dark);
-    }
-
+    .os-tab.active { box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light); color: var(--fg-dark); }
     .os-panel { display: none; flex-direction: column; align-items: center; gap: 0.9rem; width: 100%; }
     .os-panel.active { display: flex; }
 
     .version-list { display: flex; flex-direction: column; gap: 0.35rem; width: 100%; }
-
     .version-row { display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.8rem; cursor: pointer; border-radius: 12px; }
     .version-row input { display: none; }
-
-    .version-check {
-      width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; background: var(--bg);
-      box-shadow: 3px 3px 6px rgba(0,0,0,0.18), -1px -1px 4px rgba(255,255,255,0.6); transition: 0.3s;
-    }
-
-    .version-row input:checked + .version-check {
-      background: var(--accent);
-      box-shadow: 3px 3px 6px rgba(0,0,0,0.18), -1px -1px 4px rgba(255,255,255,0.6),
-                  inset 3px 3px 6px rgba(0,0,0,0.18), inset -1px -1px 4px rgba(255,255,255,0.3);
-      transform: scale(1.1);
-    }
-
+    .version-check { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; background: var(--bg); box-shadow: 3px 3px 6px rgba(0,0,0,0.18), -1px -1px 4px rgba(255,255,255,0.6); transition: 0.3s; }
+    .version-row input:checked + .version-check { background: var(--accent); box-shadow: 3px 3px 6px rgba(0,0,0,0.18), -1px -1px 4px rgba(255,255,255,0.6), inset 3px 3px 6px rgba(0,0,0,0.18), inset -1px -1px 4px rgba(255,255,255,0.3); transform: scale(1.1); }
     .version-name { font-size: 0.78rem; font-weight: 700; color: var(--fg-dark); flex: 1; }
-
-    .version-tag {
-      font-size: 0.6rem; font-weight: 700; padding: 0.15rem 0.5rem;
-      border-radius: 50px; text-transform: uppercase; letter-spacing: 0.06em;
-    }
-
+    .version-tag { font-size: 0.6rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.06em; }
     .version-tag.latest { background: var(--accent); color: white; }
 
-    .coming-soon-box {
-      background: var(--bg); border-radius: 14px;
-      box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
-      padding: 1.4rem 2rem; font-size: 0.8rem; color: var(--muted); font-weight: 600;
-      text-align: center; width: 100%;
-    }
-
     .download-area { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 0.9rem; }
-
-    .btn-download {
-      display: inline-flex; align-items: center; gap: 0.7rem; background: var(--bg);
-      color: var(--fg-dark); font-family: 'Nunito', sans-serif; font-size: 0.88rem;
-      font-weight: 700; padding: 0.9rem 2rem; border: none; border-radius: 50px;
-      cursor: pointer; text-decoration: none;
-      box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
-      transition: box-shadow 0.25s, transform 0.2s;
-    }
-
+    .btn-download { display: inline-flex; align-items: center; gap: 0.7rem; background: var(--bg); color: var(--fg-dark); font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 700; padding: 0.9rem 2rem; border: none; border-radius: 50px; cursor: pointer; text-decoration: none; box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light); transition: box-shadow 0.25s, transform 0.2s; }
     .btn-download:hover { box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light); transform: translateY(-1px); }
     .btn-download:active { box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); transform: translateY(0); }
     .btn-download svg { width: 16px; height: 16px; color: var(--accent); }
 
     .progress-wrap { width: 100%; display: none; flex-direction: column; gap: 0.4rem; }
     .progress-wrap.show { display: flex; }
-
-    .progress-track {
-      width: 100%; height: 8px; border-radius: 8px; background: var(--bg); overflow: hidden;
-      box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
-    }
-
+    .progress-track { width: 100%; height: 8px; border-radius: 8px; background: var(--bg); overflow: hidden; box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light); }
     .progress-fill { height: 100%; width: 0%; background: var(--accent); border-radius: 8px; transition: width 0.1s linear; }
     .progress-text { font-size: 0.68rem; color: var(--muted); text-align: center; letter-spacing: 0.04em; }
     .version { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.04em; }
 
     .section-title { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 700; align-self: flex-start; }
-
     .screenshots { width: 100%; display: flex; flex-direction: column; gap: 1rem; }
-
-    .screenshot-img {
-      width: 100%; border-radius: 16px; cursor: pointer;
-      box-shadow: 6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
-      object-fit: cover; display: block;
-    }
+    .screenshot-img { width: 100%; border-radius: 16px; cursor: pointer; box-shadow: 6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light); object-fit: cover; display: block; }
 
     .req-list { width: 100%; display: flex; flex-direction: column; gap: 0.6rem; }
-
-    .req-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0.7rem 1rem; border-radius: 12px; background: var(--bg);
-      box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
-    }
-
+    .req-row { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 1rem; border-radius: 12px; background: var(--bg); box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light); }
     .req-key { font-size: 0.75rem; color: var(--muted); font-weight: 600; letter-spacing: 0.03em; }
     .req-val { font-size: 0.75rem; color: var(--fg-dark); font-weight: 700; }
 
     .coffee-inner { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
-
-    .coffee-icon {
-      font-size: 2.6rem; background: var(--bg); border-radius: 50%; width: 72px; height: 72px;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
-    }
-
+    .coffee-icon { font-size: 2.6rem; background: var(--bg); border-radius: 50%; width: 72px; height: 72px; display: flex; align-items: center; justify-content: center; box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light); }
     .coffee-title { font-size: 1rem; font-weight: 700; color: var(--fg-dark); letter-spacing: -0.02em; }
-
-    .btn-coffee {
-      display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bg);
-      color: var(--fg-dark); font-family: 'Nunito', sans-serif; font-size: 0.88rem;
-      font-weight: 700; padding: 0.9rem 2rem; border: none; border-radius: 50px;
-      cursor: pointer; text-decoration: none;
-      box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
-      transition: box-shadow 0.25s, transform 0.2s;
-    }
-
+    .btn-coffee { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bg); color: var(--fg-dark); font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 700; padding: 0.9rem 2rem; border: none; border-radius: 50px; cursor: pointer; text-decoration: none; box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light); transition: box-shadow 0.25s, transform 0.2s; }
     .btn-coffee:hover { box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light); transform: translateY(-1px); }
     .btn-coffee:active { box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); transform: translateY(0); }
 
-    .install-box {
-      background: var(--bg); border-radius: 14px; width: 100%; padding: 1rem 1.4rem;
-      box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
-    }
+    .install-box { background: var(--bg); border-radius: 14px; width: 100%; padding: 1rem 1.4rem; box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); }
+
+    /* themes grid */
+    .themes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; width: 100%; }
+    .theme-card { background: var(--bg); border-radius: 14px; padding: 0.7rem; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light); transition: box-shadow 0.2s, transform 0.15s; border: 2px solid transparent; }
+    .theme-card:hover { transform: translateY(-1px); box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light); }
+    .theme-card.active-theme { border-color: var(--accent); box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light); transform: none; }
+    .theme-preview { width: 100%; height: 40px; border-radius: 8px; overflow: hidden; }
+    .preview-neu    { background: linear-gradient(135deg, #e8e8e8, #d0d0d0); box-shadow: inset 2px 2px 4px #c5c5c5, inset -2px -2px 4px #fff; }
+    .preview-aero   { background: linear-gradient(160deg, #b8cfe8, #d4e8f8, #c0d4ec); border: 1px solid rgba(255,255,255,.5); }
+    .preview-modern { background: #fff; border: 1px solid #e0e0e0; }
+    .preview-glass  { background: linear-gradient(135deg, #e8f0fe88, #f0e8fe88); border: 1px solid rgba(255,255,255,.4); }
+    .preview-arc    { background: linear-gradient(180deg, #1c1b2e, #16152a); }
+    .theme-name { font-size: 0.68rem; font-weight: 700; color: var(--fg-dark); }
 
     .lightbox { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; pointer-events: none; opacity: 0; transition: opacity 0.3s ease; }
     .lightbox.open { opacity: 1; pointer-events: all; }
@@ -543,13 +208,7 @@
     .lightbox-img { position: relative; z-index: 1; max-width: 92vw; max-height: 88vh; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); transform: scale(0.92); transition: transform 0.3s ease; object-fit: contain; }
     .lightbox.open .lightbox-img { transform: scale(1); }
 
-    .toast {
-      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px);
-      background: #333; color: #eee; font-family: 'Nunito', sans-serif; font-size: 0.75rem;
-      font-weight: 600; padding: 0.6rem 1.2rem; border-radius: 50px; opacity: 0;
-      pointer-events: none; transition: opacity 0.25s, transform 0.25s; z-index: 200; white-space: nowrap;
-    }
-
+    .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px); background: #333; color: #eee; font-family: 'Nunito', sans-serif; font-size: 0.75rem; font-weight: 600; padding: 0.6rem 1.2rem; border-radius: 50px; opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; z-index: 200; white-space: nowrap; }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
     .cl-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 0.3rem; vertical-align: middle; position: relative; top: -1px; flex-shrink: 0; }
@@ -563,27 +222,8 @@
     @keyframes coffeeFall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
-    @media (max-width: 480px) {
-      body { padding: 1.2rem 0.8rem 3rem; }
-      .card { padding: 2rem 1.5rem; }
-    }
-
-    @media (max-height: 500px) and (orientation: landscape) {
-      body { padding: 1rem 1.5rem 2rem; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 1rem; }
-      .card { max-width: 420px; padding: 1.4rem 1.6rem; gap: 1rem; }
-      .card:first-child { max-width: 680px; width: 100%; }
-      .icon-circle { width: 60px; height: 60px; }
-      .icon-circle svg { width: 24px; height: 24px; }
-      h1 { font-size: 1.1rem; }
-      .os-tab { padding: 0.3rem 0.55rem; font-size: 0.68rem; }
-      .btn-download { padding: 0.7rem 1.4rem; font-size: 0.8rem; }
-      .card.anim:nth-child(2), .card.anim:nth-child(3) { flex: 1; min-width: 260px; }
-    }
-
-    @media (min-width: 700px) and (min-height: 501px) {
-      body { padding: 2.5rem 2rem 5rem; }
-      .card { max-width: 560px; }
-    }
+    @media (max-width: 480px) { body { padding: 1.2rem 0.8rem 3rem; } .card { padding: 2rem 1.5rem; } }
+    @media (min-width: 700px) and (min-height: 501px) { body { padding: 2.5rem 2rem 5rem; } .card { max-width: 560px; } }
   </style>
 </head>
 <body>
@@ -617,11 +257,11 @@
         </div>
         <div class="docs-dropdown" id="themeDropdown">
           <div class="docs-content" style="gap:0.3rem;padding:0.5rem 0.4rem;">
-            <label style="display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0.6rem;cursor:pointer;font-size:0.75rem;font-weight:600;color:var(--fg-dark);" id="themeSmooth">
+            <label style="display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0.6rem;cursor:pointer;font-size:0.75rem;font-weight:600;color:var(--fg-dark);">
               <input type="radio" name="theme" value="smooth" style="margin:0;cursor:pointer;"/>
               fenn (smooth)
             </label>
-            <label style="display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0.6rem;cursor:pointer;font-size:0.75rem;font-weight:600;color:var(--fg-dark);" id="themeFennex">
+            <label style="display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0.6rem;cursor:pointer;font-size:0.75rem;font-weight:600;color:var(--fg-dark);">
               <input type="radio" name="theme" value="fennex" style="margin:0;cursor:pointer;"/>
               fennex (fast)
             </label>
@@ -636,11 +276,11 @@
         <div class="docs-dropdown" id="docsDropdown">
           <div class="docs-content">
             <p class="docs-heading">what is fenn</p>
-            <p class="docs-text">fenn is a fast, minimal browser for mac, ios, android, and windows. no bloat, just results.</p>
+            <p class="docs-text">fenn is a fast, minimal browser for mac and windows. no bloat, just results.</p>
             <p class="docs-heading">installation</p>
-            <p class="docs-text">1. download the installer<br>2. run it<br>3. open fenn and browse</p>
+            <p class="docs-text">windows: download the .exe and run it<br>mac: download the .dmg and open it</p>
             <p class="docs-heading">system requirements</p>
-            <p class="docs-text">macOS 12+ · iOS 14+ · android 7+ · windows 10/11 · 2gb ram · 50mb storage · x64</p>
+            <p class="docs-text">macOS 12+ · windows 10/11 · 2gb ram · 50mb storage · x64</p>
           </div>
         </div>
         <div class="nav-divider"></div>
@@ -651,14 +291,16 @@
         </div>
         <div class="docs-dropdown" id="changelogDropdown">
           <div class="docs-content">
+            <p class="docs-heading"><span class="cl-dot major"></span>v1.1.0 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.65rem">· jun 13, 2026</span></p>
+            <p class="docs-text">· 5 themes: fenn, aero, liquid glass, arc, modern<br>· sidebar / top bar layout toggle<br>· pinned shortcuts grid<br>· right click to pin or bookmark any page<br>· windows support</p>
             <p class="docs-heading"><span class="cl-dot major"></span>v1.0.3 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.65rem">· feb 15, 2026 · 7:17am</span></p>
             <p class="docs-text">· persistent bookmarks, engine + dark mode after restart<br>· keyboard shortcuts (cmd+l, cmd+r, cmd+t, cmd+←/→)<br>· new tab button</p>
             <p class="docs-heading">v1.0.2 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.65rem">· feb 15, 2026 · 7:02am</span></p>
             <p class="docs-text">· fixed buy me a coffee link<br>· minor bug fixes</p>
             <p class="docs-heading"><span class="cl-dot major"></span>v1.0.1 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.65rem">· feb 15, 2026 · 4:31am</span></p>
-            <p class="docs-text">· added nav bar with back, forward and refresh<br>· persistent tabs<br>· hover preview on sidebar tabs<br>· bookmarks panel<br>· download manager<br>· settings panel with engine switcher and dark mode</p>
+            <p class="docs-text">· nav bar with back, forward and refresh<br>· persistent tabs<br>· hover preview on sidebar tabs<br>· bookmarks panel<br>· download manager<br>· settings panel</p>
             <p class="docs-heading">v1.0.0 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.65rem">· feb 15, 2026 · 1:14am</span></p>
-            <p class="docs-text">· initial release<br>· fast local search indexing<br>· lightweight with minimal resource usage<br>· macOS support</p>
+            <p class="docs-text">· initial release · macOS support</p>
           </div>
         </div>
         <div class="nav-divider"></div>
@@ -677,10 +319,6 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
               fenn repo
             </a>
-            <a href="https://github.com/ac3d1t/fenn-ios" target="_blank" class="gh-link">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-              fenn-ios repo
-            </a>
           </div>
         </div>
       </div>
@@ -695,50 +333,38 @@
 
     <div class="text-center">
       <h1>search, your way</h1>
-      <p class="desc">fenn is a fast, lightweight browser for mac, iOS, android, and windows. no fluff, just results.</p>
+      <p class="desc">fenn is a fast, minimal browser for mac and windows. no fluff, just results.</p>
     </div>
 
     <div class="info-strip">
-      <div class="info-item"><span class="info-label">platform</span><span class="info-value">macOS · iOS · android · windows</span></div>
-      <div class="info-item"><span class="info-label">version</span><span class="info-value" id="selectedVersionLabel">1.0.2</span></div>
+      <div class="info-item"><span class="info-label">platform</span><span class="info-value">macOS · windows</span></div>
+      <div class="info-item"><span class="info-label">version</span><span class="info-value" id="selectedVersionLabel">1.1.0</span></div>
       <div class="info-item"><span class="info-label">license</span><span class="info-value">free</span></div>
     </div>
 
     <div class="download-area">
       <div class="os-tabs">
-        <button class="os-tab active" id="tabMac">
+        <button class="os-tab" id="tabMac">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 8c-1.5 0-3 .5-3 2 0 3 6 3 6 6 0 1.5-1.5 2-3 2s-3-.5-3-2"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="12" y1="18" x2="12" y2="20"/></svg>
           macOS
         </button>
-        <button class="os-tab" id="tabIOS">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-          iOS
-        </button>
-        <button class="os-tab" id="tabAndroid">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 16.5A8 8 0 0 1 4 7.5"/><path d="M20 16.5A8 8 0 0 0 20 7.5"/><line x1="9" y1="7" x2="9" y2="7.01"/><line x1="15" y1="7" x2="15" y2="7.01"/><path d="M6 7l1.5-3M18 7l-1.5-3"/><rect x="4" y="7" width="16" height="10" rx="2"/></svg>
-          android
-        </button>
-        <button class="os-tab" id="tabWin">
+        <button class="os-tab active" id="tabWin">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="9" height="9"/><rect x="13" y="3" width="9" height="9"/><rect x="2" y="13" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/></svg>
           windows
         </button>
-        <button class="os-tab" id="tabLinux">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.5 9.5c0-1.5 1-2.5 2.5-2.5s2.5 1 2.5 2.5c0 2-2.5 3-2.5 5"/><circle cx="12" cy="19" r="0.5" fill="currentColor"/></svg>
-          linux
-        </button>
       </div>
 
-      <div class="os-panel active" id="panelMac">
+      <div class="os-panel" id="panelMac">
         <div class="version-list">
           <label class="version-row">
-            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/tag/v.1.0.3" data-ver="1.0.3" data-unstable="true"/>
+            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/tag/v.1.0.3" data-ver="1.0.3" data-unstable="true" checked/>
             <div class="version-check"></div>
             <span class="version-name">v1.0.3</span>
             <span class="version-tag latest">latest</span>
             <span class="version-tag" style="background:#e07070;color:#fff;margin-left:0.3rem;">unstable</span>
           </label>
           <label class="version-row">
-            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v.1.0.2/fenn-1.0.2.dmg" data-ver="1.0.2" checked/>
+            <input type="radio" name="macver" value="https://github.com/ac3d1t/fenn/releases/download/v.1.0.2/fenn-1.0.2.dmg" data-ver="1.0.2"/>
             <div class="version-check"></div>
             <span class="version-name">v1.0.2</span>
             <span class="version-tag" style="background:#007aff;color:#fff;">recommended</span>
@@ -754,77 +380,71 @@
             <span class="version-name">v1.0.0</span>
           </label>
         </div>
-        <a class="btn-download" id="downloadBtn" href="https://github.com/ac3d1t/fenn/releases/download/v.1.0.2/fenn-1.0.2.dmg">
+        <a class="btn-download" id="downloadBtnMac" href="https://github.com/ac3d1t/fenn/releases/tag/v.1.0.3" target="_blank">
           <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v13M6 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          download for mac
+          view on github
         </a>
-        <p id="unstableWarning" style="font-size:0.68rem;color:#e07070;margin-top:0.4rem;display:none;text-align:center;">v1.0.3 is unstable — download from the repo at your own risk</p>
+        <p id="unstableWarning" style="font-size:0.68rem;color:#e07070;margin-top:0.4rem;text-align:center;">v1.0.3 is unstable — download from the repo at your own risk</p>
       </div>
 
-      <div class="os-panel" id="panelIOS">
-        <p style="font-size:0.72rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:0.4rem;">fenn for iOS is available as a sideloadable IPA. requires iOS 14.0+</p>
-        <a class="btn-download" href="https://github.com/ac3d1t/fenn-ios/releases/download/v1.0.3-mobile/fenn.ipa" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v13M6 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          download IPA
-        </a>
-        <div class="coming-soon-box" style="padding:1rem 1.5rem;font-size:0.68rem;">
-          <p style="font-weight:700;color:var(--fg-dark);margin-bottom:0.6rem;">sideloading instructions</p>
-          <p style="text-align:left;line-height:1.7;">
-            <strong style="color:var(--fg-dark);">option 1: AltStore</strong><br>1. install altstore from altstore.io<br>2. download the ipa above<br>3. open altstore and install<br><br>
-            <strong style="color:var(--fg-dark);">option 2: Sideloadly</strong><br>1. download sideloadly from sideloadly.io<br>2. connect iphone via usb<br>3. drag ipa into sideloadly<br>4. sign with apple id<br><br>
-            <strong style="color:var(--fg-dark);">option 3: TrollStore</strong><br>tap the ipa to install (if jailbroken)
-          </p>
-        </div>
-      </div>
-
-      <div class="os-panel" id="panelAndroid">
-        <p style="font-size:0.72rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:0.4rem;">fenn for android is available as a free APK. requires android 7.0+</p>
-        <a class="btn-download" href="https://drive.google.com/uc?export=download&id=1WPLaXomBs9zP95BV6pOA5WDVkKz39gbI" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v13M6 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          download APK
-        </a>
-        <div class="coming-soon-box" style="padding:1rem 1.5rem;font-size:0.68rem;">
-          <p style="font-weight:700;color:var(--fg-dark);margin-bottom:0.6rem;">install instructions</p>
-          <p style="text-align:left;line-height:1.7;">1. download the APK above<br>2. open settings → security<br>3. enable "install from unknown sources"<br>4. open the downloaded APK file<br>5. tap install<br><br>no account needed. no expiry. just install and go.</p>
-        </div>
-      </div>
-
-      <div class="os-panel" id="panelLinux">
-        <p style="font-size:0.72rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:0.4rem;">fenn for linux is available as an AppImage. works on most distributions</p>
-        <a class="btn-download" href="https://github.com/ac3d1t/fennex/actions/runs/25535320572/artifacts/6871324751" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v13M6 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          download AppImage
-        </a>
-        <div class="install-box">
-          <p style="font-size:0.68rem;color:var(--muted);line-height:1.5;">
-            • make it executable: <code style="background:var(--bg);padding:0.2rem 0.4rem;border-radius:4px;font-size:0.65rem;">chmod +x fenn.AppImage</code><br>
-            • run: <code style="background:var(--bg);padding:0.2rem 0.4rem;border-radius:4px;font-size:0.65rem;">./fenn.AppImage</code>
-          </p>
-        </div>
-      </div>
-
-      <div class="os-panel" id="panelWin">
+      <div class="os-panel active" id="panelWin">
         <p style="font-size:0.72rem;color:var(--muted);text-align:center;line-height:1.6;margin-bottom:0.4rem;">fenn for windows is available as an installer. requires windows 10 or 11</p>
-        <a class="btn-download" href="https://github.com/ac3d1t/fennex/actions/runs/25535320572/artifacts/6871338779" target="_blank">
+        <a class="btn-download" id="downloadBtnWin" href="https://github.com/ac3d1t/fenn/releases/download/v1.1.0/fenn.exe" target="_blank">
           <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v13M6 11l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          download installer
+          download for windows
         </a>
         <div class="install-box">
-          <p style="font-size:0.68rem;color:var(--muted);line-height:1.5;">• run the installer<br>• follow the setup wizard<br>• launch fenn from start menu or desktop</p>
+          <p style="font-size:0.68rem;color:var(--muted);line-height:1.5;">· run the installer<br>· follow the setup wizard<br>· launch fenn from start menu or desktop</p>
+        </div>
+        <div class="progress-wrap" id="progressWrap">
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          <span class="progress-text" id="progressText">downloading... 0%</span>
         </div>
       </div>
 
-      <div class="progress-wrap" id="progressWrap">
-        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-        <span class="progress-text" id="progressText">downloading... 0%</span>
-      </div>
       <span class="version">free · open source</span>
     </div>
   </div>
 
+  <!-- themes card -->
+  <div class="card anim">
+    <span class="section-title">themes</span>
+    <p style="font-size:0.72rem;color:var(--muted);margin-top:-0.3rem;margin-bottom:0.2rem;align-self:flex-start;">5 visual themes built in. switch anytime in settings</p>
+    <div class="themes-grid">
+      <div class="theme-card active-theme" data-t="neu">
+        <div class="theme-preview preview-neu"></div>
+        <span class="theme-name">fenn</span>
+      </div>
+      <div class="theme-card" data-t="aero">
+        <div class="theme-preview preview-aero"></div>
+        <span class="theme-name">aero</span>
+      </div>
+      <div class="theme-card" data-t="modern">
+        <div class="theme-preview preview-modern"></div>
+        <span class="theme-name">modern</span>
+      </div>
+      <div class="theme-card" data-t="glass">
+        <div class="theme-preview preview-glass"></div>
+        <span class="theme-name">liquid glass</span>
+      </div>
+      <div class="theme-card" data-t="arc" style="grid-column:1/-1;">
+        <div class="theme-preview preview-arc" style="height:32px;"></div>
+        <span class="theme-name">arc</span>
+      </div>
+    </div>
+    <div class="screenshots">
+      <img class="screenshot-img" src="sussy1.png" alt="fenn theme preview"/>
+      <img class="screenshot-img" src="sussy2.png" alt="fenn theme preview"/>
+      <img class="screenshot-img" src="sussy3.png" alt="fenn theme preview"/>
+      <img class="screenshot-img" src="sussy4.png" alt="fenn theme preview"/>
+      <img class="screenshot-img" src="sussy5.png" alt="fenn theme preview"/>
+    </div>
+  </div>
+
+  <!-- preview card -->
   <div class="card anim">
     <span class="section-title">preview</span>
-    <p style="font-size:0.72rem;color:var(--muted);margin-top:-0.3rem;margin-bottom:0.2rem;">app preview (as of v1.0.2)</p>
+    <p style="font-size:0.72rem;color:var(--muted);margin-top:-0.3rem;margin-bottom:0.2rem;">as of v1.1.0 (windows)</p>
     <div class="screenshots">
       <img class="screenshot-img" src="full.png" alt="fenn full view"/>
       <img class="screenshot-img" src="tabs.png" alt="fenn tabs"/>
@@ -835,7 +455,7 @@
   <div class="card anim">
     <span class="section-title">system requirements</span>
     <div class="req-list">
-      <div class="req-row"><span class="req-key">os</span><span class="req-val">macOS 12+ · iOS 14+ · win 10/11</span></div>
+      <div class="req-row"><span class="req-key">os</span><span class="req-val">macOS 12+ · win 10/11</span></div>
       <div class="req-row"><span class="req-key">ram</span><span class="req-val">2 gb minimum</span></div>
       <div class="req-row"><span class="req-key">storage</span><span class="req-val">50 mb</span></div>
       <div class="req-row"><span class="req-key">architecture</span><span class="req-val">x64 · arm64</span></div>
@@ -863,6 +483,7 @@
   <div class="toast" id="toast">copied to clipboard</div>
 
 <script>
+  // dropdowns
   ['githubToggle','changelogToggle','docsToggle','themeToggle'].forEach(id => {
     const toggle = document.getElementById(id)
     const dropdown = document.getElementById(id.replace('Toggle','Dropdown'))
@@ -872,14 +493,15 @@
     })
   })
 
+  // dark toggle
   document.getElementById('darkToggle').addEventListener('change', e => {
     document.documentElement.classList.toggle('dark', e.target.checked)
     localStorage.setItem('fennDarkMode', e.target.checked)
   })
 
-  // theme switcher
+  // website theme (smooth/fennex)
   document.querySelectorAll('input[name="theme"]').forEach(radio => {
-    radio.addEventListener('change', (e) => {
+    radio.addEventListener('change', e => {
       if (e.target.value === 'fennex') {
         document.documentElement.classList.add('fennex')
         document.documentElement.classList.remove('dark')
@@ -894,7 +516,6 @@
     })
   })
 
-  // load saved theme
   const savedTheme = localStorage.getItem('fennTheme') || 'smooth'
   document.querySelector(`input[name="theme"][value="${savedTheme}"]`).checked = true
   if (savedTheme === 'fennex') {
@@ -905,15 +526,17 @@
     document.getElementById('darkToggle').checked = isDark
   }
 
+  // hamburger
   const menuCheck = document.getElementById('hamburgerCheck')
   menuCheck.addEventListener('change', () => {
     document.getElementById('navMenu').classList.toggle('open', menuCheck.checked)
   })
 
-  const tabs = ['Mac','IOS','Android','Win','Linux']
-  tabs.forEach(os => {
+  // os tabs
+  const osTabs = ['Mac','Win']
+  osTabs.forEach(os => {
     document.getElementById('tab'+os).addEventListener('click', () => {
-      tabs.forEach(t => {
+      osTabs.forEach(t => {
         document.getElementById('tab'+t).classList.remove('active')
         document.getElementById('panel'+t).classList.remove('active')
       })
@@ -922,24 +545,27 @@
     })
   })
 
-  const downloadBtn = document.getElementById('downloadBtn')
+  // mac version selector
+  const downloadBtnMac = document.getElementById('downloadBtnMac')
   const unstableWarning = document.getElementById('unstableWarning')
 
   document.querySelectorAll('input[name="macver"]').forEach(inp => {
     inp.addEventListener('change', () => {
       const isUnstable = inp.dataset.unstable === 'true'
-      downloadBtn.href = inp.value
+      downloadBtnMac.href = inp.value
       document.getElementById('selectedVersionLabel').textContent = inp.dataset.ver
-      downloadBtn.childNodes[downloadBtn.childNodes.length - 1].textContent = isUnstable ? ' view on github' : ' download for mac'
+      downloadBtnMac.childNodes[downloadBtnMac.childNodes.length - 1].textContent = isUnstable ? ' view on github' : ' download for mac'
       unstableWarning.style.display = isUnstable ? 'block' : 'none'
     })
   })
 
+  // windows download progress
   const progressWrap = document.getElementById('progressWrap')
   const progressFill = document.getElementById('progressFill')
   const progressText = document.getElementById('progressText')
+  const downloadBtnWin = document.getElementById('downloadBtnWin')
 
-  downloadBtn.addEventListener('click', () => {
+  downloadBtnWin.addEventListener('click', () => {
     if (progressWrap.classList.contains('show')) return
     progressWrap.classList.add('show')
     progressText.textContent = 'starting download...'
@@ -957,11 +583,11 @@
       setTimeout(() => {
         progressWrap.classList.remove('show')
         progressFill.style.width = '0%'
-        progressText.textContent = 'downloading... 0%'
       }, 2500)
     }, 4000)
   })
 
+  // search icon bounce
   const searchIcon = document.getElementById('searchIcon')
   searchIcon.addEventListener('click', () => {
     searchIcon.classList.remove('bounce')
@@ -970,6 +596,7 @@
     searchIcon.addEventListener('animationend', () => searchIcon.classList.remove('bounce'), { once: true })
   })
 
+  // logo copy
   document.getElementById('logoPill').addEventListener('click', () => {
     navigator.clipboard.writeText('fenn').then(() => {
       const toast = document.getElementById('toast')
@@ -978,16 +605,24 @@
     })
   })
 
+  // lightbox
   const lightbox = document.getElementById('lightbox')
   const lightboxImg = document.getElementById('lightboxImg')
-
   document.querySelectorAll('.screenshot-img').forEach(img => {
     img.addEventListener('click', () => { lightboxImg.src = img.src; lightbox.classList.add('open') })
   })
-
   document.getElementById('lightboxBg').addEventListener('click', () => lightbox.classList.remove('open'))
   lightboxImg.addEventListener('click', () => lightbox.classList.remove('open'))
 
+  // theme cards (cosmetic only, just visual selection)
+  document.querySelectorAll('.theme-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.theme-card').forEach(c => c.classList.remove('active-theme'))
+      card.classList.add('active-theme')
+    })
+  })
+
+  // coffee
   document.querySelector('.btn-coffee').addEventListener('click', () => {
     const count = Math.floor(Math.random() * 4) + 3
     for (let i = 0; i < count; i++) {
