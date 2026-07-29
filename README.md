@@ -51,9 +51,34 @@ you'll need:
 - a computer (mac or windows) for the initial setup
 - a free apple ID
 
-### option 1 — AltStore (recommended)
+### option 1 - Ksign (Easiest if you don't have a computer)
 
-AltStore is the easiest way to sideload. it runs in the background on your computer and automatically re-signs fenn before it expires.
+Ksign is hands down the easiest way to sideload if you don't have a computer.
+
+**on your phone:**
+
+1. go to applejr.net
+2. find the Ksign tab (not Esign, Scarlet, or Certs.)
+3. select any one, but XL AXIATA is recommended (at the bottom)
+4. let it install.
+5. once its done and you see it on your Home Screen, go to settings > general > VPN & Device Management
+6. find any text that says XL AXIATA or whatever it said under Ksign when you installed it.
+7. press Verify. this will prompt you to restart your device.
+8. let it restart
+9. when it turns back on, swipe up to install profile
+10. read carefully because it kinda tricks you with the color, and press Install Profile (it will ask for your password, if you have one)
+11. when you get back to the Home Screen, open the app. ignore the errors, they mean nothing.
+12. go to Library and press the + next to Search under your battery indicator.
+13. the files app will open, find the fenn ipa you installed.
+14. once its done, press and hold the app, and press sign and install
+15. if that doesn't work, press and hold, but press only sign
+16. then go to the signed tab and press and hold the app and press install.
+17. if that doesn't work either, repeat steps 1 to 4.
+18. if it DOES work, congratulations, you have fenn on your device.
+
+### option 2 — AltStore
+
+AltStore is one of the easiest ways to sideload. It runs in the background on your computer and automatically re-signs fenn before it expires.
 
 **on your computer:**
 
@@ -189,6 +214,6 @@ android 16 implemented a new "auto blocker" feature that prevents internet-downl
 
 ## support
 
-if you run into issues not covered here, open an issue on the [github repo](https://github.com/ac3d1t/fenn/issues) or reach out directly. [chrispy1331@gmail.com]
+if you run into issues not covered here, open an issue on the [github repo](https://github.com/ac3d1t/fenn/issues) or reach out directly. [oculon.business1@gmail.com]
 
 if fenn has been useful, a coffee is always appreciated — [buymeacoffee.com/ac3d1t](https://buymeacoffee.com/ac3d1t)
